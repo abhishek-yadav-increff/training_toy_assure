@@ -7,7 +7,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.increff.ui</groupId>
+    <groupId>com.increff.toyassure</groupId>
     <artifactId>toy-assure</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -21,7 +21,13 @@
         <jetty.context>/toyassure</jetty.context>
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
-
+    <!-- <dependencies>
+        <dependency>
+            <groupId>com.increff.common</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies> -->
     <build>
         <plugins>
             <!-- Jetty plugin, for web application testing -->

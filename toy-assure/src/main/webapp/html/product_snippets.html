@@ -1,0 +1,28 @@
+<div class="row m-0 shadow-sm rounded" id="pageHeader" th:fragment="toystore_header_product">
+    <a th:href="@{/ui/home}">Home</a>
+    &nbsp; > &nbsp;
+    <a th:href="@{/ui/product}">Product</a>
+</div>
+
+<form id="client-form" th:fragment="toystore_form_product">
+    <div class="row">
+        <label for="inputClientId" class="col-form-label justify-content-start">Client ID</label>
+        <input type="text" class="col form-control" name="clientId" id="inputClientId" placeholder="Enter Client ID"
+            required>
+    </div>
+    <div class="row">
+        <div class="fixed p-0" style="column-width: 100px;">
+            <label for="productFile" class="col-form-label justify-content-start">Product Csv</label>
+        </div>
+        <div class="col p-0">
+            <input type="file" class="form-control-file" id="productFile">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col p-0 text-right">
+            <button type="submit" class="btn btn-primary btn-sm" id="add-brand" form="brand-form">Add</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" id="refresh-data">Refresh</button>
+        </div>
+    </div>
+</form>

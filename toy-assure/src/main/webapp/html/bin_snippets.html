@@ -1,0 +1,21 @@
+<div class="row m-0 shadow-sm rounded" id="pageHeader" th:fragment="toystore_header_bin">
+    <a th:href="@{/ui/home}">Home</a>
+    &nbsp; > &nbsp;
+    <a th:href="@{/ui/bin}">Bin</a>
+</div>
+
+<form id="bin-form" th:fragment="toystore_form_bin">
+    <div class="row">
+        <label for="inputBinNumber" style="width: 150px;" class="col-form-label justify-content-start">Number of
+            Bins</label>
+        <input type="number" class="col form-control" name="binNumber" id="inputBinNumber"
+            placeholder="Enter number of Bins to be added" required>
+    </div>
+    <div class="row">
+        <div class="col p-0 text-right">
+            <button type="submit" class="btn btn-primary btn-sm" id="add-bin" form="bin-form">Add</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" id="refresh-data">Refresh</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,23 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="snippets.html :: name_head"></head>
+
+<body>
+
+    <nav th:replace="snippets.html :: name_app_navbar"></nav>
+    <div th:replace="bin_snippets.html :: toystore_header_bin"></div>
+    <div id="container">
+        <form th:replace="bin_snippets.html :: toystore_form_bin"></form>
+
+    </div> <!-- Container end-->
+
+    <footer th:replace="snippets.html :: name_footer"></footer>
+
+    <script th:src="@{/static/client.js}" />
+    </script>
+
+</body>
+
+</html>

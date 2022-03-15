@@ -1,0 +1,32 @@
+<div class="row m-0 shadow-sm rounded" id="pageHeader" th:fragment="toystore_header_client">
+
+
+    <a th:href="@{/ui/home}">Home</a>
+    &nbsp; > &nbsp;
+    <a th:href="@{/ui/client}">Client</a>
+</div>
+
+<form id="client-form" th:fragment="toystore_form_client">
+    <div class="row">
+        <label style="width: 200px" for="inputClient" class="col-form-label justify-content-start">Client/Customer
+            Name</label>
+        <input type="text" class="col form-control" name="client" id="inputClient" placeholder="Enter Name" required>
+    </div>
+    <div class="row">
+        <label style="width: 200px;" for="inputClientType" class="col-form-label justify-content-start">User
+            Type</label>
+        <select class="col form-control" name="clientType" id="inputClientType">
+            <option value="client" selected>Client</option>
+            <option value="customer" selected>Customer</option>
+        </select>
+    </div>
+    <div class="row">
+        <div class="col p-0 text-right">
+            <button type="submit" class="btn btn-primary btn-sm" id="add-brand" form="brand-form">Add</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" id="refresh-data">Refresh</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" id="upload-data">Upload</button>
+        </div>
+    </div>
+</form>

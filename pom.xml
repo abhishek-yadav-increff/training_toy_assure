@@ -8,7 +8,11 @@
     <packaging>pom</packaging>
 
     <name>toy-assure-master</name>
-
+    <modules>
+        <module>common</module>
+        <module>toy-assure</module>
+        <module>toy-assure-channel</module>
+    </modules>
 
     <properties>
         <!-- Maven configuration -->
@@ -206,9 +210,7 @@
             <version>${javax.servlet.version}</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
-    <modules>
-        <module>toy-assure</module>
-        <module>toy-assure-channel</module>
-    </modules>
+
 </project>
