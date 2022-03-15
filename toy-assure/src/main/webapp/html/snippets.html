@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="baseUrl" th:attr="content=${baseUrl}">
 
-
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" th:href="@{/static/app.css}">
   <link rel="stylesheet" th:href="@{/static/utils/jquery.toast.css}">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-
+  <link rel="stylesheet" th:href="@{/static/utils/select2.min.css}">
   <script src="https://kit.fontawesome.com/c30beb553f.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
@@ -24,6 +23,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
   </script>
 
+  <script th:src="@{/static/utils/select2.min.js}"></script>
   <script type="module" th:src="@{/static/utils/jquery.toast.js}"></script>
 </head>
 
@@ -72,15 +72,10 @@
 </nav>
 
 <div class="row m-0 shadow-sm pt-1 rounded" id="pageHeader" th:fragment="toystore_header">
-
-
-  <a th:href="@{/ui/home}">Home</a>
-  <!-- <div th:each="path : ${paths}">
-
-    </div>
-    <div>
-
-    </div> -->
+  <div class="row" style="width:max-content">
+    <div class="col p-0"><i class="material-icons">&#xe88a;</i></div>
+    <div class="col p-0">Home</div>
+  </div>
 </div>
 
 <!-- Footer -->

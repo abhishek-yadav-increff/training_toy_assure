@@ -12,7 +12,6 @@ function toJson($form) {
     return json;
 }
 
-
 function handleAjaxError(response) {
     var response = JSON.parse(response.responseText);
     if (response != null) {
@@ -56,16 +55,7 @@ function writeFileData(arr, filename) {
 }
 //INITIALIZATION CODE
 function init() {
-    $('#gotoBrand').click(function () {
-        window.location.href = "http://localhost:9000/employee/ui/reports/brand";
-    });
-    $('#gotoInventory').click(function () {
-        window.location.href = "http://localhost:9000/employee/ui/reports/inventory";
 
-    });
-    $('#gotoSales').click(function () {
-        window.location.href = "http://localhost:9000/employee/ui/reports/sales";
-    });
 }
 function toast(successState, message) {
     if (successState == true) {
@@ -93,6 +83,14 @@ function toast(successState, message) {
 function getBrandUrl() {
     var baseUrl = $("meta[name=baseUrl]").attr("content")
     return baseUrl + "/api/brand";
+}
+function getClientUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/client";
+}
+function getProductUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/product";
 }
 
 $(document).ready(init);

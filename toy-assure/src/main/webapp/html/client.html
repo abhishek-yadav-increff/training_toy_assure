@@ -7,10 +7,10 @@
 <body>
 
     <nav th:replace="snippets.html :: name_app_navbar"></nav>
-    <div th:replace="client_snippets.html :: toystore_header_client"></div>
+    <div th:replace="client_snippets.html :: toystore_client_header"></div>
     <div id="container">
-        <form th:replace="client_snippets.html :: toystore_form_client"></form>
-
+        <form th:replace="client_snippets.html :: toystore_client_form"></form>
+        <div th:replace="client_snippets.html :: toystore_client_table"></div>
     </div> <!-- Container end-->
 
     <footer th:replace="snippets.html :: name_footer"></footer>
