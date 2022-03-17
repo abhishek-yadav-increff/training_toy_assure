@@ -1,0 +1,51 @@
+<div class="row m-0 shadow-sm rounded" id="pageHeader" th:fragment="toystore_header_bin">
+    <a th:href="@{/ui/home}">
+        <div class="row" style="width:max-content">
+            <div class="col p-0"><i class="material-icons">&#xe88a;</i></div>
+            <div class="col p-0">Home</div>
+        </div>
+    </a>
+    &nbsp;/&nbsp;
+    Bin
+</div>
+
+<!-- <form id="bin-form" th:fragment="toystore_form_bin">
+    <div class="row">
+        <label for="inputBinNumber" style="width: 150px;" class="col-form-label justify-content-start">Number of
+            Bins</label>
+        <input type="number" class="col form-control" name="binNumber" id="inputBinNumber"
+            placeholder="Enter number of Bins to be added" required>
+    </div>
+    <div class="row">
+        <div class="col p-0 text-right">
+            <button type="submit" class="btn btn-primary btn-sm" id="add-bin" form="bin-form">Add</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" id="refresh-data">Refresh</button>
+        </div>
+    </div>
+</form> -->
+<!-- Product Edit Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="add-bin-modal" th:fragment="toystore_bin_add_form">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add bins</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="bin-add-form">
+                    <div class="row">
+                        <label for="inputBinSize" class="col-form-label justify-content-start">Bin Size</label>
+                        <input type="number" min="1" step="1" class="col form-control" name="binSize" id="inputBinSize"
+                            placeholder="Enter number of bins to add" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-sm" id="add-bin" form="bin-add-form">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="snippets.html :: name_head"></head>
+
+<body>
+
+    <nav th:replace="snippets.html :: name_app_navbar"></nav>
+    <div th:replace="snippets.html :: toystore_header"></div>
+    <div id="container">
+        <!-- Blank Row -->
+        <!-- <div class="row">
+            &nbsp;
+        </div> -->
+        <!-- Top row with form-->
+        <div class="row">
+            <div class="row" style="padding-bottom: 5px;">
+                <h5>Clients and Customers</h5>
+            </div>
+            <div class="row">
+                <div class="col-2" style="justify-content: center;">
+                    <a th:href="@{/ui/client}" title="Brand">
+                        <div class="row" style="justify-content: center;">
+                            <i class="	fa fa-user icon-size"></i>
+                        </div>
+                        <div class="row" style="justify-content: center;">
+                            <h6 style="text-align: center;">Clients and Customers</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <h5>Product</h5>
+            </div>
+            <div class="row">
+                <div class="col-2" style="justify-content: center;">
+                    <a th:href="@{/ui/product}" title="Product">
+                        <div class="row" style="justify-content: center;">
+                            <i class="fas fa-box icon-size"></i>
+                        </div>
+                        <div class="row" style="justify-content: center;">
+                            <h6 style="text-align: center;">Product</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <h5>Bin</h5>
+            </div>
+            <div class="row">
+                <div class="col-2" style="justify-content: center;">
+                    <a th:href="@{/ui/bin}" title="Bins">
+                        <div class="row" style="justify-content: center;">
+                            <i class="fas fa-box-open icon-size"></i>
+                        </div>
+                        <div class="row" style="justify-content: center;">
+                            <h6 style="text-align: center;">Bin</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <h5>Channel</h5>
+            </div>
+            <div class="row">
+                <div class="col-2" style="justify-content: center;">
+                    <a th:href="@{/ui/channel}" title="Channel">
+                        <div class="row" style="justify-content: center;">
+                            <i class="fas fa-window-maximize icon-size"></i>
+                        </div>
+                        <div class="row" style="justify-content: center;">
+                            <h6 style="text-align: center;">Channel</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <h5>Order</h5>
+            </div>
+            <div class="row">
+                <div class="col-2" style="justify-content: center;">
+                    <a th:href="@{/ui/order}" title="Order">
+                        <div class="row" style="justify-content: center;">
+                            <i class="fas fa-shopping-cart icon-size"></i>
+                        </div>
+                        <div class="row" style="justify-content: center;">
+                            <h6 style="text-align: center;">Order</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- Container end-->
+
+    <footer th:replace="snippets.html :: name_footer"></footer>
+
+    <script th:src="@{/static/home.js}" />
+    </script>
+
+</body>
+
+</html>

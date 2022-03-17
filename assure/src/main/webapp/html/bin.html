@@ -1,0 +1,24 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="snippets.html :: name_head"></head>
+
+<body>
+
+    <nav th:replace="snippets.html :: name_app_navbar"></nav>
+    <div th:replace="bin_snippets.html :: toystore_header_bin"></div>
+    <div id="container">
+        <button type="button" class="btn btn-primary btn-sm" id="display-add-bin">Add Bins</button>
+        <div th:replace="bin_snippets.html :: toystore_bin_add_form"></div>
+
+    </div> <!-- Container end-->
+
+    <footer th:replace="snippets.html :: name_footer"></footer>
+
+    <script th:src="@{/static/bin.js}" />
+    </script>
+
+</body>
+
+</html>

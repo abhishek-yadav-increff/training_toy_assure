@@ -1,0 +1,51 @@
+<div class="row m-0 shadow-sm rounded" id="pageHeader" th:fragment="toystore_client_header">
+    <a th:href="@{/ui/home}">
+        <div class="row" style="width:max-content">
+            <div class="col p-0"><i class="material-icons">&#xe88a;</i></div>
+            <div class="col p-0">Home</div>
+        </div>
+    </a>
+    &nbsp; / &nbsp;
+    Client
+</div>
+
+<form id="client-form" th:fragment="toystore_client_form">
+    <div class="row">
+        <label style="width: 200px" for="inputClient" class="col-form-label justify-content-start">Client/Customer
+            Name</label>
+        <input type="text" class="col form-control" name="name" id="inputClient" placeholder="Enter Name" required>
+    </div>
+    <div class="row">
+        <label style="width: 200px;" for="inputClientType" class="col-form-label justify-content-start">User
+            Type</label>
+        <select class="col form-control" name="userEnum" id="inputClientType">
+            <option value="client" selected>Client</option>
+            <option value="customer" selected>Customer</option>
+        </select>
+    </div>
+    <div class="row">
+        <div class="col p-0 text-right">
+            <button type="submit" class="btn btn-primary btn-sm" id="add-brand" form="client-form">Add</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" id="refresh-data">Refresh</button>
+        </div>
+    </div>
+</form>
+
+<div class="row" th:fragment="toystore_client_table">
+    <!-- Table -->
+    <div class="col p-0">
+        <table class="table table-striped" id="client-table">
+            <thead>
+                <tr>
+                    <th scope="col">Internal ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">User Type</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
