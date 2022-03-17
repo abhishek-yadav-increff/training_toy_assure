@@ -15,8 +15,8 @@ import lombok.Setter;
 public class ChannelPojo {
 
     @Id
-    @TableGenerator(name = "channel_id", table = "generator_table", pkColumnName = "channel_id",
-            initialValue = 10000, allocationSize = 1)
+    @TableGenerator(name = "channel_id", table = "generator_table", initialValue = 10000,
+            allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "channel_id")
     private Long id;
 

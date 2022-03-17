@@ -13,7 +13,7 @@ public class BinDao extends AbstractDao {
 
     private static final String SELECT_ID = "SELECT P FROM assure_bin P WHERE binId=:id";
     private static final String SELECT_ALL = "SELECT P FROM assure_bin P";
-
+    private static final String SELECT_MAX = "SELECT MAX(binId) FROM assure_bin";
     @PersistenceContext
     private EntityManager em;
 
@@ -35,5 +35,10 @@ public class BinDao extends AbstractDao {
     }
 
     public void update(BinPojo p) {}
+
+    public Long selectMax() {
+        TypedQuery<Long> query = getQuery(SELECT_MAX, Long.class);
+        return getSingle(query);
+    }
 
 }

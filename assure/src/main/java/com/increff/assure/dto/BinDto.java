@@ -4,6 +4,7 @@ import java.util.List;
 import com.increff.assure.dto.helper.BinDtoHelper;
 import com.increff.assure.model.BinData;
 import com.increff.assure.model.BinForm;
+import com.increff.assure.model.BinIndexRange;
 import com.increff.assure.pojo.BinPojo;
 import com.increff.assure.service.ApiException;
 import com.increff.assure.service.BinService;
@@ -22,10 +23,11 @@ public class BinDto {
 
     private static final Logger LOGGER = Logger.getLogger(BinDto.class);
 
-    public void add(BinForm binForm) throws ApiException {
+    public BinIndexRange add(BinForm binForm) throws ApiException {
         LOGGER.info("In BinService:add()");
         LOGGER.info("Form data received: " + binForm.toString());
-        binService.add(binForm);
+        Long smIndex = binService.add(binForm);
+        return BinDtoHelper.convertToRange(smIndex, binForm.getBinSize());
     }
 
     public BinData get(Long id) throws ApiException {

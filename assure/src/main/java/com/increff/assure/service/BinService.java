@@ -15,12 +15,14 @@ public class BinService {
     private BinDao dao;
 
     @Transactional(rollbackFor = ApiException.class)
-    public void add(BinForm p) throws ApiException {
+    public Long add(BinForm p) throws ApiException {
         if (p.getBinSize() <= 0)
             throw new ApiException("Can not add non-positive amount of bins!!");
+        Long nextBin = dao.selectMax();
         for (int i = 1; i <= p.getBinSize(); i++) {
             dao.insert();
         }
+        return nextBin;
     }
 
     @Transactional(readOnly = true)

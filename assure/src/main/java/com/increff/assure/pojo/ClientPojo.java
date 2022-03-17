@@ -15,8 +15,8 @@ import lombok.Setter;
 public class ClientPojo {
 
     @Id
-    @TableGenerator(name = "client_id", table = "generator_table", pkColumnName = "client_id",
-            initialValue = 10000, allocationSize = 1)
+    @TableGenerator(name = "client_id", table = "generator_table", initialValue = 10000,
+            allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "client_id")
     private Long id;
     private String name;

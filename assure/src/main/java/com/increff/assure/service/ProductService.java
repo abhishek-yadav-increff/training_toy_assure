@@ -24,6 +24,16 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    public ProductPojo getClientIdClientSkuId(Long clientId, String clientSkuId)
+            throws ApiException {
+        ProductPojo productPojo = dao.selectClientIdClientSkuId(clientSkuId, clientId);
+        if (productPojo == null) {
+            throw new ApiException("Product with given fields doesn't exist!!");
+        }
+        return productPojo;
+    }
+
+    @Transactional(readOnly = true, rollbackFor = ApiException.class)
     public List<ProductPojo> getAll() throws ApiException {
         List<ProductPojo> productPojos = dao.selectAll();
         if (productPojos == null) {

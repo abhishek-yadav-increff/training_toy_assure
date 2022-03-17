@@ -14,8 +14,8 @@ import lombok.Setter;
 public class ProductPojo {
 
     @Id
-    @TableGenerator(name = "product_id", table = "generator_table", pkColumnName = "product_id",
-            initialValue = 10000, allocationSize = 1)
+    @TableGenerator(name = "product_id", table = "generator_table", initialValue = 10000,
+            allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "product_id")
     private Long globalSkuId;
 

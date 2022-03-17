@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 public class ChannelDao extends AbstractDao {
 
     private static final String SELECT_ID = "SELECT P FROM assure_channel P WHERE ID=:id";
+    private static final String SELECT_NAME = "SELECT P FROM assure_channel P WHERE NAME=:name";
     private static final String SELECT_ALL = "SELECT P FROM assure_channel P";
     private static final String QUERY_NAME = "SELECT P FROM assure_channel P WHERE NAME LIKE :name";
 
@@ -40,6 +41,12 @@ public class ChannelDao extends AbstractDao {
         TypedQuery<ChannelPojo> query = getQuery(QUERY_NAME, ChannelPojo.class);
         query.setParameter("name", "%" + name + "%");
         return query.getResultList();
+    }
+
+    public ChannelPojo selectByName(String name) {
+        TypedQuery<ChannelPojo> query = getQuery(SELECT_NAME, ChannelPojo.class);
+        query.setParameter("name", name);
+        return getSingle(query);
     }
 
 

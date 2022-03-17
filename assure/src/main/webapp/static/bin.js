@@ -19,8 +19,16 @@ function addBins() {
             'Content-Type': 'application/json'
         },
         success: function (response) {
+            toggleAddBinForm();
             getBinList();
-            toast(true, "Successfully added client!!");
+            console.log(response);
+            $.toast({
+                heading: 'Success',
+                text: "Successfully created bins! From: " + response.smIndex + " To: " + response.bgIndex,
+                allowToastClose: true,
+                position: 'top-right',
+                icon: 'success'
+            });
         },
         error: handleAjaxError
     });

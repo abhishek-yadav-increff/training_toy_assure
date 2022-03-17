@@ -10,5 +10,5 @@ import lombok.Setter;
 @Setter
 public class BinForm {
 
-    private Integer binSize;
+    private Long binSize;
 }

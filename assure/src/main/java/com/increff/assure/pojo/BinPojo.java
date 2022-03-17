@@ -17,8 +17,8 @@ import lombok.Setter;
 public class BinPojo {
 
     @Id
-    @TableGenerator(name = "bin_id", table = "generator_table", pkColumnName = "bin_id",
-            initialValue = 10000, allocationSize = 1)
+    @TableGenerator(name = "bin_id", table = "generator_table", initialValue = 10000,
+            allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "bin_id")
     private long binId;
 

@@ -4,12 +4,14 @@ import java.util.List;
 import com.increff.assure.dto.BinDto;
 import com.increff.assure.model.BinData;
 import com.increff.assure.model.BinForm;
+import com.increff.assure.model.BinIndexRange;
 import com.increff.assure.service.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,8 +26,9 @@ public class BinController {
 
     @ApiOperation(value = "Adds a Bin")
     @RequestMapping(path = "/api/bin", method = RequestMethod.POST)
-    public void add(@RequestBody BinForm form) throws ApiException {
-        binDto.add(form);
+    @ResponseBody
+    public BinIndexRange add(@RequestBody BinForm form) throws ApiException {
+        return binDto.add(form);
     }
 
     @ApiOperation(value = "Gets a Bin by Bin ID")

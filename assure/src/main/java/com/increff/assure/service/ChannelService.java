@@ -19,15 +19,18 @@ public class ChannelService {
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(ChannelPojo p) throws ApiException {
-        dao.insert(p);
+        if (dao.selectByName(p.getName()) == null)
+            dao.insert(p);
+        else
+            throw new ApiException("Given name already exists!!");
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     public ChannelPojo get(int id) throws ApiException {
         return getCheck(id);
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     public List<ChannelPojo> getAll() throws ApiException {
         List<ChannelPojo> channelPojos = dao.selectAll();
         if (channelPojos == null) {
@@ -36,7 +39,13 @@ public class ChannelService {
         return channelPojos;
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
+    public ChannelPojo getByName(String name) throws ApiException {
+        ChannelPojo p = dao.selectByName(name);
+        return p;
+    }
+
+    @Transactional(readOnly = true)
     public ChannelPojo getCheck(int id) throws ApiException {
         ChannelPojo p = dao.select(id);
         if (p == null) {
@@ -53,7 +62,7 @@ public class ChannelService {
         dao.update(ex);
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     private List<ChannelPojo> queryByName(String name) throws ApiException {
         List<ChannelPojo> channelPojos = dao.queryByName(name);
         if (channelPojos == null) {
@@ -62,7 +71,7 @@ public class ChannelService {
         return channelPojos;
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     private List<ChannelPojo> queryById(Long id) throws ApiException {
         List<ChannelPojo> channelPojos = getAll();
         if (channelPojos == null) {

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 public class ProductDao extends AbstractDao {
 
     private static final String SELECT_ID = "SELECT P FROM assure_product P WHERE globalSkuId=:id";
+    private static final String SELECT_CLIENTID_CLIENTSKUID =
+            "SELECT P FROM assure_product P WHERE clientId=:clientId and clientSkuId =:clientSkuId";
     private static final String SELECT_ALL = "SELECT P FROM assure_product P";
 
     @PersistenceContext
@@ -31,6 +33,13 @@ public class ProductDao extends AbstractDao {
     public List<ProductPojo> selectAll() {
         TypedQuery<ProductPojo> query = getQuery(SELECT_ALL, ProductPojo.class);
         return query.getResultList();
+    }
+
+    public ProductPojo selectClientIdClientSkuId(String clientSkuId, Long clientId) {
+        TypedQuery<ProductPojo> query = getQuery(SELECT_CLIENTID_CLIENTSKUID, ProductPojo.class);
+        query.setParameter("clientSkuId", clientSkuId);
+        query.setParameter("clientId", clientId);
+        return getSingle(query);
     }
 
     public void update(ProductPojo p) {}

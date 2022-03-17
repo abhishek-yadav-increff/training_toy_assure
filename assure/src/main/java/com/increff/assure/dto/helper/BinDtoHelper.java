@@ -3,6 +3,7 @@ package com.increff.assure.dto.helper;
 import java.util.ArrayList;
 import java.util.List;
 import com.increff.assure.model.BinData;
+import com.increff.assure.model.BinIndexRange;
 import com.increff.assure.pojo.BinPojo;
 
 /**
@@ -22,6 +23,10 @@ public class BinDtoHelper {
             binDatas.add(convert(binPojo));
         }
         return binDatas;
+    }
+
+    public static BinIndexRange convertToRange(Long smIndex, Long size) {
+        return new BinIndexRange(smIndex + 1, smIndex + size);
     }
 
 }
