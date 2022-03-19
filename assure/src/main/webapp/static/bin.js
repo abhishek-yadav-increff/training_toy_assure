@@ -151,7 +151,7 @@ function init() {
     $('#inputClientId').select2({
         allowClear: true,
         ajax: {
-            url: getClientUrl() + "/search/",
+            url: getClientUrl() + "/client/",
             dataType: 'json',
 
             data: function (params) {

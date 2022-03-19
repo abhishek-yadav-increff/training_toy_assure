@@ -9,7 +9,10 @@
     <nav th:replace="snippets.html :: name_app_navbar"></nav>
     <div th:replace="bin_snippets.html :: toystore_header_bin"></div>
     <div id="container">
+        <h3 class="p-0">Create Bins</h3>
         <button type="button" class="btn btn-primary btn-sm" id="display-add-bin">Add Bins</button>
+        <hr>
+        <h3 class="p-0">Bin wise Inventory for the Products/SKU</h3>
         <div th:replace="bin_snippets.html :: toystore_bin_add_form"></div>
         <form th:replace="bin_snippets.html :: toystore_bin_sku_form"></form>
         <div th:replace="bin_snippets.html :: toystore_bin_sku_table"></div>

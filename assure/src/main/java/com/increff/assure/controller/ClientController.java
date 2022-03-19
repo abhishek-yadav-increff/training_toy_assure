@@ -42,6 +42,21 @@ public class ClientController {
         return clientDto.getByQuery(query);
     }
 
+    @ApiOperation(value = "Search a Client by ID and Name")
+    @RequestMapping(path = "/api/client/client/", method = RequestMethod.GET)
+    public List<ClientData> getClient(@RequestParam(value = "term", required = false) String query,
+            @RequestParam(value = "type", required = true) String type) throws ApiException {
+        return clientDto.getByQueryClient(query);
+    }
+
+    @ApiOperation(value = "Search a Client by ID and Name")
+    @RequestMapping(path = "/api/client/customer/", method = RequestMethod.GET)
+    public List<ClientData> getCustomer(
+            @RequestParam(value = "term", required = false) String query,
+            @RequestParam(value = "type", required = true) String type) throws ApiException {
+        return clientDto.getByQueryCustomer(query);
+    }
+
     @ApiOperation(value = "Gets list of all Clients")
     @RequestMapping(path = "/api/client", method = RequestMethod.GET)
     public List<ClientData> getAll() throws ApiException {

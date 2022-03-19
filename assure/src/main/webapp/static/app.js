@@ -108,5 +108,9 @@ function getBinSkuUrl() {
     var baseUrl = $("meta[name=baseUrl]").attr("content")
     return baseUrl + "/api/binSku";
 }
+function getOrderUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/order";
+}
 
 $(document).ready(init);

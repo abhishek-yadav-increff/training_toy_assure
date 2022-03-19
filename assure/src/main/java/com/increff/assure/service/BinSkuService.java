@@ -33,8 +33,8 @@ public class BinSkuService {
     }
 
     @Transactional(readOnly = true, rollbackFor = ApiException.class)
-    public BinSkuPojo getByGlobalSkuId(Long globalSkuId) throws ApiException {
-        BinSkuPojo binSkuPojo = dao.selectByGlobalSkuId(globalSkuId);
+    public List<BinSkuPojo> getByGlobalSkuId(Long globalSkuId) throws ApiException {
+        List<BinSkuPojo> binSkuPojo = dao.selectByGlobalSkuId(globalSkuId);
         if (binSkuPojo == null) {
             throw new ApiException("BinSku does not exist, globalSkuId: " + globalSkuId);
         }

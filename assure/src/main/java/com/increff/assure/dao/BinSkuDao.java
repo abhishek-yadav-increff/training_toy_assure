@@ -31,10 +31,10 @@ public class BinSkuDao extends AbstractDao {
         return getSingle(query);
     }
 
-    public BinSkuPojo selectByGlobalSkuId(Long globalSkuId) {
+    public List<BinSkuPojo> selectByGlobalSkuId(Long globalSkuId) {
         TypedQuery<BinSkuPojo> query = getQuery(SELECT_GLOBALSKUID, BinSkuPojo.class);
         query.setParameter("globalSkuId", globalSkuId);
-        return getSingle(query);
+        return query.getResultList();
     }
 
     public List<BinSkuPojo> selectAll() {

@@ -51,4 +51,20 @@ public class ClientDto {
             return null;
         return ClientDtoHelper.convert(clientPojos);
     }
+
+    public List<ClientData> getByQueryClient(String query) throws ApiException {
+        List<ClientPojo> clientPojos =
+                clientService.getByQueryClient(CommonsHelper.normalize(query));
+        if (clientPojos == null)
+            return null;
+        return ClientDtoHelper.convert(clientPojos);
+    }
+
+    public List<ClientData> getByQueryCustomer(String query) throws ApiException {
+        List<ClientPojo> clientPojos =
+                clientService.getByQueryCustomer(CommonsHelper.normalize(query));
+        if (clientPojos == null)
+            return null;
+        return ClientDtoHelper.convert(clientPojos);
+    }
 }

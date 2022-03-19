@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.increff.assure.dao.ClientDao;
 import com.increff.assure.dto.helper.CommonsHelper;
+import com.increff.assure.enums.UserEnum;
 import com.increff.assure.pojo.ClientPojo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,4 +92,21 @@ public class ClientService {
         }
 
     }
+
+    public List<ClientPojo> getByQueryClient(String query) throws ApiException {
+        List<ClientPojo> clientPojos = getByQuery(query);
+        List<ClientPojo> clientPojos2 = clientPojos.stream()
+                .filter(c -> c.getUserType().equals(UserEnum.CLIENT)).collect(Collectors.toList());
+        return clientPojos2;
+    }
+
+
+    public List<ClientPojo> getByQueryCustomer(String query) throws ApiException {
+        List<ClientPojo> clientPojos = getByQuery(query);
+        List<ClientPojo> clientPojos2 =
+                clientPojos.stream().filter(c -> c.getUserType().equals(UserEnum.CUSTOMER))
+                        .collect(Collectors.toList());
+        return clientPojos2;
+    }
+
 }

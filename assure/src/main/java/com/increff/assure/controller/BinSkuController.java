@@ -36,7 +36,7 @@ public class BinSkuController {
 
     @ApiOperation(value = "Gets a BinSku by globalSkuId")
     @RequestMapping(path = "/api/binSku/globalskuid/{id}", method = RequestMethod.GET)
-    public BinSkuData getByGlobalSkuId(@PathVariable Long id) throws ApiException {
+    public List<BinSkuData> getByGlobalSkuId(@PathVariable Long id) throws ApiException {
         return binDto.getByGlobalSkuId(id);
     }
 

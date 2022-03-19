@@ -47,8 +47,8 @@ public class BinSkuDto {
         return BinSkuDtoHelper.convert(binSkuPojo);
     }
 
-    public BinSkuData getByGlobalSkuId(Long globalSkuId) throws ApiException {
-        BinSkuPojo binSkuPojo = binSkuService.getByGlobalSkuId(globalSkuId);
+    public List<BinSkuData> getByGlobalSkuId(Long globalSkuId) throws ApiException {
+        List<BinSkuPojo> binSkuPojo = binSkuService.getByGlobalSkuId(globalSkuId);
         return BinSkuDtoHelper.convert(binSkuPojo);
     }
 
