@@ -14,8 +14,9 @@ public class ChannelListingService {
     private ChannelListingDao dao;
 
     @Transactional(rollbackFor = ApiException.class)
-    public void add(ChannelListingPojo p) throws ApiException {
-        dao.insert(p);
+    public void add(List<ChannelListingPojo> p) throws ApiException {
+        for (ChannelListingPojo chLiPojo : p)
+            dao.insert(chLiPojo);
     }
 
     @Transactional(readOnly = true)

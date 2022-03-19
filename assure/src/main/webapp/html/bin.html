@@ -11,7 +11,8 @@
     <div id="container">
         <button type="button" class="btn btn-primary btn-sm" id="display-add-bin">Add Bins</button>
         <div th:replace="bin_snippets.html :: toystore_bin_add_form"></div>
-
+        <form th:replace="bin_snippets.html :: toystore_bin_sku_form"></form>
+        <div th:replace="bin_snippets.html :: toystore_bin_sku_table"></div>
     </div> <!-- Container end-->
 
     <footer th:replace="snippets.html :: name_footer"></footer>

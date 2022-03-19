@@ -23,6 +23,4 @@ public class ChannelPojo {
     private String name;
     private InvoiceEnum invoiceType;
 
-
-
 }

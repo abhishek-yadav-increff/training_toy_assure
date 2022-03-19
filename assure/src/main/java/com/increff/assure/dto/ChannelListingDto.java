@@ -1,5 +1,6 @@
 package com.increff.assure.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.increff.assure.dto.helper.ChannelListingDtoHelper;
 import com.increff.assure.dto.helper.CommonsHelper;
@@ -28,15 +29,19 @@ public class ChannelListingDto {
     private ProductService productService;
     private static final Logger LOGGER = Logger.getLogger(ChannelListingDto.class);
 
-    public void add(ChannelListingForm channelListingForm) throws ApiException {
+    public void add(List<ChannelListingForm> channelListingForms) throws ApiException {
         LOGGER.info("In ChannelListingService:add()");
-        LOGGER.info("Form data received: " + channelListingForm.toString());
-        ProductPojo productPojo =
-                productService.getClientIdClientSkuId(channelListingForm.getClientId(),
-                        CommonsHelper.normalize(channelListingForm.getClientSkuId()));
-        ChannelListingPojo channelListingPojo =
-                ChannelListingDtoHelper.convert(channelListingForm, productPojo);
-        channelListingService.add(channelListingPojo);
+        LOGGER.info("Form data received: " + channelListingForms.toString());
+        List<ChannelListingPojo> channelListingPojos = new ArrayList<ChannelListingPojo>();
+        for (ChannelListingForm chLiForm : channelListingForms) {
+
+            ProductPojo productPojo = productService.getClientIdClientSkuId(chLiForm.getClientId(),
+                    CommonsHelper.normalize(chLiForm.getClientSkuId()));
+            ChannelListingPojo channelListingPojo =
+                    ChannelListingDtoHelper.convert(chLiForm, productPojo);
+            channelListingPojos.add(channelListingPojo);
+        }
+        channelListingService.add(channelListingPojos);
     }
 
     public ChannelListingData get(int id) throws ApiException {

@@ -16,4 +16,11 @@ public class ProductForm {
 
     public ProductForm() {}
 
+    @Override
+    public String toString() {
+        return "ProductForm [brandId=" + brandId + ", clientId=" + clientId + ", clientSkuId="
+                + clientSkuId + ", description=" + description + ", mrp=" + mrp + ", name=" + name
+                + "]";
+    }
+
 }

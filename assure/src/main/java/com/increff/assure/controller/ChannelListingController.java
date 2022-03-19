@@ -24,8 +24,9 @@ public class ChannelListingController {
 
     @ApiOperation(value = "Adds a ChannelListing")
     @RequestMapping(path = "/api/channelListing", method = RequestMethod.POST)
-    public void add(@RequestBody ChannelListingForm form) throws ApiException {
-        channelListingDto.add(form);
+    public void add(@RequestBody List<ChannelListingForm> forms) throws ApiException {
+        // System.out.print(forms);
+        channelListingDto.add(forms);
     }
 
     @ApiOperation(value = "Gets a ChannelListing by ID")

@@ -134,7 +134,7 @@ function uploadRows(clientId) {
             'Content-Type': 'application/json'
         },
         success: function (response) {
-            uploadRows();
+            uploadRows(clientId);
         },
         error: function (response) {
             var jsonError = JSON.parse(response.responseText)
@@ -142,7 +142,7 @@ function uploadRows(clientId) {
             row.Row = processCount
 
             errorData.push(row);
-            uploadRows();
+            uploadRows(clientId);
         }
     });
 

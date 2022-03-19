@@ -79,7 +79,7 @@ function toast(successState, message) {
         });
     }
 }
-
+// API ENDPOINTS
 function getBrandUrl() {
     var baseUrl = $("meta[name=baseUrl]").attr("content")
     return baseUrl + "/api/brand";
@@ -99,6 +99,14 @@ function getBinUrl() {
 function getChannelUrl() {
     var baseUrl = $("meta[name=baseUrl]").attr("content")
     return baseUrl + "/api/channel";
+}
+function getChannelListingUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/channelListing";
+}
+function getBinSkuUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/binSku";
 }
 
 $(document).ready(init);
