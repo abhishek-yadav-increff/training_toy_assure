@@ -1,8 +1,21 @@
 // UTILITY CODE
 function toggleAddBinForm() {
     $('#add-bin-modal').modal('toggle');
-
 }
+function resetOnSuccess() {
+    // Reset Form
+    document.getElementById("bin-sku-form").reset();
+    $("#inputClientId").empty().trigger('change');
+    // Reset File Data
+    processCount = 0;
+    fileData = [];
+    errorData = [];
+    //Reset various counts
+    //Update counts	
+    updateUploadDialog();
+    document.getElementById("add-bin-sku").disabled = true;
+}
+
 // DISPLAY CODE
 function displayBinSkuList(data) {
     var $tbody = $('#bin-sku-table').find('tbody');
@@ -137,11 +150,11 @@ function uploadRows(clientId) {
             'Content-Type': 'application/json'
         },
         success: function (response) {
+            getBinSkuList();
+            resetOnSuccess();
             toast(true, "BinSku were succesfully added!!");
         },
-        error: function (response) {
-            toast(false, 'No data was added!');
-        }
+        error: handleAjaxError
     });
 
 }
@@ -172,7 +185,7 @@ function init() {
     });
     $('#display-add-bin').click(toggleAddBinForm);
     $('#bin-add-form').submit(addBins);
-
+    $('#refresh-bin-sku-data').click(resetOnSuccess);
     $('#bin-sku-form').submit(addBinSku);
 
     // $('#process-data').click(processData);

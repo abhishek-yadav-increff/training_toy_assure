@@ -23,9 +23,11 @@ public class ChannelDtoHelper {
 
     public static ChannelPojo convert(ChannelForm channelForm) {
         ChannelPojo channelPojo = new ChannelPojo();
-        channelPojo.setName(CommonsHelper.normalize(channelForm.getName()));
-        channelPojo.setInvoiceType(
-                InvoiceEnum.fromString(CommonsHelper.normalize(channelForm.getInvoiceType())));
+        if (channelForm.getName() != null && !channelForm.getName().isEmpty())
+            channelPojo.setName(CommonsHelper.normalize(channelForm.getName()));
+        if (channelForm.getInvoiceType() != null && !channelForm.getInvoiceType().isEmpty())
+            channelPojo.setInvoiceType(
+                    InvoiceEnum.fromString(CommonsHelper.normalize(channelForm.getInvoiceType())));
         return channelPojo;
     }
 

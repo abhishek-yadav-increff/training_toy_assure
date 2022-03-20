@@ -2,14 +2,10 @@
 function refreshProductList() {
     getProductList();
     toast(true, "Refreshed!");
-    resetInputProduct();
+    resetOnSuccess();
 }
 
-function resetInputProduct() {
-    document.getElementById("product-form").reset();
-    $("#inputClientId").empty().trigger('change');
-    resetUploadDialog();
-}
+
 function addProduct(event) {
     //Set the values to update
     var clientId = document.getElementById("inputClientId").value;
@@ -58,12 +54,11 @@ function getProductList() {
     });
 }
 
-
 // FILE UPLOAD METHODS
+
 var fileData = [];
 var errorData = [];
 var processCount = 0;
-
 
 function processData(clientId) {
     var file = $('#productFile')[0].files[0];
@@ -79,6 +74,7 @@ function readFileDataCallback(results, clientId) {
     if (fileData.length > 5000) {
         toast(false, "Limit on number of rows is 5000!!");
     }
+    errorData = [];
     uploadRows(clientId);
 }
 
@@ -87,14 +83,14 @@ function uploadRows(clientId) {
 
     updateUploadDialog();
     if (processCount == fileData.length) {
+        fileData = null;
         if (errorData.length == 0) {
-            // displayUploadData();
             getProductList();
-            resetInputProduct();
-            // resetUploadDialog();
+            resetOnSuccess();
             toast(true, 'All files successfully added!');
         } else if (errorData.length == processCount) {
             getProductList();
+            processCount = 0;
             // document.getElementById("download-errors").disabled = false;
             toast(false, 'No data was added!');
 
@@ -142,6 +138,7 @@ function uploadRows(clientId) {
             row.Row = processCount
 
             errorData.push(row);
+            console.log(row);
             uploadRows(clientId);
         }
     });
@@ -165,11 +162,15 @@ function downloadErrors() {
 }
 
 
-function resetUploadDialog() {
-    //Reset various counts
+function resetOnSuccess() {
+    // Reset Form
+    document.getElementById("product-form").reset();
+    $("#inputClientId").empty().trigger('change');
+    // Reset File Data
     processCount = 0;
     fileData = [];
     errorData = [];
+    //Reset various counts
     //Update counts	
     updateUploadDialog();
     document.getElementById("add-product").disabled = true;
@@ -227,7 +228,7 @@ function updateUploadDialog() {
 // }
 
 function displayUploadData() {
-    resetUploadDialog();
+    resetOnSuccess();
     $('#upload-product-modal').modal('toggle');
 }
 

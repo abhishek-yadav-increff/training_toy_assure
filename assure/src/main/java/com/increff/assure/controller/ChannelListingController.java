@@ -25,13 +25,12 @@ public class ChannelListingController {
     @ApiOperation(value = "Adds a ChannelListing")
     @RequestMapping(path = "/api/channelListing", method = RequestMethod.POST)
     public void add(@RequestBody List<ChannelListingForm> forms) throws ApiException {
-        // System.out.print(forms);
         channelListingDto.add(forms);
     }
 
     @ApiOperation(value = "Gets a ChannelListing by ID")
     @RequestMapping(path = "/api/channelListing/{id}", method = RequestMethod.GET)
-    public ChannelListingData get(@PathVariable int id) throws ApiException {
+    public ChannelListingData get(@PathVariable Long id) throws ApiException {
         return channelListingDto.get(id);
     }
 
@@ -39,13 +38,6 @@ public class ChannelListingController {
     @RequestMapping(path = "/api/channelListing", method = RequestMethod.GET)
     public List<ChannelListingData> getAll() throws ApiException {
         return channelListingDto.getAll();
-    }
-
-    @ApiOperation(value = "Updates a ChannelListing")
-    @RequestMapping(path = "/api/channelListing/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable int id, @RequestBody ChannelListingForm f)
-            throws ApiException {
-        channelListingDto.update(id, f);
     }
 
 }

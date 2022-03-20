@@ -5,7 +5,6 @@ import java.util.List;
 import com.increff.assure.model.ChannelListingData;
 import com.increff.assure.model.ChannelListingForm;
 import com.increff.assure.pojo.ChannelListingPojo;
-import com.increff.assure.pojo.ProductPojo;
 
 /**
  * ChannelListingDtoHelper
@@ -22,13 +21,14 @@ public class ChannelListingDtoHelper {
     }
 
     public static ChannelListingPojo convert(ChannelListingForm channelListingForm,
-            ProductPojo productPojo) {
+            Long globalSkuId) {
         ChannelListingPojo channelListingPojo = new ChannelListingPojo();
-        channelListingPojo
-                .setChannelSkuId(CommonsHelper.normalize(channelListingForm.getChannelSkuId()));
+        String channelSkuId = channelListingForm.getChannelSkuId();
+        if (channelSkuId != null && !channelSkuId.isEmpty())
+            channelListingPojo.setChannelSkuId(CommonsHelper.normalize(channelSkuId));
         channelListingPojo.setChannelId(channelListingForm.getChannelId());
         channelListingPojo.setClientId(channelListingForm.getClientId());
-        channelListingPojo.setGlobalSkuId(productPojo.getGlobalSkuId());
+        channelListingPojo.setGlobalSkuId(globalSkuId);
 
         return channelListingPojo;
     }

@@ -31,16 +31,16 @@ public class BinController {
         return binDto.add(form);
     }
 
-    @ApiOperation(value = "Gets a Bin by Bin ID")
-    @RequestMapping(path = "/api/bin/{id}", method = RequestMethod.GET)
-    public BinData get(@PathVariable Long id) throws ApiException {
-        return binDto.get(id);
-    }
+    // @ApiOperation(value = "Gets a Bin by Bin ID")
+    // @RequestMapping(path = "/api/bin/{id}", method = RequestMethod.GET)
+    // public BinData get(@PathVariable Long id) throws ApiException {
+    // return binDto.get(id);
+    // }
 
-    @ApiOperation(value = "Gets list of all Bins")
-    @RequestMapping(path = "/api/bin", method = RequestMethod.GET)
-    public List<BinData> getAll() throws ApiException {
-        return binDto.getAll();
-    }
+    // @ApiOperation(value = "Gets list of all Bins")
+    // @RequestMapping(path = "/api/bin", method = RequestMethod.GET)
+    // public List<BinData> getAll() throws ApiException {
+    // return binDto.getAll();
+    // }
 
 }

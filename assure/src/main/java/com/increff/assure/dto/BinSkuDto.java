@@ -29,26 +29,25 @@ public class BinSkuDto {
     private static final Logger LOGGER = Logger.getLogger(BinSkuDto.class);
 
     public void add(List<BinSkuForm> binSkuForms) throws ApiException {
-        LOGGER.info("In BinSkuService:add()");
+        LOGGER.info("In add()");
         LOGGER.info("Form data received: " + binSkuForms.toString());
+
         List<BinSkuPojo> binSkuPojos = new ArrayList<BinSkuPojo>();
         for (BinSkuForm binSkuForm : binSkuForms) {
             ProductPojo productPojo = productService
                     .getClientIdClientSkuId(binSkuForm.getClientId(), binSkuForm.getClientSkuId());
-            BinSkuPojo binSkuPojo =
-                    BinSkuDtoHelper.convert(binSkuForm, productPojo.getGlobalSkuId());
+            Long globalSkuId = null;
+            if (productPojo != null)
+                globalSkuId = productPojo.getGlobalSkuId();
+            BinSkuPojo binSkuPojo = BinSkuDtoHelper.convert(binSkuForm, globalSkuId);
             binSkuPojos.add(binSkuPojo);
         }
         binSkuService.add(binSkuPojos);
+
     }
 
     public BinSkuData get(Long id) throws ApiException {
         BinSkuPojo binSkuPojo = binSkuService.get(id);
-        return BinSkuDtoHelper.convert(binSkuPojo);
-    }
-
-    public List<BinSkuData> getByGlobalSkuId(Long globalSkuId) throws ApiException {
-        List<BinSkuPojo> binSkuPojo = binSkuService.getByGlobalSkuId(globalSkuId);
         return BinSkuDtoHelper.convert(binSkuPojo);
     }
 
@@ -57,11 +56,9 @@ public class BinSkuDto {
         return BinSkuDtoHelper.convert(binSkuPojos);
     }
 
-    public void update(Long id, BinSkuForm binSkuForm) throws ApiException {
-        ProductPojo productPojo = productService.getClientIdClientSkuId(binSkuForm.getClientId(),
-                binSkuForm.getClientSkuId());
-        BinSkuPojo p = BinSkuDtoHelper.convert(binSkuForm, productPojo.getGlobalSkuId());
-        binSkuService.update(id, p);
+    public List<BinSkuData> getByGlobalSkuId(Long globalSkuId) throws ApiException {
+        List<BinSkuPojo> binSkuPojos = binSkuService.getByGlobalSkuId(globalSkuId);
+        return BinSkuDtoHelper.convert(binSkuPojos);
     }
 
 }

@@ -11,4 +11,9 @@ import lombok.Setter;
 public class BinForm {
 
     private Long binSize;
+
+    @Override
+    public String toString() {
+        return "BinForm [binSize=" + binSize + "]";
+    }
 }

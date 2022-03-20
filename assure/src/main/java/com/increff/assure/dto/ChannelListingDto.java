@@ -37,14 +37,17 @@ public class ChannelListingDto {
 
             ProductPojo productPojo = productService.getClientIdClientSkuId(chLiForm.getClientId(),
                     CommonsHelper.normalize(chLiForm.getClientSkuId()));
+            Long globalSkuId = null;
+            if (productPojo != null)
+                globalSkuId = productPojo.getGlobalSkuId();
             ChannelListingPojo channelListingPojo =
-                    ChannelListingDtoHelper.convert(chLiForm, productPojo);
+                    ChannelListingDtoHelper.convert(chLiForm, globalSkuId);
             channelListingPojos.add(channelListingPojo);
         }
         channelListingService.add(channelListingPojos);
     }
 
-    public ChannelListingData get(int id) throws ApiException {
+    public ChannelListingData get(Long id) throws ApiException {
         ChannelListingPojo channelListingPojo = channelListingService.get(id);
         return ChannelListingDtoHelper.convert(channelListingPojo);
     }
@@ -52,14 +55,6 @@ public class ChannelListingDto {
     public List<ChannelListingData> getAll() throws ApiException {
         List<ChannelListingPojo> channelListingPojos = channelListingService.getAll();
         return ChannelListingDtoHelper.convert(channelListingPojos);
-    }
-
-    public void update(int id, ChannelListingForm channelListingForm) throws ApiException {
-        ProductPojo productPojo =
-                productService.getClientIdClientSkuId(channelListingForm.getClientId(),
-                        CommonsHelper.normalize(channelListingForm.getClientSkuId()));
-        ChannelListingPojo p = ChannelListingDtoHelper.convert(channelListingForm, productPojo);
-        channelListingService.update(id, p);
     }
 
 }

@@ -26,7 +26,7 @@ public class ChannelService {
     }
 
     @Transactional(readOnly = true)
-    public ChannelPojo get(int id) throws ApiException {
+    public ChannelPojo get(Long id) throws ApiException {
         return getCheck(id);
     }
 
@@ -34,7 +34,7 @@ public class ChannelService {
     public List<ChannelPojo> getAll() throws ApiException {
         List<ChannelPojo> channelPojos = dao.selectAll();
         if (channelPojos == null) {
-            throw new ApiException("No Channel Category Pair in database!");
+            throw new ApiException("No Channel in database!");
         }
         return channelPojos;
     }
@@ -46,20 +46,12 @@ public class ChannelService {
     }
 
     @Transactional(readOnly = true)
-    public ChannelPojo getCheck(int id) throws ApiException {
+    public ChannelPojo getCheck(Long id) throws ApiException {
         ChannelPojo p = dao.select(id);
         if (p == null) {
             throw new ApiException("Channel with given ID does not exist, id: " + id);
         }
         return p;
-    }
-
-    @Transactional(rollbackFor = ApiException.class)
-    public void update(int id, ChannelPojo p) throws ApiException {
-        ChannelPojo ex = getCheck(id);
-        ex.setName(p.getName());
-        ex.setInvoiceType(p.getInvoiceType());
-        dao.update(ex);
     }
 
     @Transactional(readOnly = true)

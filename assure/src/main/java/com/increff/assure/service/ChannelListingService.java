@@ -15,12 +15,13 @@ public class ChannelListingService {
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(List<ChannelListingPojo> p) throws ApiException {
-        for (ChannelListingPojo chLiPojo : p)
+        for (ChannelListingPojo chLiPojo : p) {
             dao.insert(chLiPojo);
+        }
     }
 
     @Transactional(readOnly = true)
-    public ChannelListingPojo get(int id) throws ApiException {
+    public ChannelListingPojo get(Long id) throws ApiException {
         return getCheck(id);
     }
 
@@ -34,18 +35,12 @@ public class ChannelListingService {
     }
 
     @Transactional(readOnly = true)
-    public ChannelListingPojo getCheck(int id) throws ApiException {
+    public ChannelListingPojo getCheck(Long id) throws ApiException {
         ChannelListingPojo p = dao.select(id);
         if (p == null) {
             throw new ApiException("ChannelListing with given ID does not exist, id: " + id);
         }
         return p;
-    }
-
-    @Transactional(rollbackFor = ApiException.class)
-    public void update(int id, ChannelListingPojo p) throws ApiException {
-        ChannelListingPojo ex = getCheck(id);
-        dao.update(ex);
     }
 
 }

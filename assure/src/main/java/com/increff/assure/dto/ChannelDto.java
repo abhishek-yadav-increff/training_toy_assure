@@ -30,7 +30,7 @@ public class ChannelDto {
         channelService.add(channelPojo);
     }
 
-    public ChannelData get(int id) throws ApiException {
+    public ChannelData get(Long id) throws ApiException {
         ChannelPojo channelPojo = channelService.get(id);
         return ChannelDtoHelper.convert(channelPojo);
     }
@@ -38,11 +38,6 @@ public class ChannelDto {
     public List<ChannelData> getAll() throws ApiException {
         List<ChannelPojo> channelPojos = channelService.getAll();
         return ChannelDtoHelper.convert(channelPojos);
-    }
-
-    public void update(int id, ChannelForm f) throws ApiException {
-        ChannelPojo p = ChannelDtoHelper.convert(f);
-        channelService.update(id, p);
     }
 
     public List<ChannelData> getByQuery(String query) throws ApiException {

@@ -26,6 +26,7 @@ public class ProductDto {
         LOGGER.info("In ProductService:add()");
         LOGGER.info("Form data received: " + productForm.toString());
         ProductPojo productPojo = ProductDtoHelper.convert(productForm);
+        LOGGER.info("Converted pojo data: " + productPojo.toString());
         productService.add(productPojo);
     }
 

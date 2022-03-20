@@ -11,7 +11,7 @@ import lombok.Setter;
 @Entity(name = "assure_product")
 @Getter
 @Setter
-public class ProductPojo {
+public class ProductPojo extends AbstractPojo {
 
     @Id
     @TableGenerator(name = "product_id", table = "generator_table", initialValue = 10000,
@@ -27,5 +27,12 @@ public class ProductPojo {
     private String description;
 
     public ProductPojo() {}
+
+    @Override
+    public String toString() {
+        return "ProductPojo [brandId=" + brandId + ", clientId=" + clientId + ", clientSkuId="
+                + clientSkuId + ", description=" + description + ", globalSkuId=" + globalSkuId
+                + ", mrp=" + mrp + ", name=" + name + "]";
+    }
 
 }

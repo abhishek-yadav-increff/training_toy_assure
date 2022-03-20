@@ -119,8 +119,8 @@ function uploadRows(clientId, channelId) {
             'Content-Type': 'application/json'
         },
         success: function (response) {
-            // getChannelListingList();
-            // resetInputChannelListing();
+            getChannelListingList();
+            resetInputChannelListing();
             toast(true, "Channel Listings were succesfully added!!");
             // uploadRows();
         },

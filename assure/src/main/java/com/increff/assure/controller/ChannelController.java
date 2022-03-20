@@ -30,7 +30,7 @@ public class ChannelController {
 
     @ApiOperation(value = "Gets a Channel by ID")
     @RequestMapping(path = "/api/channel/{id}", method = RequestMethod.GET)
-    public ChannelData get(@PathVariable int id) throws ApiException {
+    public ChannelData get(@PathVariable Long id) throws ApiException {
         return channelDto.get(id);
     }
 
@@ -45,12 +45,6 @@ public class ChannelController {
     @RequestMapping(path = "/api/channel", method = RequestMethod.GET)
     public List<ChannelData> getAll() throws ApiException {
         return channelDto.getAll();
-    }
-
-    @ApiOperation(value = "Updates a Channel")
-    @RequestMapping(path = "/api/channel/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable int id, @RequestBody ChannelForm f) throws ApiException {
-        channelDto.update(id, f);
     }
 
 }

@@ -19,7 +19,6 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 public class ClientController {
 
-
     @Autowired
     private ClientDto clientDto;
 
@@ -31,8 +30,14 @@ public class ClientController {
 
     @ApiOperation(value = "Gets a Client by ID")
     @RequestMapping(path = "/api/client/{id}", method = RequestMethod.GET)
-    public ClientData get(@PathVariable int id) throws ApiException {
+    public ClientData get(@PathVariable Long id) throws ApiException {
         return clientDto.get(id);
+    }
+
+    @ApiOperation(value = "Gets list of all Clients")
+    @RequestMapping(path = "/api/client", method = RequestMethod.GET)
+    public List<ClientData> getAll() throws ApiException {
+        return clientDto.getAll();
     }
 
     @ApiOperation(value = "Search a Client by ID and Name")
@@ -55,18 +60,6 @@ public class ClientController {
             @RequestParam(value = "term", required = false) String query,
             @RequestParam(value = "type", required = true) String type) throws ApiException {
         return clientDto.getByQueryCustomer(query);
-    }
-
-    @ApiOperation(value = "Gets list of all Clients")
-    @RequestMapping(path = "/api/client", method = RequestMethod.GET)
-    public List<ClientData> getAll() throws ApiException {
-        return clientDto.getAll();
-    }
-
-    @ApiOperation(value = "Updates a Client")
-    @RequestMapping(path = "/api/client/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable int id, @RequestBody ClientForm f) throws ApiException {
-        clientDto.update(id, f);
     }
 
 }

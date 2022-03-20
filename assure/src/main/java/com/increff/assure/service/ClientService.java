@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClientService {
+
     private static final Logger LOGGER = Logger.getLogger(ClientService.class);
 
     @Autowired
@@ -20,15 +21,21 @@ public class ClientService {
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(ClientPojo p) throws ApiException {
+        if (p.getName() == null) {
+            throw new ApiException("Name can not be empty!!");
+        }
+        if (p.getUserType() == null) {
+            throw new ApiException("User Type was illegal!!");
+        }
         dao.insert(p);
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
-    public ClientPojo get(int id) throws ApiException {
+    @Transactional(readOnly = true)
+    public ClientPojo get(Long id) throws ApiException {
         return getCheck(id);
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     public List<ClientPojo> getAll() throws ApiException {
         List<ClientPojo> clientPojos = dao.selectAll();
         if (clientPojos == null) {
@@ -37,8 +44,8 @@ public class ClientService {
         return clientPojos;
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
-    public ClientPojo getCheck(int id) throws ApiException {
+    @Transactional(readOnly = true)
+    public ClientPojo getCheck(Long id) throws ApiException {
         ClientPojo p = dao.select(id);
         if (p == null) {
             throw new ApiException("Client with given ID does not exist, id: " + id);
@@ -46,15 +53,7 @@ public class ClientService {
         return p;
     }
 
-    @Transactional(rollbackFor = ApiException.class)
-    public void update(int id, ClientPojo p) throws ApiException {
-        ClientPojo ex = getCheck(id);
-        ex.setName(p.getName());
-        ex.setUserType(p.getUserType());
-        dao.update(ex);
-    }
-
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     private List<ClientPojo> queryByName(String name) throws ApiException {
         List<ClientPojo> clientPojos = dao.queryByName(name);
         if (clientPojos == null) {
@@ -63,7 +62,7 @@ public class ClientService {
         return clientPojos;
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     private List<ClientPojo> queryById(Long id) throws ApiException {
         List<ClientPojo> clientPojos = getAll();
         if (clientPojos == null) {
@@ -75,6 +74,7 @@ public class ClientService {
         return clientPojos2;
     }
 
+    @Transactional(readOnly = true)
     public List<ClientPojo> getByQuery(String query) throws ApiException {
         LOGGER.info("Inside getByQuery");
         LOGGER.info("Query: " + query);
@@ -90,9 +90,9 @@ public class ClientService {
             LOGGER.info("Size of return: " + clientPojos.size());
             return clientPojos;
         }
-
     }
 
+    @Transactional(readOnly = true)
     public List<ClientPojo> getByQueryClient(String query) throws ApiException {
         List<ClientPojo> clientPojos = getByQuery(query);
         List<ClientPojo> clientPojos2 = clientPojos.stream()
@@ -100,7 +100,7 @@ public class ClientService {
         return clientPojos2;
     }
 
-
+    @Transactional(readOnly = true)
     public List<ClientPojo> getByQueryCustomer(String query) throws ApiException {
         List<ClientPojo> clientPojos = getByQuery(query);
         List<ClientPojo> clientPojos2 =

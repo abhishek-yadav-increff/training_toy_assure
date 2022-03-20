@@ -20,37 +20,42 @@ public class BinSkuService {
     @Transactional(rollbackFor = ApiException.class)
     public void add(List<BinSkuPojo> ps) throws ApiException {
         System.out.println(ps);
+        Long rowCount = 1L;
         for (BinSkuPojo p : ps) {
-            InventoryPojo inventoryPojo = new InventoryPojo(p.getGlobalSkuId(), p.getQuantity());
-            inventoryService.add(inventoryPojo);
-            dao.insert(p);
+            validateAdd(p, rowCount);
+            BinSkuPojo binSkuPojo = getByGlobalSkuIdBinId(p.getGlobalSkuId(), p.getBinId());
+            if (binSkuPojo != null) {
+                InventoryPojo inventoryPojo = inventoryService.getByGlobalSkuId(p.getGlobalSkuId());
+                inventoryPojo.setAvailableQuantity(inventoryPojo.getAvailableQuantity()
+                        + p.getQuantity() - binSkuPojo.getQuantity());
+                inventoryService.update(inventoryPojo.getId(), inventoryPojo);
+                binSkuPojo.setQuantity(p.getQuantity());
+                dao.update(p);
+                System.out.println("Updating " + binSkuPojo + inventoryPojo);
+            } else {
+                InventoryPojo inventoryPojo =
+                        new InventoryPojo(p.getGlobalSkuId(), p.getQuantity());
+                inventoryService.add(inventoryPojo);
+                dao.insert(p);
+            }
         }
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    private void validateAdd(BinSkuPojo p, Long rowCount) throws ApiException {
+        if (p.getGlobalSkuId() == null)
+            throw new ApiException("Row: " + rowCount + ", Product doesn't exist!!");
+        if (p.getQuantity() == null)
+            throw new ApiException("Row: " + rowCount + ",Quantity can not be empty!!");
+        if (p.getQuantity() < 0)
+            throw new ApiException("Row: " + rowCount + ",Quantity can not be negative!!");
+    }
+
+    @Transactional(readOnly = true)
     public BinSkuPojo get(Long id) throws ApiException {
         return getCheck(id);
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
-    public List<BinSkuPojo> getByGlobalSkuId(Long globalSkuId) throws ApiException {
-        List<BinSkuPojo> binSkuPojo = dao.selectByGlobalSkuId(globalSkuId);
-        if (binSkuPojo == null) {
-            throw new ApiException("BinSku does not exist, globalSkuId: " + globalSkuId);
-        }
-        return binSkuPojo;
-    }
-
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
-    public List<BinSkuPojo> getAll() throws ApiException {
-        List<BinSkuPojo> binSkuPojos = dao.selectAll();
-        if (binSkuPojos == null) {
-            throw new ApiException("No BinSku Category Pair in database!");
-        }
-        return binSkuPojos;
-    }
-
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     public BinSkuPojo getCheck(Long id) throws ApiException {
         BinSkuPojo p = dao.select(id);
         if (p == null) {
@@ -59,13 +64,37 @@ public class BinSkuService {
         return p;
     }
 
-    @Transactional(rollbackFor = ApiException.class)
-    public void update(Long id, BinSkuPojo p) throws ApiException {
-        BinSkuPojo ex = getCheck(id);
-        InventoryPojo inventoryPojo = inventoryService.getByGlobalSkuId(ex.getGlobalSkuId());
-        inventoryPojo.setAvailableQuantity(
-                inventoryPojo.getAvailableQuantity() - ex.getQuantity() + p.getQuantity());
-        inventoryService.update(inventoryPojo.getId(), inventoryPojo);
-        dao.update(ex);
+    @Transactional(readOnly = true)
+    public List<BinSkuPojo> getAll() throws ApiException {
+        List<BinSkuPojo> binSkuPojos = dao.selectAll();
+        if (binSkuPojos == null) {
+            throw new ApiException("No BinSku Category Pair in database!");
+        }
+        return binSkuPojos;
     }
+
+    @Transactional(readOnly = true)
+    public List<BinSkuPojo> getByGlobalSkuId(Long globalSkuId) throws ApiException {
+        List<BinSkuPojo> binSkuPojo = dao.selectByGlobalSkuId(globalSkuId);
+        if (binSkuPojo == null) {
+            throw new ApiException("BinSku does not exist, globalSkuId: " + globalSkuId);
+        }
+        return binSkuPojo;
+    }
+
+    @Transactional(readOnly = true)
+    public BinSkuPojo getByGlobalSkuIdBinId(Long globalSkuId, Long binId) throws ApiException {
+        BinSkuPojo binSkuPojo = dao.selectByGlobalSkuIdBinId(globalSkuId, binId);
+        return binSkuPojo;
+    }
+
+    // @Transactional(rollbackFor = ApiException.class)
+    // public void update(Long id, BinSkuPojo p) throws ApiException {
+    // BinSkuPojo ex = getCheck(id);
+    // InventoryPojo inventoryPojo = inventoryService.getByGlobalSkuId(ex.getGlobalSkuId());
+    // inventoryPojo.setAvailableQuantity(
+    // inventoryPojo.getAvailableQuantity() - ex.getQuantity() + p.getQuantity());
+    // inventoryService.update(inventoryPojo.getId(), inventoryPojo);
+    // dao.update(ex);
+    // }
 }

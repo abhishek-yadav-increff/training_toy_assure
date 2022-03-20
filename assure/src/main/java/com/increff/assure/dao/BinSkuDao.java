@@ -14,6 +14,8 @@ public class BinSkuDao extends AbstractDao {
     private static final String SELECT_ID = "SELECT P FROM assure_bin_sku P WHERE ID=:id";
     private static final String SELECT_GLOBALSKUID =
             "SELECT P FROM assure_bin_sku P WHERE GLOBALSKUID=:globalSkuId";
+    private static final String SELECT_GLOBALSKUID_BINID =
+            "SELECT P FROM assure_bin_sku P WHERE GLOBALSKUID=:globalSkuId AND BINID=:binId";
     private static final String SELECT_ALL = "SELECT P FROM assure_bin_sku P";
     private static final String SELECT_BINID = "SELECT P FROM assure_bin_sku P WHERE BINID=:binId";
 
@@ -49,6 +51,13 @@ public class BinSkuDao extends AbstractDao {
     }
 
     public void update(BinSkuPojo p) {}
+
+    public BinSkuPojo selectByGlobalSkuIdBinId(Long globalSkuId, Long binId) {
+        TypedQuery<BinSkuPojo> query = getQuery(SELECT_GLOBALSKUID_BINID, BinSkuPojo.class);
+        query.setParameter("globalSkuId", globalSkuId);
+        query.setParameter("binId", binId);
+        return getSingle(query);
+    }
 
 
 }

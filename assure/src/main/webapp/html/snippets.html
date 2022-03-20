@@ -71,12 +71,24 @@
 </nav>
 
 <div class="row m-0 shadow-sm pt-1 rounded" id="pageHeader" th:fragment="toystore_header">
-  <div class="row" style="width:max-content">
-    <div class="col p-0"><i class="material-icons">&#xe88a;</i></div>
-    <div class="col p-0">Home</div>
+  <div class="row" style="justify-content: space-between; width:100%">
+    <div class="col">
+      <div class="row p-0" style="width: max-content;">
+        <div class="col p-0"><i class="material-icons">&#xe88a;</i></div>
+        <div class="col p-0">Home</div>
+      </div>
+    </div>
+    <!-- <div class="col p-0"></div> -->
+    <div th:replace="snippets.html :: name_zoned_date_time"></div>
   </div>
 </div>
 
+<!-- Zoned Date time div row -->
+<div class="col p-0" th:fragment="name_zoned_date_time">
+  <select class="js-data-example-ajax form-control float-right" name="zonedDateTime" id="inputZonedDateTime"
+    style="width: 100%;" data-placeholder="Search by Zone or Offset" required>
+  </select>
+</div>
 <!-- Footer -->
 <footer class="footer  mt-1" th:fragment="name_footer">
   &#169; Increff 2022

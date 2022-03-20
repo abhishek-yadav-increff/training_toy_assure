@@ -30,7 +30,7 @@ public class ClientDto {
         clientService.add(clientPojo);
     }
 
-    public ClientData get(int id) throws ApiException {
+    public ClientData get(Long id) throws ApiException {
         ClientPojo clientPojo = clientService.get(id);
         return ClientDtoHelper.convert(clientPojo);
     }
@@ -38,11 +38,6 @@ public class ClientDto {
     public List<ClientData> getAll() throws ApiException {
         List<ClientPojo> clientPojos = clientService.getAll();
         return ClientDtoHelper.convert(clientPojos);
-    }
-
-    public void update(int id, ClientForm f) throws ApiException {
-        ClientPojo p = ClientDtoHelper.convert(f);
-        clientService.update(id, p);
     }
 
     public List<ClientData> getByQuery(String query) throws ApiException {

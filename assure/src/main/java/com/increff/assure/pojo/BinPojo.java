@@ -14,7 +14,7 @@ import lombok.Setter;
 @Entity(name = "assure_bin")
 @Getter
 @Setter
-public class BinPojo {
+public class BinPojo extends AbstractPojo {
 
     @Id
     @TableGenerator(name = "bin_id", table = "generator_table", initialValue = 10000,

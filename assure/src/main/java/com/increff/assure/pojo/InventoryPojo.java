@@ -31,4 +31,11 @@ public class InventoryPojo {
     }
 
     public InventoryPojo() {}
+
+    @Override
+    public String toString() {
+        return "InventoryPojo [allocatedQuantity=" + allocatedQuantity + ", availableQuantity="
+                + availableQuantity + ", fulfilledQuantity=" + fulfilledQuantity + ", globalSkuId="
+                + globalSkuId + ", id=" + id + "]";
+    }
 }

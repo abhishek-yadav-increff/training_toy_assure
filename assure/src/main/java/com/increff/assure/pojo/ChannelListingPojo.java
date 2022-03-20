@@ -11,7 +11,7 @@ import lombok.Setter;
 @Entity(name = "assure_channellisting")
 @Getter
 @Setter
-public class ChannelListingPojo {
+public class ChannelListingPojo extends AbstractPojo {
 
     @Id
     @TableGenerator(name = "channellisting_id", table = "generator_table", initialValue = 10000,

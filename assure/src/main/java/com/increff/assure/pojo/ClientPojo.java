@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity(name = "assure_client")
 @Getter
 @Setter
-public class ClientPojo {
+public class ClientPojo extends AbstractPojo {
 
     @Id
     @TableGenerator(name = "client_id", table = "generator_table", initialValue = 10000,
@@ -21,6 +21,7 @@ public class ClientPojo {
     private Long id;
     private String name;
     private UserEnum userType;
+
 
     public ClientPojo(String name, UserEnum userType) {
         this.name = name;

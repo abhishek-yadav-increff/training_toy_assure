@@ -24,20 +24,20 @@ public class BinDto {
     private static final Logger LOGGER = Logger.getLogger(BinDto.class);
 
     public BinIndexRange add(BinForm binForm) throws ApiException {
-        LOGGER.info("In BinService:add()");
+        LOGGER.info("In add()");
         LOGGER.info("Form data received: " + binForm.toString());
         Long smIndex = binService.add(binForm);
         return BinDtoHelper.convertToRange(smIndex, binForm.getBinSize());
     }
 
-    public BinData get(Long id) throws ApiException {
-        BinPojo binPojo = binService.get(id);
-        return BinDtoHelper.convert(binPojo);
-    }
+    // public BinData get(Long id) throws ApiException {
+    // BinPojo binPojo = binService.get(id);
+    // return BinDtoHelper.convert(binPojo);
+    // }
 
-    public List<BinData> getAll() throws ApiException {
-        List<BinPojo> binPojos = binService.getAll();
-        return BinDtoHelper.convert(binPojos);
-    }
+    // public List<BinData> getAll() throws ApiException {
+    // List<BinPojo> binPojos = binService.getAll();
+    // return BinDtoHelper.convert(binPojos);
+    // }
 
 }

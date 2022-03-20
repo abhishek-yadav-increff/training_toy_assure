@@ -34,16 +34,16 @@ public class BinSkuController {
         return binDto.get(id);
     }
 
-    @ApiOperation(value = "Gets a BinSku by globalSkuId")
-    @RequestMapping(path = "/api/binSku/globalskuid/{id}", method = RequestMethod.GET)
-    public List<BinSkuData> getByGlobalSkuId(@PathVariable Long id) throws ApiException {
-        return binDto.getByGlobalSkuId(id);
-    }
-
     @ApiOperation(value = "Gets list of all BinSkus")
     @RequestMapping(path = "/api/binSku", method = RequestMethod.GET)
     public List<BinSkuData> getAll() throws ApiException {
         return binDto.getAll();
+    }
+
+    @ApiOperation(value = "Gets a BinSku by globalSkuId")
+    @RequestMapping(path = "/api/binSku/globalskuid/{id}", method = RequestMethod.GET)
+    public List<BinSkuData> getByGlobalSkuId(@PathVariable Long id) throws ApiException {
+        return binDto.getByGlobalSkuId(id);
     }
 
 }

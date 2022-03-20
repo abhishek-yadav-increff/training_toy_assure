@@ -24,7 +24,7 @@ public class ChannelDao extends AbstractDao {
         em.persist(p);
     }
 
-    public ChannelPojo select(int id) {
+    public ChannelPojo select(Long id) {
         TypedQuery<ChannelPojo> query = getQuery(SELECT_ID, ChannelPojo.class);
         query.setParameter("id", id);
         return getSingle(query);

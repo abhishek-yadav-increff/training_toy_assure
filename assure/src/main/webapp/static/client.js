@@ -14,7 +14,6 @@ function refreshClientList() {
 // API CALL CODE
 
 function addClient() {
-
     var $form = $("#client-form");
     var json = toJson($form);
     var url = getClientUrl();
@@ -59,12 +58,10 @@ function displayClientList(data) {
     var index = 1;
     for (var i in data) {
         var e = data[i];
-        // var buttonHtml = ' <button type="button" class="btn btn-secondary btn-sm" onclick="displayEditBrand(' + e.id + ')">Edit</button>'
         var row = '<tr>'
             + '<td>' + e.id + '</td>'
             + '<td>' + e.name + '</td>'
             + '<td>' + e.userEnum + '</td>'
-            // + '<td>' + buttonHtml + '</td>'
             + '</tr>';
         index++;
         $tbody.append(row);
@@ -73,7 +70,6 @@ function displayClientList(data) {
 
 // INITIALIZATION CODE
 function init() {
-
     $('#client-form').submit(addClient);
     $('#refresh-data').click(refreshClientList);
 }

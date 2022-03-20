@@ -23,7 +23,7 @@ public class ClientDao extends AbstractDao {
         em.persist(p);
     }
 
-    public ClientPojo select(int id) {
+    public ClientPojo select(Long id) {
         TypedQuery<ClientPojo> query = getQuery(SELECT_ID, ClientPojo.class);
         query.setParameter("id", id);
         return getSingle(query);
@@ -33,8 +33,6 @@ public class ClientDao extends AbstractDao {
         TypedQuery<ClientPojo> query = getQuery(SELECT_ALL, ClientPojo.class);
         return query.getResultList();
     }
-
-    public void update(ClientPojo p) {}
 
     public List<ClientPojo> queryByName(String name) {
         TypedQuery<ClientPojo> query = getQuery(QUERY_NAME, ClientPojo.class);
