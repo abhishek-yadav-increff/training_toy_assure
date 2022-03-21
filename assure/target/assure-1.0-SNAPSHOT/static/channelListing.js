@@ -89,6 +89,7 @@ function readFileDataCallback(results, clientId, channelId) {
 
 function uploadRows(clientId, channelId) {
     //Update progress
+
     updateUploadDialog();
 
     //Process next row
@@ -105,7 +106,11 @@ function uploadRows(clientId, channelId) {
     }
 
     var json = JSON.stringify(allRows);
+    // console.log(json);
+    // return false;
     var url = getChannelListingUrl();
+
+    //Make ajax call
     $.ajax({
         url: url,
         type: 'POST',
@@ -120,9 +125,14 @@ function uploadRows(clientId, channelId) {
             // uploadRows();
         },
         error: function (response) {
-            var response = JSON.parse(response.responseText);
-            console.log(response);
+            // getChannelListingList();
             toast(false, 'No data was added!');
+            // var jsonError = JSON.parse(response.responseText)
+            // row.Error = jsonError.message
+            // row.Row = processCount
+
+            // errorData.push(row);
+            // uploadRows();
         }
     });
 

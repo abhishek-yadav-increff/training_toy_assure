@@ -3,6 +3,7 @@ package com.increff.assure.service;
 import java.util.List;
 import com.increff.assure.dao.ProductDao;
 import com.increff.assure.pojo.ProductPojo;
+import com.increff.common.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,12 +37,12 @@ public class ProductService {
         validateUpdate(productPojo);
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     public ProductPojo get(Long id) throws ApiException {
         return getCheck(id);
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     public ProductPojo getCheck(Long id) throws ApiException {
         ProductPojo p = dao.select(id);
         if (p == null) {
@@ -50,14 +51,14 @@ public class ProductService {
         return p;
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     public ProductPojo getClientIdClientSkuId(Long clientId, String clientSkuId)
             throws ApiException {
         ProductPojo productPojo = dao.selectClientIdClientSkuId(clientSkuId, clientId);
         return productPojo;
     }
 
-    @Transactional(readOnly = true, rollbackFor = ApiException.class)
+    @Transactional(readOnly = true)
     public List<ProductPojo> getAll() throws ApiException {
         List<ProductPojo> productPojos = dao.selectAll();
         if (productPojos == null) {

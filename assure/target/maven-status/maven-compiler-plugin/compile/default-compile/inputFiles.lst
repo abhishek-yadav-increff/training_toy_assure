@@ -63,7 +63,6 @@
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/OrderController.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dao/InventoryDao.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dto/BinDto.java
-/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/service/ApiException.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/BinIndexRange.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/service/InventoryService.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/ClientForm.java

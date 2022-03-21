@@ -6,6 +6,7 @@ import com.increff.assure.dao.ClientDao;
 import com.increff.assure.dto.helper.CommonsHelper;
 import com.increff.assure.enums.UserEnum;
 import com.increff.assure.pojo.ClientPojo;
+import com.increff.common.model.ApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

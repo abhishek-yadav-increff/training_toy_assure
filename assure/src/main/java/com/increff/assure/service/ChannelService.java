@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import com.increff.assure.dao.ChannelDao;
 import com.increff.assure.dto.helper.CommonsHelper;
 import com.increff.assure.pojo.ChannelPojo;
+import com.increff.common.model.ApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

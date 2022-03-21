@@ -3,7 +3,7 @@ package com.increff.assure.controller;
 import java.util.List;
 import com.increff.assure.dto.ZonedDateTimeDto;
 import com.increff.assure.model.ZonedDateTimeData;
-import com.increff.assure.service.ApiException;
+import com.increff.common.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

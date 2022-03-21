@@ -1,13 +1,10 @@
 package com.increff.assure.dto;
 
-import java.util.List;
 import com.increff.assure.dto.helper.BinDtoHelper;
-import com.increff.assure.model.BinData;
 import com.increff.assure.model.BinForm;
 import com.increff.assure.model.BinIndexRange;
-import com.increff.assure.pojo.BinPojo;
-import com.increff.assure.service.ApiException;
 import com.increff.assure.service.BinService;
+import com.increff.common.model.ApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,11 @@
 package com.increff.assure.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.increff.assure.dao.ChannelListingDao;
 import com.increff.assure.pojo.ChannelListingPojo;
+import com.increff.common.model.ApiException;
+import com.increff.common.model.ErrorData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +18,41 @@ public class ChannelListingService {
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(List<ChannelListingPojo> p) throws ApiException {
+        System.out.print("in add()" + p.toString());
+        validateAdd(p);
         for (ChannelListingPojo chLiPojo : p) {
             dao.insert(chLiPojo);
         }
+    }
+
+    private void validateAdd(List<ChannelListingPojo> p) throws ApiException {
+        List<ErrorData> errorDatas = new ArrayList<>();
+        for (ChannelListingPojo chLiPojo : p) {
+            try {
+                ChannelListingPojo chp = getByClientIdChanneIdGlobalSkuId(chLiPojo);
+                if (chp != null)
+                    throw new ApiException(
+                            "Listing with combination Global SKU ID, Client ID, ChannelId already exists!!");
+                ChannelListingPojo chp2 = getByClientIdChanneIdChannelSkuId(chLiPojo);
+                if (chp2 != null)
+                    throw new ApiException(
+                            "Listing with combination Channel SKU ID, Client ID, ChannelId already exists!!");
+            } catch (Exception e) {
+                errorDatas.add(new ErrorData("error", e.getMessage()));
+            }
+        }
+        if (!errorDatas.isEmpty())
+            throw new ApiException("Failed validating listings!!", errorDatas);
+    }
+
+    private ChannelListingPojo getByClientIdChanneIdChannelSkuId(ChannelListingPojo p) {
+        return dao.getByClientIdChanneIdGlobalSkuId(p.getClientId(), p.getChannelId(),
+                p.getGlobalSkuId());
+    }
+
+    private ChannelListingPojo getByClientIdChanneIdGlobalSkuId(ChannelListingPojo p) {
+        return dao.getByClientIdChanneIdGlobalSkuId(p.getClientId(), p.getChannelId(),
+                p.getChannelSkuId());
     }
 
     @Transactional(readOnly = true)

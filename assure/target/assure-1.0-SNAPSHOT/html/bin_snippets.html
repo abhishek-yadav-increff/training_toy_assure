@@ -9,22 +9,7 @@
     Bin
 </div>
 
-<!-- <form id="bin-form" th:fragment="toystore_form_bin">
-    <div class="row">
-        <label for="inputBinNumber" style="width: 150px;" class="col-form-label justify-content-start">Number of
-            Bins</label>
-        <input type="number" class="col form-control" name="binNumber" id="inputBinNumber"
-            placeholder="Enter number of Bins to be added" required>
-    </div>
-    <div class="row">
-        <div class="col p-0 text-right">
-            <button type="submit" class="btn btn-primary btn-sm" id="add-bin" form="bin-form">Add</button>
-            &nbsp;
-            <button type="button" class="btn btn-primary btn-sm" id="refresh-data">Refresh</button>
-        </div>
-    </div>
-</form> -->
-<!-- Product Edit Modal -->
+<!-- BIN CREATION -->
 <div class="modal" tabindex="-1" role="dialog" id="add-bin-modal" th:fragment="toystore_bin_add_form">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -47,5 +32,53 @@
                 <button type="submit" class="btn btn-primary btn-sm" id="add-bin" form="bin-add-form">Update</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- BIN SKU UPLOAD -->
+<form id="bin-sku-form" th:fragment="toystore_bin_sku_form">
+    <div class="row">
+        <label for="inputClientId" class="col-form-label justify-content-start">Client ID</label>
+        <div class="col p-0">
+            <select class="js-data-example-ajax form-control" name="clientId" id="inputClientId" style="width: 100%;"
+                data-placeholder="Search by Name and ID" required>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="fixed p-0" style="column-width: 100px;">
+            <label for="binSkuFile" class="col-form-label justify-content-start">Input Csv</label>
+        </div>
+        <div class="col p-0">
+            <input type="file" class="form-control-file" id="binSkuFile" style="width: 100%; border: 1px solid #555;"
+                required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col p-0 text-right">
+            <button type="submit" class="btn btn-primary btn-sm" id="add-bin-sku" form="bin-sku-form"
+                disabled>Add</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" id="refresh-bin-sku-data">Refresh</button>
+        </div>
+    </div>
+</form>
+
+<div class="row" th:fragment="toystore_bin_sku_table">
+    <!-- Table -->
+    <div class="col p-0">
+        <table class="table table-striped" id="bin-sku-table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Bin ID</th>
+                    <th scope="col">Global SKU ID</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
     </div>
 </div>

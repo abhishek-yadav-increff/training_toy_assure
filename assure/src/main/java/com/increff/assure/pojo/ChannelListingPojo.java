@@ -23,4 +23,10 @@ public class ChannelListingPojo extends AbstractPojo {
     private String channelSkuId;
     private Long clientId;
     private Long globalSkuId;
+
+    @Override
+    public String toString() {
+        return "ChannelListingPojo [channelId=" + channelId + ", channelSkuId=" + channelSkuId
+                + ", clientId=" + clientId + ", globalSkuId=" + globalSkuId + ", id=" + id + "]";
+    }
 }

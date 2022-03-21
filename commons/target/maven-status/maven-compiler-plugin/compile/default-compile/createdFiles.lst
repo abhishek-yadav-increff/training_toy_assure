@@ -1,2 +1,2 @@
-com/increff/common/model/PathModel.class
-UserType.class
+com/increff/common/model/ApiException.class
+com/increff/common/model/ErrorData.class
