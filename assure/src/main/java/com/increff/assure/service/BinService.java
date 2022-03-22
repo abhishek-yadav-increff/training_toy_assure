@@ -2,7 +2,7 @@ package com.increff.assure.service;
 
 import com.increff.assure.dao.BinDao;
 import com.increff.assure.model.BinForm;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

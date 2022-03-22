@@ -11,7 +11,7 @@ import com.increff.assure.pojo.ChannelListingPojo;
 import com.increff.assure.pojo.ProductPojo;
 import com.increff.assure.service.ChannelListingService;
 import com.increff.assure.service.ProductService;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

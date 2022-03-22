@@ -4,7 +4,7 @@ import java.util.List;
 import com.increff.assure.dto.OrderDto;
 import com.increff.assure.model.OrderData;
 import com.increff.assure.model.OrderForm;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,16 +28,16 @@ public class OrderController {
         orderDto.add(form);
     }
 
-    @ApiOperation(value = "Adds a Order")
-    @RequestMapping(path = "/api/order/batch", method = RequestMethod.POST)
-    public void addBatch(@RequestBody List<OrderForm> forms) throws ApiException {
-        System.out.print(forms);
-        orderDto.add(forms);
-    }
+    // @ApiOperation(value = "Adds a Order")
+    // @RequestMapping(path = "/api/order/batch", method = RequestMethod.POST)
+    // public void addBatch(@RequestBody List<OrderForm> forms) throws ApiException {
+    // System.out.print(forms);
+    // orderDto.add(forms);
+    // }
 
     @ApiOperation(value = "Gets a Order by ID")
     @RequestMapping(path = "/api/order/{id}", method = RequestMethod.GET)
-    public OrderData get(@PathVariable int id) throws ApiException {
+    public OrderData get(@PathVariable Long id) throws ApiException {
         return orderDto.get(id);
     }
 
@@ -48,10 +48,10 @@ public class OrderController {
         return orderDto.getAll();
     }
 
-    @ApiOperation(value = "Updates a Order")
-    @RequestMapping(path = "/api/order/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable int id, @RequestBody OrderForm f) throws ApiException {
-        orderDto.update(id, f);
-    }
+    // @ApiOperation(value = "Updates a Order")
+    // @RequestMapping(path = "/api/order/{id}", method = RequestMethod.PUT)
+    // public void update(@PathVariable Long id, @RequestBody OrderForm f) throws ApiException {
+    // orderDto.update(id, f);
+    // }
 
 }

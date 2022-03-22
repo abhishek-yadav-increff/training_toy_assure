@@ -1,12 +1,13 @@
 package com.increff.channel.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.increff.channel.model.MessageData;
+import com.increff.commons.model.ApiException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.increff.channel.model.MessageData;
-import com.increff.channel.service.ApiException;
+import org.springframework.web.client.HttpStatusCodeException;
 
 @RestControllerAdvice
 public class AppRestControllerAdvice {
@@ -16,6 +17,7 @@ public class AppRestControllerAdvice {
     public MessageData handle(ApiException e) {
         MessageData data = new MessageData();
         data.setMessage(e.getMessage());
+        data.setErrorDatas(e.getErrorDatas());
         return data;
     }
 
@@ -24,6 +26,24 @@ public class AppRestControllerAdvice {
     public MessageData handle(Throwable e) {
         MessageData data = new MessageData();
         data.setMessage("An unknown error has occurred - " + e.getMessage());
+        return data;
+    }
+
+    @ExceptionHandler(HttpStatusCodeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MessageData handle(HttpStatusCodeException ex) {
+        MessageData data = new MessageData();
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.print(ex.getResponseBodyAsString());
+        try {
+            MessageData obj = mapper.readValue(ex.getResponseBodyAsString(), MessageData.class);
+            return obj;
+            // data.setMessage(obj.getMessage() + "in advice!!");
+            // data.setErrorDatas(obj.getErrorDatas());
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+            data.setMessage("Error parsing response!!");
+        }
         return data;
     }
 }

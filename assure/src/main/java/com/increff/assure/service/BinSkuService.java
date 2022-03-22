@@ -4,7 +4,7 @@ import java.util.List;
 import com.increff.assure.dao.BinSkuDao;
 import com.increff.assure.pojo.BinSkuPojo;
 import com.increff.assure.pojo.InventoryPojo;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

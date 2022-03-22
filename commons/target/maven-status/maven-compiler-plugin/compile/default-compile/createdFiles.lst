@@ -1,2 +1,8 @@
-com/increff/common/model/ApiException.class
-com/increff/common/model/ErrorData.class
+com/increff/commons/model/MessageData.class
+com/increff/commons/model/ApiException.class
+com/increff/commons/model/ProductData.class
+com/increff/commons/model/ClientData.class
+com/increff/commons/model/ProductForm.class
+com/increff/commons/model/BinData.class
+com/increff/commons/model/ClientForm.class
+com/increff/commons/model/ErrorData.class

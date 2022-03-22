@@ -70,7 +70,6 @@ com/increff/assure/dto/ChannelListingDto.class
 com/increff/assure/service/ChannelListingService.class
 com/increff/assure/model/ClientData.class
 com/increff/assure/util/UserPrincipal.class
-com/increff/assure/model/MessageData.class
 com/increff/assure/service/ZonedDateTimeService.class
 com/increff/assure/model/ZonedDateTimeData.class
 com/increff/assure/model/OrderData.class

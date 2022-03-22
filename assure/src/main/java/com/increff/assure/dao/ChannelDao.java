@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import com.increff.assure.enums.InvoiceEnum;
 import com.increff.assure.pojo.ChannelPojo;
 import org.springframework.stereotype.Repository;
 
@@ -48,7 +49,5 @@ public class ChannelDao extends AbstractDao {
         query.setParameter("name", name);
         return getSingle(query);
     }
-
-
 
 }

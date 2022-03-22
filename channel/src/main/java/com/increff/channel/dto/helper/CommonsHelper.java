@@ -10,16 +10,35 @@ import com.increff.channel.util.StringUtil;
 public class CommonsHelper {
 
     public static String normalize(String s) {
-        return StringUtil.toLowerCase(s).trim();
+        if (s != null)
+            return StringUtil.toLowerCase(s).trim();
+        return null;
     }
 
     public static Double normalize(Double d) {
-        BigDecimal bigDecimal = new BigDecimal(d).setScale(2, RoundingMode.HALF_DOWN);
-        Double scaledDouble = bigDecimal.doubleValue();
-        return scaledDouble;
+        if (d != null) {
+            BigDecimal bigDecimal = new BigDecimal(d).setScale(2, RoundingMode.HALF_DOWN);
+            Double scaledDouble = bigDecimal.doubleValue();
+            return scaledDouble;
+        }
+        return null;
     }
 
     public static String doubleToString(Double d) {
-        return String.format("%.2f", d);
+        if (d != null)
+            return String.format("%.2f", d);
+        return null;
+    }
+
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

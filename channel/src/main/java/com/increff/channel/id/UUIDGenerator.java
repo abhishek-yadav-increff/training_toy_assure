@@ -9,4 +9,3 @@ public class UUIDGenerator implements ValueGenerator<String> {
         return UUID.randomUUID().toString().replace("-", "");
     }
 }
-

@@ -139,7 +139,7 @@ function getChannelUrl() {
 }
 function getChannelListingUrl() {
     var baseUrl = $("meta[name=baseUrl]").attr("content")
-    return baseUrl + "/api/channelListing";
+    return baseUrl + "/api/channellisting";
 }
 function getBinSkuUrl() {
     var baseUrl = $("meta[name=baseUrl]").attr("content")

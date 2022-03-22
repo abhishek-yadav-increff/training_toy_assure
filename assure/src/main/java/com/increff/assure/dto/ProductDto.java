@@ -6,7 +6,7 @@ import com.increff.assure.model.ProductData;
 import com.increff.assure.model.ProductForm;
 import com.increff.assure.pojo.ProductPojo;
 import com.increff.assure.service.ProductService;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,10 +35,18 @@ public class ProductDto {
         return ProductDtoHelper.convert(productPojo);
     }
 
+    public ProductData getClientIdClientSkuId(Long clientId, String clientSkuId)
+            throws ApiException {
+        ProductPojo productPojo = productService.getClientIdClientSkuId(clientId, clientSkuId);
+        return ProductDtoHelper.convert(productPojo);
+    }
+
     public List<ProductData> getAll() throws ApiException {
         List<ProductPojo> productPojos = productService.getAll();
         return ProductDtoHelper.convert(productPojos);
     }
+
+
 
     public void update(Long id, ProductForm f) throws ApiException {
         ProductPojo p = ProductDtoHelper.convert(f);

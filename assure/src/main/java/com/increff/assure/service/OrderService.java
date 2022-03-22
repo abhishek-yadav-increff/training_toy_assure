@@ -3,7 +3,7 @@ package com.increff.assure.service;
 import java.util.List;
 import com.increff.assure.dao.OrderDao;
 import com.increff.assure.pojo.OrderPojo;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,7 @@ public class OrderService {
     }
 
     @Transactional(readOnly = true, rollbackFor = ApiException.class)
-    public OrderPojo get(int id) throws ApiException {
+    public OrderPojo get(Long id) throws ApiException {
         return getCheck(id);
     }
 
@@ -34,7 +34,7 @@ public class OrderService {
     }
 
     @Transactional(readOnly = true, rollbackFor = ApiException.class)
-    public OrderPojo getCheck(int id) throws ApiException {
+    public OrderPojo getCheck(Long id) throws ApiException {
         OrderPojo p = dao.select(id);
         if (p == null) {
             throw new ApiException("Order with given ID does not exist, id: " + id);
@@ -43,7 +43,7 @@ public class OrderService {
     }
 
     @Transactional(rollbackFor = ApiException.class)
-    public void update(int id, OrderPojo p) throws ApiException {
+    public void update(Long id, OrderPojo p) throws ApiException {
         OrderPojo ex = getCheck(id);
         dao.update(ex);
     }

@@ -4,7 +4,7 @@ import java.util.List;
 import com.increff.assure.dto.ClientDto;
 import com.increff.assure.model.ClientData;
 import com.increff.assure.model.ClientForm;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

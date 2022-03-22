@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="snippets.html :: name_head"></head>
+
+<body>
+
+    <nav th:replace="snippets.html :: name_app_navbar"></nav>
+    <div th:replace="order_snippets.html :: toystore_order_header"></div>
+    <div id="container">
+        <h3 class="p-0">Upload Order CSV</h3>
+        <form th:replace="order_snippets.html :: toystore_order_upload_form"></form>
+        <hr>
+        <h3 class="p-0">Create Order</h3>
+        <form th:replace="order_snippets.html :: toystore_order_form"></form>
+        <hr>
+        <div th:replace="order_snippets.html :: toystore_order_table"></div>
+        <div th:replace="order_snippets.html :: toystore_order_editform"></div>
+
+    </div> <!-- Container end-->
+
+    <footer th:replace="snippets.html :: name_footer"></footer>
+
+    <!-- <script th:src="@{/static/channelListingUtil.js}" /> -->
+    <script th:src="@{/static/order.js}" />
+    </script>
+
+</body>
+
+</html>

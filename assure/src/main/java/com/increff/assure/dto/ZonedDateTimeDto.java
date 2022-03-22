@@ -12,7 +12,7 @@ import com.increff.assure.dto.helper.CommonsHelper;
 import com.increff.assure.dto.helper.ZonedDateTimeDtoHelper;
 import com.increff.assure.model.ZonedDateTimeData;
 import com.increff.assure.service.ZonedDateTimeService;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

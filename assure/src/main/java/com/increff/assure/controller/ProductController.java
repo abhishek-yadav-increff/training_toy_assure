@@ -4,7 +4,7 @@ import java.util.List;
 import com.increff.assure.dto.ProductDto;
 import com.increff.assure.model.ProductData;
 import com.increff.assure.model.ProductForm;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +32,13 @@ public class ProductController {
     @RequestMapping(path = "/api/product/{id}", method = RequestMethod.GET)
     public ProductData get(@PathVariable Long id) throws ApiException {
         return productDto.get(id);
+    }
+
+    @ApiOperation(value = "Gets a Product by Client ID and Client SKU ID")
+    @RequestMapping(path = "/api/product/{clientId}/{clientSkuId}", method = RequestMethod.GET)
+    public ProductData getClientIdClientSkuId(@PathVariable Long clientId,
+            @PathVariable String clientSkuId) throws ApiException {
+        return productDto.getClientIdClientSkuId(clientId, clientSkuId);
     }
 
 

@@ -4,7 +4,7 @@ import com.increff.assure.dto.helper.BinDtoHelper;
 import com.increff.assure.model.BinForm;
 import com.increff.assure.model.BinIndexRange;
 import com.increff.assure.service.BinService;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

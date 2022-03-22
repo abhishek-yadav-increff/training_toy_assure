@@ -1,0 +1,24 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="snippets.html :: name_head"></head>
+
+<body>
+
+    <nav th:replace="snippets.html :: name_app_navbar"></nav>
+    <div th:replace="channel_snippets.html :: toystore_header_channel"></div>
+    <div id="container">
+        <form th:replace="channel_snippets.html :: toystore_channel_form"></form>
+        <div th:replace="channel_snippets.html:: toystore_channel_table">
+
+        </div> <!-- Container end-->
+
+        <footer th:replace="snippets.html :: name_footer"></footer>
+
+        <script th:src="@{/static/channel.js}" />
+        </script>
+
+</body>
+
+</html>

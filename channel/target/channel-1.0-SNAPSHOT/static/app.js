@@ -1,3 +1,5 @@
+// GLOBAL VARIABLES FOR STATE
+var currentZone = null;
 
 //HELPER METHOD
 function toJson($form) {
@@ -11,7 +13,6 @@ function toJson($form) {
     var json = JSON.stringify(data);
     return json;
 }
-
 
 function handleAjaxError(response) {
     var response = JSON.parse(response.responseText);
@@ -56,15 +57,41 @@ function writeFileData(arr, filename) {
 }
 //INITIALIZATION CODE
 function init() {
-    $('#gotoBrand').click(function () {
-        window.location.href = "http://localhost:9000/employee/ui/reports/brand";
+    $('#inputZonedDateTime').on('change', function (e) {
+        // Do something
+        currentZone = document.getElementById("inputZonedDateTime").value;
+        var url = getZonedDateTimeUrl() + "/" + encodeURIComponent(currentZone);
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (data) {
+                console.log(data);
+            },
+            error: handleAjaxError
+        });
     });
-    $('#gotoInventory').click(function () {
-        window.location.href = "http://localhost:9000/employee/ui/reports/inventory";
+    $('#inputZonedDateTime').select2({
+        allowClear: true,
+        ajax: {
+            url: getZonedDateTimeUrl() + "/search/",
+            dataType: 'json',
 
-    });
-    $('#gotoSales').click(function () {
-        window.location.href = "http://localhost:9000/employee/ui/reports/sales";
+            data: function (params) {
+                var query = {
+                    term: params.term,
+                    type: 'query'
+                }
+                return query;
+            },
+            processResults: function (data) {
+                var data = $.map(data, function (obj) {
+                    obj.id = obj.offset;
+                    obj.text = "Zone: " + obj.zoneDateTime + " Offset: " + obj.offset; // replace name with the property used for the text
+                    return obj;
+                });
+                return { results: data };
+            }
+        }
     });
 }
 function toast(successState, message) {
@@ -89,10 +116,42 @@ function toast(successState, message) {
         });
     }
 }
-
+// API ENDPOINTS
 function getBrandUrl() {
     var baseUrl = $("meta[name=baseUrl]").attr("content")
     return baseUrl + "/api/brand";
+}
+function getClientUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/client";
+}
+function getProductUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/product";
+}
+function getBinUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/bin";
+}
+function getChannelUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/channel";
+}
+function getChannelListingUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/channellisting";
+}
+function getBinSkuUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/binSku";
+}
+function getOrderUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/order";
+}
+function getZonedDateTimeUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/zoneddatetime";
 }
 
 $(document).ready(init);

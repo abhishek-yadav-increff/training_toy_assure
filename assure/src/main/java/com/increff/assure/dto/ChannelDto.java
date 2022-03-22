@@ -7,7 +7,7 @@ import com.increff.assure.model.ChannelData;
 import com.increff.assure.model.ChannelForm;
 import com.increff.assure.pojo.ChannelPojo;
 import com.increff.assure.service.ChannelService;
-import com.increff.common.model.ApiException;
+import com.increff.commons.model.ApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
