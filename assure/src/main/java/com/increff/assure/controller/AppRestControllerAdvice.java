@@ -15,7 +15,8 @@ public class AppRestControllerAdvice {
     public MessageData handle(ApiException e) {
         MessageData data = new MessageData();
         data.setMessage(e.getMessage());
-        data.setErrorDatas(e.getErrorDatas());
+        if (e.getErrorDatas() != null)
+            data.setErrorDatas(e.getErrorDatas());
         return data;
     }
 

@@ -3,6 +3,7 @@ function refreshChannelListingList() {
     getChannelListingList();
     toast(true, "Refreshed!");
     resetInputChannelListing();
+    document.getElementById("download-error-channel-listing").disabled = true;
 }
 
 function resetInputChannelListing() {
@@ -18,6 +19,7 @@ function addChannelListing(event) {
     processData(clientId, channelId);
     return false;
 }
+
 //VALIDATION
 
 // API CALLS
@@ -121,7 +123,8 @@ function uploadRows(clientId, channelId) {
         },
         error: function (response) {
             var response = JSON.parse(response.responseText);
-            console.log(response);
+            errorData = response.errorDatas;
+            document.getElementById("download-error-channel-listing").disabled = false;
             toast(false, 'No data was added!');
         }
     });
@@ -141,6 +144,7 @@ function readFileDataChannelListing(file, callback, clientId, channelId) {
 }
 
 function downloadErrors() {
+    console.log(errorData);
     writeFileData(errorData, "channel_listing_error.tsv");
 }
 
@@ -267,6 +271,7 @@ function init() {
     });
 
     $('#channel-listing-form').submit(addChannelListing);
+    $('#download-error-channel-listing').click(downloadErrors);
     $('#channel-listing-edit-form').submit(updateChannelListing);
     $('#refresh-channel-listing-data').click(refreshChannelListingList);
 
@@ -275,6 +280,9 @@ function init() {
         if (file.name != null) {
             document.getElementById("add-channel-listing").disabled = false;
         }
+    });
+    document.addEventListener('channelListingFile').addEventListener('change', function () {
+        document.getElementById("download-error-channel-listing").disabled = true;
     });
 }
 

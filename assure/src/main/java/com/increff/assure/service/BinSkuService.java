@@ -89,13 +89,16 @@ public class BinSkuService {
         return binSkuPojo;
     }
 
-    // @Transactional(rollbackFor = ApiException.class)
-    // public void update(Long id, BinSkuPojo p) throws ApiException {
-    // BinSkuPojo ex = getCheck(id);
-    // InventoryPojo inventoryPojo = inventoryService.getByGlobalSkuId(ex.getGlobalSkuId());
-    // inventoryPojo.setAvailableQuantity(
-    // inventoryPojo.getAvailableQuantity() - ex.getQuantity() + p.getQuantity());
-    // inventoryService.update(inventoryPojo.getId(), inventoryPojo);
-    // dao.update(ex);
-    // }
+    @Transactional(rollbackFor = ApiException.class)
+    public void update(Long id, BinSkuPojo p) throws ApiException {
+        BinSkuPojo ex = getCheck(id);
+
+        InventoryPojo inventoryPojo = inventoryService.getByGlobalSkuId(ex.getGlobalSkuId());
+        inventoryPojo.setAvailableQuantity(
+                inventoryPojo.getAvailableQuantity() - ex.getQuantity() + p.getQuantity());
+        inventoryService.update(inventoryPojo.getId(), inventoryPojo);
+
+        ex.setQuantity(p.getQuantity());
+        dao.update(ex);
+    }
 }

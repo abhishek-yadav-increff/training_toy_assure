@@ -8,15 +8,15 @@ import javax.persistence.TableGenerator;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(name = "assure_channellisting")
+@Entity(name = "assure_channel_listing")
 @Getter
 @Setter
 public class ChannelListingPojo extends AbstractPojo {
 
     @Id
-    @TableGenerator(name = "channellisting_id", table = "generator_table", initialValue = 10000,
+    @TableGenerator(name = "channel_listing_id", table = "generator_table", initialValue = 10000,
             allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "channellisting_id")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "channel_listing_id")
     private Long id;
 
     private Long channelId;

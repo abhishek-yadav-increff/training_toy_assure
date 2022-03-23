@@ -30,7 +30,10 @@ public class InventoryPojo {
         this.fulfilledQuantity = Long.valueOf(0);
     }
 
-    public InventoryPojo() {}
+    public InventoryPojo() {
+        this.allocatedQuantity = Long.valueOf(0);
+        this.fulfilledQuantity = Long.valueOf(0);
+    }
 
     @Override
     public String toString() {

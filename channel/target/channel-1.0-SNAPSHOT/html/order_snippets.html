@@ -10,50 +10,6 @@
 </div>
 
 <!-- TOYSTORE ORDER UPLOAD FORM -->
-<form id="order-upload-form" th:fragment="toystore_order_upload_form">
-    <div class="row">
-        <label style="width: 150px;" for="uploadClientId" class="col-form-label justify-content-start">Client ID</label>
-        <div class="col p-0">
-            <select class="js-data-example-ajax form-control" name="clientId" id="uploadClientId" style="width: 100%;"
-                data-placeholder="Search by Name and ID" required>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <label style="width: 150px;" for="uploadCustomerId" class="col-form-label justify-content-start">Customer
-            ID</label>
-        <div class="col p-0">
-            <select class="js-data-example-ajax form-control" name="customerId" id="uploadCustomerId"
-                style="width: 100%;" data-placeholder="Search by Name and ID" required>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <label style="width: 150px;" for="uploadChannelOrderId" class="col-form-label justify-content-start">Channel
-            Order ID</label>
-        <div class="col p-0">
-            <input type="text" class="col form-control" name="channelOrderId" id="uploadChannelOrderId"
-                placeholder="Enter Channel Order ID" required>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="fixed p-0" style="column-width: 150px;">
-            <label for="orderFile" class="col-form-label justify-content-start">Order CSV</label>
-        </div>
-        <div class="col p-0">
-            <input type="file" class="form-control-file" id="orderFile" style="width: 100%; border: 1px solid #555;"
-                required>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col p-0 text-right">
-            <button type="submit" class="btn btn-primary btn-sm" id="upload-order" form="order-upload-form"
-                disabled>Upload</button>
-        </div>
-    </div>
-</form>
-<!-- ORDER CREATE FORM -->
 <form id="order-form" th:fragment="toystore_order_form">
     <div class="row">
         <label style="width: 150px;" for="inputChannelId" class="col-form-label justify-content-start">Channel
@@ -88,6 +44,15 @@
             <input type="text" class="col form-control" name="channelOrderId" id="inputChannelOrderId"
                 placeholder="Enter Channel Order ID" required>
 
+        </div>
+    </div>
+    <div class="row">
+        <div class="fixed p-0" style="column-width: 150px;">
+            <label for="orderFile" class="col-form-label justify-content-start">Order CSV</label>
+        </div>
+        <div class="col p-0">
+            <input type="file" class="form-control-file" id="orderFile" style="width: 100%; border: 1px solid #555;"
+                required>
         </div>
     </div>
     <div class="row">

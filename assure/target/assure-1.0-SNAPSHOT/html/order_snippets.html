@@ -37,15 +37,7 @@
 
         </div>
     </div>
-    <div class="row">
-        <div class="fixed p-0" style="column-width: 150px;">
-            <label for="orderFile" class="col-form-label justify-content-start">Order CSV</label>
-        </div>
-        <div class="col p-0">
-            <input type="file" class="form-control-file" id="orderFile" style="width: 100%; border: 1px solid #555;"
-                required>
-        </div>
-    </div>
+
     <div class="row">
         <div class="col p-0 text-right">
             <button type="submit" class="btn btn-primary btn-sm" id="upload-order" form="order-upload-form"
@@ -82,12 +74,16 @@
         </div>
     </div>
     <div class="row">
-        <label style="width: 150px;" for="inputChannelOrderId" class="col-form-label justify-content-start">Channel
-            Order ID</label>
+        <div class="fixed p-0" style="column-width: 150px;">
+            <label for="orderFile" class="col-form-label justify-content-start">Order CSV</label>
+        </div>
         <div class="col p-0">
-            <input type="text" class="col form-control" name="channelOrderId" id="inputChannelOrderId"
-                placeholder="Enter Channel Order ID" required>
-
+            <input type="file" class="form-control-file" id="orderFile" style="width: 100%; border: 1px solid #555;"
+                required>
+        </div>
+        <div class="fixed pl-1" style="column-width: auto;">
+            <button type="button" class="btn btn-danger btn-sm" id="download-error-order" disabled>Download
+                Error</button>
         </div>
     </div>
     <div class="row">

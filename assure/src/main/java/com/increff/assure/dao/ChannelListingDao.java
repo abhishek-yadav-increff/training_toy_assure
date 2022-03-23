@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ChannelListingDao extends AbstractDao {
 
-    private static final String SELECT_ID = "SELECT P FROM assure_channellisting P WHERE ID=:id";
-    private static final String SELECT_ALL = "SELECT P FROM assure_channellisting P";
+    private static final String SELECT_ID = "SELECT P FROM assure_channel_listing P WHERE ID=:id";
+    private static final String SELECT_ALL = "SELECT P FROM assure_channel_listing P";
     private static final String SELECT_CLIENTID_CHANNELID_GLOBALSKUID =
-            "SELECT P FROM assure_channellisting P WHERE CLIENTID=:clientId AND CHANNELID=:channelId AND GLOBALSKUID=:globalSkuId";
+            "SELECT P FROM assure_channel_listing P WHERE CLIENTID=:clientId AND CHANNELID=:channelId AND GLOBALSKUID=:globalSkuId";
     private static final String SELECT_CLIENTID_CHANNELID_CHANNELSKUID =
-            "SELECT P FROM assure_channellisting P WHERE CLIENTID=:clientId AND CHANNELID=:channelId AND CHANNELSKUID=:channelSkuId";
+            "SELECT P FROM assure_channel_listing P WHERE CLIENTID=:clientId AND CHANNELID=:channelId AND CHANNELSKUID=:channelSkuId";
 
     @PersistenceContext
     private EntityManager em;

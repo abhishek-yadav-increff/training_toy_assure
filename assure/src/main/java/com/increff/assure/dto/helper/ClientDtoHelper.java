@@ -16,15 +16,17 @@ public class ClientDtoHelper {
         ClientData clientData = new ClientData();
         clientData.setId(clientPojo.getId());
         clientData.setName(clientPojo.getName());
-        clientData.setUserEnum(CommonsHelper.normalize(clientPojo.getUserType().toString()));
+        clientData.setUserEnum(clientPojo.getUserType().toString());
         return clientData;
     }
 
     public static ClientPojo convert(ClientForm clientForm) {
         ClientPojo clientPojo = new ClientPojo();
-        clientPojo.setName(CommonsHelper.normalize(clientForm.getName()));
-        clientPojo.setUserType(
-                UserEnum.fromString(CommonsHelper.normalize(clientForm.getUserEnum())));
+        if (clientForm.getName() != null && !clientForm.getName().isEmpty())
+            clientPojo.setName(CommonsHelper.normalize(clientForm.getName()));
+        if (clientForm.getUserEnum() != null)
+            clientPojo.setUserType(
+                    UserEnum.fromString(CommonsHelper.normalize(clientForm.getUserEnum())));
         return clientPojo;
     }
 

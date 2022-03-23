@@ -18,6 +18,9 @@ public class ApiException extends Exception {
 
 	public ApiException(String string) {
 		super(string);
+		this.errorDatas = null;
 	}
+
+	public ApiException() {}
 
 }

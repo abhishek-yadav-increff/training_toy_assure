@@ -16,8 +16,7 @@ public class ChannelDtoHelper {
         ChannelData channelData = new ChannelData();
         channelData.setId(channelPojo.getId());
         channelData.setName(channelPojo.getName());
-        channelData
-                .setInvoiceType(CommonsHelper.normalize(channelPojo.getInvoiceType().toString()));
+        channelData.setInvoiceType(channelPojo.getInvoiceType().toString());
         return channelData;
     }
 

@@ -51,4 +51,8 @@ public class OrderItemDto {
         return OrderItemDtoHelper.convert(orderItemPojos);
     }
 
+    public List<OrderItemData> getByOrderId(Long orderId) throws ApiException {
+        return OrderItemDtoHelper.convert(orderItemService.getByOrderId(orderId));
+    }
+
 }

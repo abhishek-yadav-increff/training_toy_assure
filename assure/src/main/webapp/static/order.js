@@ -14,43 +14,72 @@ function resetOrderInput() {
 }
 function uploadOrder(event) {
     //Set the values to update
-    var clientId = document.getElementById("inputClientId").value;
-    var customerId = document.getElementById("inputCustomerId").value;
-    var channelId = document.getElementById("inputChannelId").value;
-    processData(clientId, customerId, channelId);
+    processData();
     return false;
 }
 
 // FILE HANDLING CODE
-function processData(clientId, customerId, channelId) {
+function processData() {
     var file = $('#orderFile')[0].files[0];
     if (file.name.split('.').pop() == "csv") {
-        console.log(clientId, customerId, channelId);
-        readFileDataOrder(file, readFileDataCallback, clientId, customerId, channelId);
+        console.log();
+        readFileDataOrder(file, readFileDataCallback);
     } else
         toast(false, "CSV file is required!!");
     return false;
 }
-function readFileDataOrder(file, callback, clientId, customerId, channelId) {
+function readFileDataOrder(file, callback) {
     var config = {
         header: true,
         delimiter: "\t",
         skipEmptyLines: "greedy",
         complete: function (results) {
-            callback(results, clientId, customerId, channelId);
+            callback(results);
         }
     }
     Papa.parse(file, config);
 }
-function readFileDataCallback(results, clientId, customerId, channelId) {
+function readFileDataCallback(results) {
     fileData = results.data;
     if (fileData.length > 5000) {
         toast(false, "Limit on number of rows is 5000!!");
     }
-    uploadRows(clientId, customerId, channelId);
+    uploadRows();
 }
 // API CODE
-function uploadRows(clientId, customerId, channelId) {
+function allocate(orderId) {
+    var url = getOrderUrl() + "/allocate/" + orderId;
+    $.ajax({
+        url: url,
+        type: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        success: function (response) {
+            getOrderList();
+            resetOrderInput();
+            toast(true, "Order was succesfully allocated!!");
+        },
+        error: handleAjaxError
+    });
+}
+function generateInvoice(orderId) {
+    var url = getOrderUrl() + "/allocate/" + orderId;
+    $.ajax({
+        url: url,
+        type: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        success: function (response) {
+            getOrderList();
+            resetOrderInput();
+            toast(true, "Order was succesfully allocated!!");
+        },
+        error: handleAjaxError
+    });
+}
+function uploadRows() {
     //Update progress
     var $form = $("#order-form");
 
@@ -62,7 +91,7 @@ function uploadRows(clientId, customerId, channelId) {
         var row = fileData[index];
         var row2 = {
             clientSkuId: row["ClientSkuId"],
-            orderQuantity: row["OrderQuantity"],
+            orderedQuantity: row["OrderedQuantity"],
             sellingPricePerUnit: row["SellingPricePerUnit"],
         };
         allRows.push(row2);
@@ -72,13 +101,14 @@ function uploadRows(clientId, customerId, channelId) {
     obj["orderItemForms"] = allRows;
     data = JSON.stringify(obj);
     console.log(data);
+    // return false;
     var url = getOrderUrl();
 
     //Make ajax call
     $.ajax({
         url: url,
         type: 'POST',
-        data: json,
+        data: data,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -86,12 +116,12 @@ function uploadRows(clientId, customerId, channelId) {
             getOrderList();
             resetOrderInput();
             getOrderList();
-            toast(true, "Channel Listings were succesfully added!!");
+            toast(true, "Order was succesfully added!!");
             // uploadRows();
         },
         error: function (response) {
             document.getElementById("download-error-order").disabled = false;
-            toast(false, 'No data was added!');
+            handleAjaxError(response);
         }
     });
 
@@ -145,9 +175,16 @@ function displayOrderList(data) {
     var index = 1;
     for (var i in data) {
         var e = data[i];
-        var buttonHtml = ' <button type="button" class="btn btn-secondary btn-sm" onclick="displayEditOrder(' + e.id + ')">Edit</button>'
+        var buttonHtml;
+        if (e.status == "CREATED")
+            buttonHtml = ' <button type="button" class="btn btn-secondary btn-sm" onclick="allocate(' + e.id + ')">Allocate</button>'
+        else if (e.status == "ALLOCATED")
+            buttonHtml = ' <button type="button" class="btn btn-secondary btn-sm" onclick="generateInvoice(' + e.id + ')">Generate Invoice</button>'
+        else if (e.status == "FULFILLED")
+            buttonHtml = ' <button type="button" class="btn btn-secondary btn-sm" onclick="downloadInvoice(' + e.id + ')">Download Invoice</button>'
+
         var row = '<tr>'
-            + '<td>' + e.id + '</td>'
+            + '<td><a href="http://localhost:9000/assure/ui/orderpreview/' + e.id + '">' + e.id + '</a></td>'
             + '<td>' + e.clientId + '</td>'
             + '<td>' + e.customerId + '</td>'
             + '<td>' + e.channelId + '</td>'
@@ -205,28 +242,28 @@ function init() {
             }
         }
     });
-    $('#inputChannelId').select2({
-        allowClear: true,
-        ajax: {
-            url: getChannelUrl() + "/search/",
-            dataType: 'json',
+    // $('#inputChannelId').select2({
+    //     allowClear: true,
+    //     ajax: {
+    //         url: getChannelUrl() + "/search/",
+    //         dataType: 'json',
 
-            data: function (params) {
-                var query = {
-                    term: params.term,
-                    type: 'query'
-                }
-                return query;
-            },
-            processResults: function (data) {
-                var data = $.map(data, function (obj) {
-                    obj.text = "ID: " + obj.id + " Name: " + obj.name; // replace name with the property used for the text
-                    return obj;
-                });
-                return { results: data };
-            }
-        }
-    });
+    //         data: function (params) {
+    //             var query = {
+    //                 term: params.term,
+    //                 type: 'query'
+    //             }
+    //             return query;
+    //         },
+    //         processResults: function (data) {
+    //             var data = $.map(data, function (obj) {
+    //                 obj.text = "ID: " + obj.id + " Name: " + obj.name; // replace name with the property used for the text
+    //                 return obj;
+    //             });
+    //             return { results: data };
+    //         }
+    //     }
+    // });
 
     $('#order-form').submit(uploadOrder);
     $('#refresh-order-data').click(refreshOrderList);

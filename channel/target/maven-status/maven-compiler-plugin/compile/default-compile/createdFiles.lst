@@ -1,5 +1,6 @@
 com/increff/channel/util/StringUtil.class
 com/increff/channel/service/OrderService.class
+com/increff/channel/controller/OrderController.class
 com/increff/channel/model/ZonedDateTimeData.class
 com/increff/channel/client/assureClient/ProductAssureClient.class
 com/increff/channel/dto/ClientDto.class
@@ -33,14 +34,15 @@ com/increff/channel/dto/helper/ChannelListingDtoHelper.class
 com/increff/channel/model/ChannelListingForm.class
 com/increff/channel/spring/WebInitializer.class
 com/increff/channel/model/OrderData.class
-com/increff/channel/model/MessageData.class
 com/increff/channel/dao/ChannelDao.class
 com/increff/channel/enums/OrderEnum.class
 com/increff/channel/spring/DbConfig.class
 com/increff/channel/client/assureClient/ChannelListingAssureClient.class
 com/increff/channel/pojo/OrderPojo.class
 com/increff/channel/util/SecurityUtil.class
+com/increff/channel/model/OrderItemForm.class
 com/increff/channel/util/IOUtil.class
+com/increff/channel/client/assureClient/OrderAssureClient.class
 com/increff/channel/controller/ChannelListingController.class
 com/increff/channel/client/assureClient/ClientAssureClient.class
 com/increff/channel/controller/ClientController.class

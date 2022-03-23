@@ -1,8 +1,8 @@
 package com.increff.channel.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.increff.channel.model.MessageData;
 import com.increff.commons.model.ApiException;
+import com.increff.commons.model.MessageData;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -38,8 +38,6 @@ public class AppRestControllerAdvice {
         try {
             MessageData obj = mapper.readValue(ex.getResponseBodyAsString(), MessageData.class);
             return obj;
-            // data.setMessage(obj.getMessage() + "in advice!!");
-            // data.setErrorDatas(obj.getErrorDatas());
         } catch (Exception e) {
             System.out.print(e.getMessage());
             data.setMessage("Error parsing response!!");

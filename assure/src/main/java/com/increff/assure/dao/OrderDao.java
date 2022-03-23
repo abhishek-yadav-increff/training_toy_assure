@@ -15,6 +15,8 @@ public class OrderDao extends AbstractDao {
     private static final String SELECT_ALL = "SELECT P FROM assure_order P";
     private static final String SELECT_CLIENTID_CUSTOMERID_CHANNELID_CHANNELORDERID =
             "SELECT P FROM assure_order P WHERE CLIENID=:clientId AND CUSTOMERID=:customerId AND CHANNELID=:channelId AND CHANNELORDERID=:channelOrderId ";
+    private static final String SELECT_CHANNELORDERID =
+            "SELECT P FROM assure_order P WHERE CHANNELORDERID=:channelOrderId ";
     @PersistenceContext
     private EntityManager em;
 
@@ -47,5 +49,11 @@ public class OrderDao extends AbstractDao {
     }
 
     public void update(OrderPojo p) {}
+
+    public OrderPojo selectByChannelOrderId(String channelOrderId) {
+        TypedQuery<OrderPojo> query = getQuery(SELECT_CHANNELORDERID, OrderPojo.class);
+        query.setParameter("channelOrderId", channelOrderId);
+        return getSingle(query);
+    }
 
 }

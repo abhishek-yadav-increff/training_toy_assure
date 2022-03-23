@@ -27,6 +27,7 @@ public class ChannelListingService {
 
     private void validateAdd(List<ChannelListingPojo> p) throws ApiException {
         List<ErrorData> errorDatas = new ArrayList<>();
+        Long row = 1L;
         for (ChannelListingPojo chLiPojo : p) {
             try {
                 ChannelListingPojo chp = getByClientIdChanneIdGlobalSkuId(chLiPojo);
@@ -38,8 +39,9 @@ public class ChannelListingService {
                     throw new ApiException(
                             "Listing with combination Channel SKU ID, Client ID, ChannelId already exists!!");
             } catch (Exception e) {
-                errorDatas.add(new ErrorData("error", e.getMessage()));
+                errorDatas.add(new ErrorData("error", e.getMessage(), row));
             }
+            row += 1;
         }
         if (!errorDatas.isEmpty())
             throw new ApiException("Failed validating listings!!", errorDatas);

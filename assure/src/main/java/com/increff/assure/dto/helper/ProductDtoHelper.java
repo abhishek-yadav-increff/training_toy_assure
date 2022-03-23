@@ -22,16 +22,14 @@ public class ProductDtoHelper {
 
     public static ProductPojo convert(ProductForm productForm) {
         ProductPojo productPojo = new ProductPojo();
-        if (productForm.getClientId() != null)
-            productPojo.setClientId(productForm.getClientId());
+        productPojo.setClientId(productForm.getClientId());
         if (productForm.getClientSkuId() != null && !productForm.getClientSkuId().isEmpty())
             productPojo.setClientSkuId(CommonsHelper.normalize(productForm.getClientSkuId()));
         if (productForm.getName() != null && !productForm.getName().isEmpty())
             productPojo.setName(CommonsHelper.normalize(productForm.getName()));
         if (productForm.getBrandId() != null && !productForm.getBrandId().isEmpty())
             productPojo.setBrandId(CommonsHelper.normalize(productForm.getBrandId()));
-        if (productForm.getMrp() != null)
-            productPojo.setMrp(CommonsHelper.normalize(productForm.getMrp()));
+        productPojo.setMrp(CommonsHelper.normalize(productForm.getMrp()));
         if (productForm.getDescription() != null && !productForm.getDescription().isEmpty())
             productPojo.setDescription(CommonsHelper.normalize(productForm.getDescription()));
         return productPojo;

@@ -13,6 +13,8 @@ public class OrderItemDao extends AbstractDao {
 
     private static final String SELECT_ID =
             "SELECT P FROM assure_order_item P WHERE globalSkuId=:id";
+    private static final String SELECT_ORDERID =
+            "SELECT P FROM assure_order_item P WHERE ORDERID=:orderId";
     private static final String SELECT_ALL = "SELECT P FROM assure_order_item P";
 
     @PersistenceContext
@@ -35,5 +37,11 @@ public class OrderItemDao extends AbstractDao {
     }
 
     public void update(OrderItemPojo p) {}
+
+    public List<OrderItemPojo> getByOrderId(Long orderId) {
+        TypedQuery<OrderItemPojo> query = getQuery(SELECT_ORDERID, OrderItemPojo.class);
+        query.setParameter("orderId", orderId);
+        return query.getResultList();
+    }
 
 }

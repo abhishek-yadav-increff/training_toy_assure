@@ -1,7 +1,9 @@
 package com.increff.assure.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -40,6 +42,13 @@ public class AppUiController extends AbstractUiController {
 	@RequestMapping(value = "/ui/order")
 	public ModelAndView order() {
 		ModelAndView mavObject = mav("order.html");
+		return mavObject;
+	}
+
+	@RequestMapping(value = "/ui/orderpreview/{orderId}", method = RequestMethod.GET)
+	public ModelAndView orderPreview(@PathVariable String orderId) {
+		ModelAndView mavObject = mav("order_preview.html");
+		mavObject.addObject("orderId", orderId.toString());
 		return mavObject;
 	}
 

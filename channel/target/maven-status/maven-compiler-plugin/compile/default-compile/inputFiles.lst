@@ -5,6 +5,7 @@
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/dto/helper/ChannelListingDtoHelper.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/dto/ClientDto.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/service/ChannelListingService.java
+/home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/model/OrderItemForm.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/dao/ChannelListingDao.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/util/CookieUtil.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/spring/SpringConfig.java
@@ -48,7 +49,6 @@
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/controller/ChannelListingController.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/client/assureClient/ProductAssureClient.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/util/StringUtil.java
-/home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/model/MessageData.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/model/ChannelListingData.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/enums/UserEnum.java
 /home/abhk943/Documents/increff/toy_assure/channel/src/main/java/com/increff/channel/controller/ProductController.java

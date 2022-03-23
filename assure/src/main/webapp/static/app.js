@@ -149,6 +149,10 @@ function getOrderUrl() {
     var baseUrl = $("meta[name=baseUrl]").attr("content")
     return baseUrl + "/api/order";
 }
+function getOrderItemUrl() {
+    var baseUrl = $("meta[name=baseUrl]").attr("content")
+    return baseUrl + "/api/orderitem";
+}
 function getZonedDateTimeUrl() {
     var baseUrl = $("meta[name=baseUrl]").attr("content")
     return baseUrl + "/api/zoneddatetime";
