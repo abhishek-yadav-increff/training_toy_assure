@@ -1,4 +1,4 @@
-package com.increff.channel.model;
+package com.increff.commons.model;
 
 import lombok.Getter;
 import lombok.Setter;

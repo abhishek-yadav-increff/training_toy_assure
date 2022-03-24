@@ -38,7 +38,7 @@
                         </fo:inline-container>
                     </fo:block>
                     <fo:block>
-                        <fo:inline-container inline-progression-dimension="60%">
+                        <fo:inline-container vertical-align="bottom" inline-progression-dimension="60%">
                             <fo:block linefeed-treatment="preserve">
                             INCREFF
                             2nd floor, Enzyme Tech Park,
@@ -48,11 +48,27 @@
                             </fo:block>
                         </fo:inline-container>
                         <fo:inline-container vertical-align="bottom" inline-progression-dimension="39%">
-                            <fo:block font-size="16pt" font-family="Helvetica" font-weight="bold">
+                            <fo:block font-size="12pt" font-family="Helvetica" font-weight="bold">
                                 Order ID:
                                 <xsl:value-of select="id" />
                             </fo:block>
-                            <fo:block font-size="16pt" font-family="Helvetica" font-weight="bold">
+                            <fo:block font-size="12pt" font-family="Helvetica">
+                                Client ID:
+                                <xsl:value-of select="clientId" />
+                            </fo:block>
+                            <fo:block font-size="12pt" font-family="Helvetica">
+                                Customer ID:
+                                <xsl:value-of select="customerId" />
+                            </fo:block>
+                            <fo:block font-size="12pt" font-family="Helvetica">
+                                Channel ID:
+                                <xsl:value-of select="channelId" />
+                            </fo:block>
+                            <fo:block font-size="12pt" font-family="Helvetica">
+                                Channel Order ID:
+                                <xsl:value-of select="channelOrderId" />
+                            </fo:block>
+                            <fo:block font-size="12pt" font-family="Helvetica">
                                 Date:
                                 <xsl:value-of select="date" />
                             </fo:block>
@@ -62,26 +78,22 @@
                     <fo:block>&#160;</fo:block>
                     <fo:block font-size="10pt">
                         <fo:table table-layout="fixed" width="100%" border-collapse="separate" xsl:use-attribute-sets="myBorder">
-                            <fo:table-column column-width="2.5cm" />
                             <fo:table-column column-width="8cm" />
-                            <fo:table-column column-width="2cm" />
-                            <fo:table-column column-width="2cm" />
-                            <fo:table-column column-width="2.5cm" />
+                            <fo:table-column column-width="3cm" />
+                            <fo:table-column column-width="3cm" />
+                            <fo:table-column column-width="3cm" />
                             <fo:table-header>
                                 <fo:table-cell xsl:use-attribute-sets="tableBorder">
-                                    <fo:block margin-left="1mm" font-weight="bold">Name</fo:block>
-                                </fo:table-cell>
-                                <fo:table-cell xsl:use-attribute-sets="tableBorder">
-                                    <fo:block margin-left="1mm" font-weight="bold">Barcode</fo:block>
-                                </fo:table-cell>
-                                <fo:table-cell xsl:use-attribute-sets="tableBorder">
-                                    <fo:block margin-left="1mm" font-weight="bold">MRP</fo:block>
+                                    <fo:block margin-left="1mm" font-weight="bold">Global Sku ID</fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell xsl:use-attribute-sets="tableBorder">
                                     <fo:block margin-left="1mm" font-weight="bold">Quantity</fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell xsl:use-attribute-sets="tableBorder">
                                     <fo:block margin-left="1mm" font-weight="bold">Selling Price</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell xsl:use-attribute-sets="tableBorder">
+                                    <fo:block margin-left="1mm" font-weight="bold">Total Price</fo:block>
                                 </fo:table-cell>
                             </fo:table-header>
                             <fo:table-body>
@@ -91,13 +103,13 @@
                     </fo:block>
                     <!-- <fo:block>&#160;</fo:block><fo:block>&#160;</fo:block> -->
                     <fo:block text-align="center">
-                        <fo:inline-container inline-progression-dimension="83%">
+                        <fo:inline-container inline-progression-dimension="79%">
                             <fo:block font-size="16pt" font-family="Helvetica" font-weight="bold">
                                 <!-- <fo:block>&#160;</fo:block><fo:block>&#160;</fo:block> -->
                                 <!-- THANK YOU -->
                             </fo:block>
                         </fo:inline-container>
-                        <fo:inline-container vertical-align="top" inline-progression-dimension="30%">
+                        <fo:inline-container vertical-align="top" inline-progression-dimension="20%">
                             <fo:block font-size="12pt" font-weight="bold" text-align="left">
                                 TOTAL:
                                 <xsl:value-of select="total" />
@@ -118,28 +130,23 @@
         <fo:table-row>
             <fo:table-cell xsl:use-attribute-sets="tableBorder">
                 <fo:block margin-left="1mm">
-                    <xsl:value-of select="name" />
+                    <xsl:value-of select="globalSkuId" />
                 </fo:block>
             </fo:table-cell>
 
             <fo:table-cell xsl:use-attribute-sets="tableBorder">
                 <fo:block margin-left="1mm">
-                    <xsl:value-of select="productBarcode" />
+                    <xsl:value-of select="fulfilledQuantity" />
                 </fo:block>
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="tableBorder">
                 <fo:block margin-left="1mm">
-                    <xsl:value-of select="mrp" />
+                    <xsl:value-of select="sellingPricePerUnit" />
                 </fo:block>
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="tableBorder">
                 <fo:block margin-left="1mm">
-                    <xsl:value-of select="quantity" />
-                </fo:block>
-            </fo:table-cell>
-            <fo:table-cell xsl:use-attribute-sets="tableBorder">
-                <fo:block margin-left="1mm">
-                    <xsl:value-of select="sellingPrice" />
+                    <xsl:value-of select="totalSellingPrice" />
                 </fo:block>
             </fo:table-cell>
         </fo:table-row>

@@ -2,8 +2,8 @@ package com.increff.channel.client.assureClient;
 
 import java.util.Arrays;
 import java.util.List;
-import com.increff.channel.model.ChannelData;
-import com.increff.channel.model.ChannelForm;
+import com.increff.commons.model.ChannelData;
+import com.increff.commons.model.ChannelForm;
 import com.increff.commons.model.ApiException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;

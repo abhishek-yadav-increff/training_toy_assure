@@ -1,7 +1,9 @@
 package com.increff.assure.service;
 
+import java.util.List;
 import com.increff.assure.dao.BinDao;
 import com.increff.assure.model.BinForm;
+import com.increff.assure.pojo.BinPojo;
 import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,27 +30,24 @@ public class BinService {
         return nextBin;
     }
 
-    // @Transactional(readOnly = true)
-    // public BinPojo get(Long id) throws ApiException {
-    // return getCheck(id);
-    // }
+    @Transactional(readOnly = true)
+    public BinPojo get(Long id) throws ApiException {
+        return getCheck(id);
+    }
 
-    // @Transactional(readOnly = true)
-    // public List<BinPojo> getAll() throws ApiException {
-    // List<BinPojo> binPojos = dao.selectAll();
-    // if (binPojos == null) {
-    // throw new ApiException("No Bin Category Pair in database!");
-    // }
-    // return binPojos;
-    // }
+    @Transactional(readOnly = true)
+    public List<BinPojo> getAll() throws ApiException {
+        List<BinPojo> binPojos = dao.selectAll();
+        return binPojos;
+    }
 
-    // @Transactional(readOnly = true)
-    // public BinPojo getCheck(Long id) throws ApiException {
-    // BinPojo p = dao.select(id);
-    // if (p == null) {
-    // throw new ApiException("Bin with given ID does not exist, id: " + id);
-    // }
-    // return p;
-    // }
+    @Transactional(readOnly = true)
+    public BinPojo getCheck(Long id) throws ApiException {
+        BinPojo p = dao.select(id);
+        if (p == null) {
+            throw new ApiException("Bin with given ID does not exist, id: " + id);
+        }
+        return p;
+    }
 
 }

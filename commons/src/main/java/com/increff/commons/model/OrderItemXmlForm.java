@@ -1,4 +1,4 @@
-package com.increff.assure.model;
+package com.increff.commons.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,6 +45,13 @@ public class OrderItemXmlForm {
 
     public void setTotalSellingPrice(String totalSellingPrice) {
         this.totalSellingPrice = totalSellingPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItemXmlForm [fulfilledQuantity=" + fulfilledQuantity + ", globalSkuId="
+                + globalSkuId + ", sellingPricePerUnit=" + sellingPricePerUnit
+                + ", totalSellingPrice=" + totalSellingPrice + "]";
     }
 
 }

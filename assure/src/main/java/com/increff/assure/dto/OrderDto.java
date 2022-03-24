@@ -3,21 +3,26 @@ package com.increff.assure.dto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
+import com.increff.assure.client.ChannelClient;
 import com.increff.assure.dto.helper.CommonsHelper;
 import com.increff.assure.dto.helper.OrderDtoHelper;
 import com.increff.assure.dto.helper.OrderItemDtoHelper;
-import com.increff.assure.model.OrderData;
-import com.increff.assure.model.OrderForm;
-import com.increff.assure.model.OrderItemForm;
-import com.increff.assure.model.OrderItemXmlForm;
-import com.increff.assure.model.OrderXmlForm;
+import com.increff.assure.enums.InvoiceEnum;
+import com.increff.assure.pojo.ChannelPojo;
 import com.increff.assure.pojo.OrderItemPojo;
 import com.increff.assure.pojo.OrderPojo;
 import com.increff.assure.pojo.ProductPojo;
+import com.increff.assure.service.ChannelService;
 import com.increff.assure.service.OrderItemService;
 import com.increff.assure.service.OrderService;
 import com.increff.assure.service.ProductService;
 import com.increff.commons.model.ApiException;
+import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderForm;
+import com.increff.commons.model.OrderItemForm;
+import com.increff.commons.model.OrderItemXmlForm;
+import com.increff.commons.model.OrderXmlForm;
+import com.increff.commons.utils.PdfGenerationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +39,18 @@ public class OrderDto {
     private OrderItemService orderItemService;
 
     @Autowired
+    private ChannelClient channelClient;
+
+    @Autowired
+    private ChannelService channelService;
+
+    @Autowired
     private ProductService productService;
+
+    private static final String pdfFolder =
+            "/home/abhk943/Documents/increff/toy_assure/assure/xml_data/generated_pdf/";
+    private static final String xlsModelPath =
+            "/home/abhk943/Documents/increff/toy_assure/assure/src/main/resources/OrderPdfModel.xsl";
 
     @Transactional(rollbackOn = ApiException.class)
     public void add(OrderForm orderForm) throws ApiException {
@@ -76,10 +92,25 @@ public class OrderDto {
     @Transactional(rollbackOn = ApiException.class)
     public void generateInvoice(Long id) throws ApiException {
         orderService.generateInvoice(id);
+
         OrderXmlForm orderXmlForm = getXmlForm(id);
-        String fname = OrderDtoHelper.generateXML(id, orderXmlForm);
-        List<String> xsl_dir_pdf_paths = OrderDtoHelper.generatePaths(fname);
-        OrderDtoHelper.generatePdf(fname, xsl_dir_pdf_paths);
+        if (getInvoiceType(id).equals(InvoiceEnum.SELF)) {
+            String fname = PdfGenerationHelper.generateXML(id, orderXmlForm);
+            List<String> xsl_dir_pdf_paths = PdfGenerationHelper.generatePaths(fname, xlsModelPath);
+            PdfGenerationHelper.generatePdf(fname, xsl_dir_pdf_paths);
+        } else {
+            System.out.print("before calling client");
+            channelClient.generateInvoiceOrder(orderXmlForm);
+            System.out.print("after calling client");
+
+        }
+    }
+
+    private InvoiceEnum getInvoiceType(Long id) throws ApiException {
+        OrderPojo orderPojo = orderService.get(id);
+        ChannelPojo channelPojo = channelService.get(orderPojo.getChannelId());
+        InvoiceEnum invoiceEnum = channelPojo.getInvoiceType();
+        return invoiceEnum;
     }
 
     public OrderXmlForm getXmlForm(Long id) throws ApiException {
@@ -99,7 +130,16 @@ public class OrderDto {
     }
 
     public byte[] getPdf(Long id) throws ApiException {
-        return OrderDtoHelper.getPdf(id);
+        orderService.getPdf(id);
+        if (getInvoiceType(id).equals(InvoiceEnum.SELF))
+            return PdfGenerationHelper.getPdf(id, pdfFolder);
+        else
+            return channelClient.downloadOrder(id);
+    }
+
+    public List<OrderData> getAllForChannel() throws ApiException {
+        List<OrderPojo> orderPojos = orderService.getAllForChannel();
+        return OrderDtoHelper.convert(orderPojos);
     }
 
     // public void update(Long id, OrderForm f) throws ApiException {

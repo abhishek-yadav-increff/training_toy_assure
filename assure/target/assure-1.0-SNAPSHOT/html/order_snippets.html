@@ -10,7 +10,7 @@
 </div>
 
 <!-- TOYSTORE ORDER UPLOAD FORM -->
-<form id="order-upload-form" th:fragment="toystore_order_upload_form">
+<!-- <form id="order-upload-form" th:fragment="toystore_order_upload_form">
     <div class="row">
         <label style="width: 150px;" for="uploadClientId" class="col-form-label justify-content-start">Client ID</label>
         <div class="col p-0">
@@ -44,16 +44,16 @@
                 disabled>Upload</button>
         </div>
     </div>
-</form>
+</form> -->
 <!-- ORDER CREATE FORM -->
 <form id="order-form" th:fragment="toystore_order_form">
+    <input type="hidden" name="channelId" id="inputChannelId" value="10001">
     <div class="row">
         <label style="width: 150px;" for="inputChannelId" class="col-form-label justify-content-start">Channel
-            ID</label>
+            Order ID</label>
         <div class="col p-0">
-            <select class="js-data-example-ajax form-control" name="channelId" id="inputChannelId" style="width: 100%;"
-                data-placeholder="Search by Name and ID" required>
-            </select>
+            <input type="text" class="col form-control" name="channelOrderId" id="inputChannelOrderId"
+                placeholder="Enter Channel Order ID" required>
         </div>
     </div>
     <div class="row">
@@ -117,7 +117,7 @@
     </div>
 </div>
 
-<!-- Product Edit Modal -->
+<!-- Product Edit Modal
 <div class="modal" tabindex="-1" role="dialog" id="edit-order-modal" th:fragment="toystore_order_editform">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -164,4 +164,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

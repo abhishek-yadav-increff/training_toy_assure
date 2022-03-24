@@ -2,9 +2,9 @@ package com.increff.assure.dto.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.increff.assure.model.ChannelListingData;
-import com.increff.assure.model.ChannelListingForm;
 import com.increff.assure.pojo.ChannelListingPojo;
+import com.increff.commons.model.ChannelListingData;
+import com.increff.commons.model.ChannelListingForm;
 
 /**
  * ChannelListingDtoHelper

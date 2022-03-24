@@ -5,14 +5,12 @@
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/pojo/ChannelPojo.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/BinSkuController.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dto/ProductDto.java
-/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/OrderData.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/AbstractUiController.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/spring/DbConfig.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/service/OrderItemService.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/BinForm.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dto/helper/BinSkuDtoHelper.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/BinData.java
-/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/ChannelListingData.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dto/ClientDto.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/BinSkuForm.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dao/AbstractDao.java
@@ -24,6 +22,7 @@
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/ChannelListingController.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/pojo/BinSkuPojo.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/id/UUIDGenerator.java
+/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/client/ChannelClient.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/BinSkuData.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/AppRestControllerAdvice.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/ProductController.java
@@ -48,7 +47,6 @@
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/pojo/ProductPojo.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/service/ZonedDateTimeService.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/service/BinService.java
-/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/OrderItemData.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/util/IOUtil.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/pojo/OrderPojo.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/spring/WebInitializer.java
@@ -58,7 +56,6 @@
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dto/helper/ClientDtoHelper.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/AppUiController.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/ClientController.java
-/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/ChannelData.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/util/StringUtil.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/BinController.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dto/helper/OrderDtoHelper.java
@@ -68,7 +65,6 @@
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/controller/OrderController.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dao/InventoryDao.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dto/BinDto.java
-/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/OrderItemForm.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/BinIndexRange.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/service/InventoryService.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/ClientForm.java
@@ -83,11 +79,8 @@
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/util/CookieUtil.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/util/SecurityUtil.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dto/ChannelDto.java
-/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/ChannelListingForm.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/enums/InvoiceEnum.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dao/BinSkuDao.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/service/ChannelListingService.java
-/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/ChannelForm.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dao/OrderDao.java
 /home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/dto/helper/CommonsHelper.java
-/home/abhk943/Documents/increff/toy_assure/assure/src/main/java/com/increff/assure/model/OrderForm.java

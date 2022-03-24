@@ -2,8 +2,8 @@ package com.increff.channel.dto.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.increff.channel.model.ChannelListingData;
-import com.increff.channel.model.ChannelListingForm;
+import com.increff.commons.model.ChannelListingData;
+import com.increff.commons.model.ChannelListingForm;
 import com.increff.channel.pojo.ChannelListingPojo;
 
 /**

@@ -1,13 +1,17 @@
 package com.increff.assure.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.increff.assure.dao.OrderDao;
+import com.increff.assure.enums.InvoiceEnum;
 import com.increff.assure.enums.OrderEnum;
-import com.increff.assure.model.OrderItemData;
+import com.increff.assure.pojo.ChannelPojo;
 import com.increff.assure.pojo.OrderItemPojo;
 import com.increff.assure.pojo.OrderPojo;
 import com.increff.commons.model.ApiException;
+import com.increff.commons.model.OrderItemData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +23,9 @@ public class OrderService {
 
     @Autowired
     private OrderItemService orderItemService;
+
+    @Autowired
+    private ChannelService channelService;
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(OrderPojo p) throws ApiException {
@@ -93,9 +100,25 @@ public class OrderService {
 
     public void generateInvoice(Long id) throws ApiException {
         if (get(id).getStatus() != OrderEnum.ALLOCATED)
-            throw new ApiException("Order only with status ALLOCATED can be allocated!!");
+            throw new ApiException("Order only with status ALLOCATED can be fulfilled!!");
         orderItemService.generateInvoice(id);
         update(id, OrderEnum.FULFILLED);
+    }
+
+    public void getPdf(Long id) throws ApiException {
+        if (get(id).getStatus() != OrderEnum.FULFILLED)
+            throw new ApiException("Order only with status FULFILLED can be downloaded!!");
+    }
+
+    public List<OrderPojo> getAllForChannel() throws ApiException {
+        List<OrderPojo> orderPojos = getAll();
+        List<OrderPojo> orderPojos2 = new ArrayList<>();
+        for (OrderPojo p : orderPojos) {
+            ChannelPojo channelPojo = channelService.get(p.getChannelId());
+            if (channelPojo.getInvoiceType().equals(InvoiceEnum.CHANNEL))
+                orderPojos2.add(p);
+        }
+        return orderPojos2;
     }
 
 }

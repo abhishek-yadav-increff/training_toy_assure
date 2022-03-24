@@ -2,9 +2,10 @@ package com.increff.channel.dto.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.increff.channel.model.OrderData;
-import com.increff.channel.model.OrderForm;
+import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderForm;
 import com.increff.channel.pojo.OrderPojo;
+
 
 /**
  * OrderDtoHelper

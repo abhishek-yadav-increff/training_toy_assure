@@ -1,10 +1,9 @@
-package com.increff.assure.model;
+package com.increff.commons.model;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import com.increff.assure.pojo.OrderPojo;
 
 /**
  * OrderXmlForm
@@ -21,7 +20,7 @@ public class OrderXmlForm {
     private String date;
     private List<OrderItemXmlForm> items;
 
-    public OrderXmlForm(OrderPojo p) {
+    public OrderXmlForm(OrderData p) {
         this.id = p.getId();
         this.clientId = p.getClientId();
         this.customerId = p.getCustomerId();
@@ -103,6 +102,13 @@ public class OrderXmlForm {
 
     public void setdate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderXmlForm [channelId=" + channelId + ", channelOrderId=" + channelOrderId
+                + ", clientId=" + clientId + ", customerId=" + customerId + ", date=" + date
+                + ", id=" + id + ", items=" + items + ", total=" + total + "]";
     }
 
 }

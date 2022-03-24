@@ -37,7 +37,24 @@ function displayBinSkuList(data) {
         $tbody.append(row);
     }
 }
+function displayBin(data) {
+    if (data.smIndex == data.bgIndex)
+        document.getElementById("currentBins").innerHTML = "Available Bins: [" + data.smIndex + "]";
+    else
+        document.getElementById("currentBins").innerHTML = "Available Bins: [" + data.smIndex + "," + data.bgIndex + "]";
+
+}
 // API CALL CODE
+function getBin() {
+    var url = getBinUrl();
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (data) {
+            displayBin(data);
+        },
+    });
+}
 function getBinSkuList() {
     var url = getBinSkuUrl();
     $.ajax({
@@ -69,14 +86,12 @@ function addBins() {
         success: function (response) {
             toggleAddBinForm();
             getBinList();
+            getBin();
             console.log(response);
-            $.toast({
-                heading: 'Success',
-                text: "Successfully created bins! From: " + response.smIndex + " To: " + response.bgIndex,
-                allowToastClose: true,
-                position: 'top-right',
-                icon: 'success'
-            });
+            if (response.smIndex != response.bgIndex)
+                toast(true, "Successfully created bins! From: " + response.smIndex + " To: " + response.bgIndex);
+            else
+                toast(true, "Successfully created bin! Bin ID: " + response.smIndex)
         },
         error: handleAjaxError
     });
@@ -202,5 +217,7 @@ function init() {
 }
 
 $(document).ready(init);
+$(document).ready(getBin);
 $(document).ready(getBinSkuList);
+
 

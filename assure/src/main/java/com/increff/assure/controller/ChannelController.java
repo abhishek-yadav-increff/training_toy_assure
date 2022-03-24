@@ -2,9 +2,9 @@ package com.increff.assure.controller;
 
 import java.util.List;
 import com.increff.assure.dto.ChannelDto;
-import com.increff.assure.model.ChannelData;
-import com.increff.assure.model.ChannelForm;
 import com.increff.commons.model.ApiException;
+import com.increff.commons.model.ChannelData;
+import com.increff.commons.model.ChannelForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

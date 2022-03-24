@@ -3,9 +3,9 @@ package com.increff.assure.dto.helper;
 import java.util.ArrayList;
 import java.util.List;
 import com.increff.assure.enums.InvoiceEnum;
-import com.increff.assure.model.ChannelData;
-import com.increff.assure.model.ChannelForm;
 import com.increff.assure.pojo.ChannelPojo;
+import com.increff.commons.model.ChannelData;
+import com.increff.commons.model.ChannelForm;
 
 /**
  * ChannelDtoHelper

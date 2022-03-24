@@ -10,7 +10,10 @@
     <div th:replace="bin_snippets.html :: toystore_header_bin"></div>
     <div id="container">
         <h3 class="p-0">Create Bins</h3>
-        <button type="button" class="btn btn-primary btn-sm" id="display-add-bin">Add Bins</button>
+        <div class="row" style="justify-content: space-between;">
+            <button type="button" class="btn btn-primary btn-sm" id="display-add-bin">Add Bins</button>
+            <label id="currentBins" style="width: max-content; align-items: flex-end"></label>
+        </div>
         <hr>
         <h3 class="p-0">Bin wise Inventory for the Products/SKU</h3>
         <div th:replace="bin_snippets.html :: toystore_bin_add_form"></div>

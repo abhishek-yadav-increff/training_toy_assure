@@ -2,8 +2,10 @@ package com.increff.channel.dto;
 
 import java.util.List;
 import com.increff.channel.client.assureClient.OrderAssureClient;
-import com.increff.channel.model.OrderData;
-import com.increff.channel.model.OrderForm;
+import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderForm;
+import com.increff.commons.model.OrderXmlForm;
+import com.increff.commons.utils.PdfGenerationHelper;
 import com.increff.commons.model.ApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,16 @@ public class OrderDto {
 
     private static final Logger LOGGER = Logger.getLogger(OrderDto.class);
 
+    private static final String pdfFolder =
+            "/home/abhk943/Documents/increff/toy_assure/channel/xml_data/generated_pdf/";
+    private static final String xlsModelPath =
+            "/home/abhk943/Documents/increff/toy_assure/channel/src/main/resources/OrderPdfModel.xsl";
+
     public void add(OrderForm orderForm) throws ApiException {
         LOGGER.info("In OrderService:add()");
         LOGGER.info("Form data received: " + orderForm.toString());
+        orderAssureClient.addOrder(orderForm);
+
     }
 
     public OrderData get(Long id) throws ApiException {
@@ -33,12 +42,17 @@ public class OrderDto {
         return orderAssureClient.getOrders();
     }
 
-    // public void update(Long id, OrderForm f) throws ApiException {
-    // OrderPojo p = OrderDtoHelper.convert(f);
-    // orderService.update(id, p);
-    // }
+    public void allocate(Long id) {
+        orderAssureClient.allocateOrder(id);
+    }
 
-    public void add(List<OrderForm> orderForms) {
-        orderAssureClient.addBatchOrder(orderForms);
+    public void generateInvoice(OrderXmlForm orderXmlForm) throws ApiException {
+        String fname = PdfGenerationHelper.generateXML(orderXmlForm.getId(), orderXmlForm);
+        List<String> xsl_dir_pdf_paths = PdfGenerationHelper.generatePaths(fname, xlsModelPath);
+        PdfGenerationHelper.generatePdf(fname, xsl_dir_pdf_paths);
+    }
+
+    public byte[] getPdf(Long id) throws ApiException {
+        return PdfGenerationHelper.getPdf(id, pdfFolder);
     }
 }

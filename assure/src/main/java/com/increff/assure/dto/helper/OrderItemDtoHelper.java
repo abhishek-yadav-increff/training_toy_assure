@@ -2,10 +2,10 @@ package com.increff.assure.dto.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.increff.assure.model.OrderItemData;
-import com.increff.assure.model.OrderItemForm;
-import com.increff.assure.model.OrderItemXmlForm;
 import com.increff.assure.pojo.OrderItemPojo;
+import com.increff.commons.model.OrderItemData;
+import com.increff.commons.model.OrderItemForm;
+import com.increff.commons.model.OrderItemXmlForm;
 
 /**
  * OrderItemDtoHelper

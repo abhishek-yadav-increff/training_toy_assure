@@ -2,10 +2,10 @@ package com.increff.assure.controller;
 
 import java.util.List;
 import com.increff.assure.dto.OrderDto;
-import com.increff.assure.model.OrderData;
-import com.increff.assure.model.OrderForm;
 import com.increff.assure.service.OrderService;
 import com.increff.commons.model.ApiException;
+import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,6 +62,12 @@ public class OrderController {
     @RequestMapping(path = "/api/order", method = RequestMethod.GET)
     public List<OrderData> getAll() throws ApiException {
         return orderDto.getAll();
+    }
+
+    @ApiOperation(value = "Gets list of all Orders")
+    @RequestMapping(path = "/api/order/all", method = RequestMethod.GET)
+    public List<OrderData> getAllForChannel() throws ApiException {
+        return orderDto.getAllForChannel();
     }
 
     @ApiOperation(value = "Gets pdf of order Invoice")

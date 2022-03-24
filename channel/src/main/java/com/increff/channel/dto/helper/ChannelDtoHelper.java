@@ -3,8 +3,8 @@ package com.increff.channel.dto.helper;
 import java.util.ArrayList;
 import java.util.List;
 import com.increff.channel.enums.InvoiceEnum;
-import com.increff.channel.model.ChannelData;
-import com.increff.channel.model.ChannelForm;
+import com.increff.commons.model.ChannelData;
+import com.increff.commons.model.ChannelForm;
 import com.increff.channel.pojo.ChannelPojo;
 
 /**

@@ -1,4 +1,4 @@
-package com.increff.assure.model;
+package com.increff.commons.model;
 
 import java.util.List;
 import lombok.Getter;

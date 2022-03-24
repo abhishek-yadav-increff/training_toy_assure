@@ -64,7 +64,7 @@ function allocate(orderId) {
     });
 }
 function generateInvoice(orderId) {
-    var url = getOrderUrl() + "/allocate/" + orderId;
+    var url = getOrderUrl() + "/generateinvoice/" + orderId;
     $.ajax({
         url: url,
         type: 'PUT',
@@ -79,6 +79,7 @@ function generateInvoice(orderId) {
         error: handleAjaxError
     });
 }
+
 function uploadRows() {
     //Update progress
     var $form = $("#order-form");
@@ -219,6 +220,7 @@ function init() {
                 return { results: data };
             }
         }
+
     });
     $('#inputCustomerId').select2({
         allowClear: true,

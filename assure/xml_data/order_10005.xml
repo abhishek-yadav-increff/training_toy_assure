@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<orderXmlForm>
+    <channelId>10001</channelId>
+    <channelOrderId>asdsad234</channelOrderId>
+    <clientId>10001</clientId>
+    <customerId>10002</customerId>
+    <id>10005</id>
+    <items>
+        <fulfilledQuantity>1</fulfilledQuantity>
+        <globalSkuId>10001</globalSkuId>
+        <sellingPricePerUnit>1.00</sellingPricePerUnit>
+        <totalSellingPrice>1.00</totalSellingPrice>
+    </items>
+    <items>
+        <fulfilledQuantity>2</fulfilledQuantity>
+        <globalSkuId>10002</globalSkuId>
+        <sellingPricePerUnit>2.00</sellingPricePerUnit>
+        <totalSellingPrice>4.00</totalSellingPrice>
+    </items>
+    <total>5.00</total>
+    <date>24/03/2022 10:08</date>
+</orderXmlForm>

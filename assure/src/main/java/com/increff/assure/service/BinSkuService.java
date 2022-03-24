@@ -16,6 +16,11 @@ public class BinSkuService {
     private BinSkuDao dao;
 
     @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private BinService binService;
+    @Autowired
     private InventoryService inventoryService;
 
     @Transactional(rollbackFor = ApiException.class)
@@ -45,6 +50,8 @@ public class BinSkuService {
     private void validateAdd(BinSkuPojo p, Long rowCount) throws ApiException {
         if (p.getGlobalSkuId() == null)
             throw new ApiException("Row: " + rowCount + ", Product doesn't exist!!");
+        productService.get(p.getGlobalSkuId());
+        binService.get(p.getBinId());
         if (p.getQuantity() == null)
             throw new ApiException("Row: " + rowCount + ",Quantity can not be empty!!");
         if (p.getQuantity() < 0)

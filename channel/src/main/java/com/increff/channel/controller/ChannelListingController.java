@@ -2,8 +2,8 @@ package com.increff.channel.controller;
 
 import java.util.List;
 import com.increff.channel.dto.ChannelListingDto;
-import com.increff.channel.model.ChannelListingData;
-import com.increff.channel.model.ChannelListingForm;
+import com.increff.commons.model.ChannelListingData;
+import com.increff.commons.model.ChannelListingForm;
 import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
