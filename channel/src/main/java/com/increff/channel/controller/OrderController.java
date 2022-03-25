@@ -52,15 +52,9 @@ public class OrderController {
 
     @ApiOperation(value = "Gets pdf of order Invoice")
     @RequestMapping(path = "/api/order/download/{id}", method = RequestMethod.GET)
-    public @ResponseBody byte[] getPdf(@PathVariable Long id) throws ApiException {
+    public @ResponseBody byte[] getPdf(@PathVariable String id) throws ApiException {
         return orderDto.getPdf(id);
     }
 
-
-    // @ApiOperation(value = "Updates a Order")
-    // @RequestMapping(path = "/api/order/{id}", method = RequestMethod.PUT)
-    // public void update(@PathVariable Long id, @RequestBody OrderForm f) throws ApiException {
-    // orderDto.update(id, f);
-    // }
 
 }

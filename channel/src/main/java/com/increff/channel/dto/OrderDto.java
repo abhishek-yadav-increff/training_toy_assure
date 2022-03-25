@@ -42,17 +42,15 @@ public class OrderDto {
         return orderAssureClient.getOrders();
     }
 
-    public void allocate(Long id) {
-        orderAssureClient.allocateOrder(id);
-    }
-
     public void generateInvoice(OrderXmlForm orderXmlForm) throws ApiException {
-        String fname = PdfGenerationHelper.generateXML(orderXmlForm.getId(), orderXmlForm);
+        String fname =
+                PdfGenerationHelper.generateXML(orderXmlForm.getChannelOrderId(), orderXmlForm);
+        System.out.println("xml geberated " + fname);
         List<String> xsl_dir_pdf_paths = PdfGenerationHelper.generatePaths(fname, xlsModelPath);
         PdfGenerationHelper.generatePdf(fname, xsl_dir_pdf_paths);
     }
 
-    public byte[] getPdf(Long id) throws ApiException {
+    public byte[] getPdf(String id) throws ApiException {
         return PdfGenerationHelper.getPdf(id, pdfFolder);
     }
 }

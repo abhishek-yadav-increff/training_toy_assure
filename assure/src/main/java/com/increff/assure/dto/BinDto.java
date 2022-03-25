@@ -1,7 +1,6 @@
 package com.increff.assure.dto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import com.increff.assure.dto.helper.BinDtoHelper;
@@ -10,7 +9,6 @@ import com.increff.assure.model.BinIndexRange;
 import com.increff.assure.pojo.BinPojo;
 import com.increff.assure.service.BinService;
 import com.increff.commons.model.ApiException;
-import com.increff.commons.model.BinData;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

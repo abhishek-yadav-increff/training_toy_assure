@@ -47,14 +47,14 @@ public class ChannelListingService {
             throw new ApiException("Failed validating listings!!", errorDatas);
     }
 
-    private ChannelListingPojo getByClientIdChanneIdChannelSkuId(ChannelListingPojo p) {
-        return dao.getByClientIdChanneIdGlobalSkuId(p.getClientId(), p.getChannelId(),
-                p.getGlobalSkuId());
-    }
-
-    private ChannelListingPojo getByClientIdChanneIdGlobalSkuId(ChannelListingPojo p) {
+    public ChannelListingPojo getByClientIdChanneIdChannelSkuId(ChannelListingPojo p) {
         return dao.getByClientIdChanneIdGlobalSkuId(p.getClientId(), p.getChannelId(),
                 p.getChannelSkuId());
+    }
+
+    public ChannelListingPojo getByClientIdChanneIdGlobalSkuId(ChannelListingPojo p) {
+        return dao.getByClientIdChanneIdGlobalSkuId(p.getClientId(), p.getChannelId(),
+                p.getGlobalSkuId());
     }
 
     @Transactional(readOnly = true)

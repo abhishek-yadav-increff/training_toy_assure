@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
-import com.increff.assure.enums.UserEnum;
+import com.increff.commons.enums.UserEnum;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -9,6 +9,9 @@ com/increff/commons/model/OrderItemForm.class
 com/increff/commons/model/ChannelForm.class
 com/increff/commons/utils/ApiExceptionHelper.class
 com/increff/commons/model/ChannelListingForm.class
+com/increff/commons/enums/InvoiceEnum.class
+com/increff/commons/enums/UserEnum.class
+com/increff/commons/enums/OrderEnum.class
 com/increff/commons/model/ApiException.class
 com/increff/commons/model/ProductData.class
 com/increff/commons/model/ClientData.class

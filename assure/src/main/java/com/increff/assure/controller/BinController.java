@@ -4,7 +4,6 @@ import com.increff.assure.dto.BinDto;
 import com.increff.assure.model.BinForm;
 import com.increff.assure.model.BinIndexRange;
 import com.increff.commons.model.ApiException;
-import com.increff.commons.model.BinData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

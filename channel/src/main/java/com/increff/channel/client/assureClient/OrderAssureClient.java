@@ -6,11 +6,9 @@ import com.increff.commons.model.OrderData;
 import com.increff.commons.model.OrderForm;
 import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import io.swagger.models.HttpMethod;
 
 /**
  * AssureClient
@@ -34,23 +32,23 @@ public class OrderAssureClient {
 
     public List<OrderData> getOrders() throws ApiException {
         ResponseEntity<OrderData[]> response = restTemplate
-                .getForEntity("http://localhost:9000/assure/api/order/all", OrderData[].class);
+                .getForEntity("http://localhost:9000/assure/api/order/channel", OrderData[].class);
         List<OrderData> orderDatas = Arrays.asList(response.getBody());
         return orderDatas;
     }
 
-    public void allocateOrder(Long id) {
-        restTemplate.put("http://localhost:9000/assure/api/order/allocate/" + id, null);
-        // restTemplate.getForEntity("http://localhost:9000/assure/api/order/allocate/" + id,
-        // ResponseEntity.class);
-    }
+    // public void allocateOrder(Long id) {
+    // restTemplate.put("http://localhost:9000/assure/api/order/allocate/" + id, null);
+    // // restTemplate.getForEntity("http://localhost:9000/assure/api/order/allocate/" + id,
+    // // ResponseEntity.class);
+    // }
 
-    public void generateInvoiceOrder(Long id) {
-        restTemplate.put("http://localhost:9000/assure/api/order/generateinvoice/" + id, null);
+    // public void generateInvoiceOrder(Long id) {
+    // restTemplate.put("http://localhost:9000/assure/api/order/generateinvoice/" + id, null);
 
-        // restTemplate.getForEntity("http://localhost:9000/assure/api/order/generateinvoice/" + id,
-        // ResponseEntity.class);
-    }
+    // // restTemplate.getForEntity("http://localhost:9000/assure/api/order/generateinvoice/" + id,
+    // // ResponseEntity.class);
+    // }
 
     // public byte[] downloadOrder(Long id) {
     // ResponseEntity<byte[]> response = restTemplate.getForEntity(

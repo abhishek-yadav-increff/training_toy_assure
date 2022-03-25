@@ -3,11 +3,14 @@ function refreshProductList() {
     getProductList();
     toast(true, "Refreshed!");
     resetOnSuccess();
+    document.getElementById("download-error-product").disabled = true;
+
 }
 
 
 function addProduct(event) {
     //Set the values to update
+    document.getElementById("download-error-product").disabled = true;
     var clientId = document.getElementById("inputClientId").value;
     processData(clientId);
     return false;
@@ -91,11 +94,16 @@ function uploadRows(clientId) {
         } else if (errorData.length == processCount) {
             getProductList();
             processCount = 0;
+            console.log(errorData);
+            document.getElementById("download-error-product").disabled = false;
+
             // document.getElementById("download-errors").disabled = false;
             toast(false, 'No data was added!');
 
         } else {
+
             // document.getElementById("download-errors").disabled = false;
+            document.getElementById("download-error-product").disabled = false;
             toast(false, 'Only some rows were added!');
         }
         return;
@@ -272,14 +280,15 @@ function init() {
     $('#refresh-product-data').click(refreshProductList);
     // $('#upload-data').click(displayUploadData);
     // $('#process-data').click(processData);
-    // $('#download-errors').click(downloadErrors);
+    $('#download-error-product').click(downloadErrors);
     // $('#productFile').on('change', updateFileName);
 
-    document.getElementById('productFile').addEventListener('input', function (evt) {
+    document.getElementById('productFile').addEventListener('change', function (evt) {
         var file = $('#productFile')[0].files[0];
-        if (file.name != null) {
+        if (file != null && file.name != null)
             document.getElementById("add-product").disabled = false;
-        }
+        else
+            document.getElementById("add-product").disabled = true;
     });
 }
 

@@ -45,8 +45,10 @@ public class OrderDtoHelper {
         return orderPojo;
     }
 
-    public static OrderXmlForm convert(OrderPojo p, List<OrderItemXmlForm> orderItemXmlForms) {
-        OrderXmlForm orderXmlForm = new OrderXmlForm(convert(p));
+    public static OrderXmlForm convert(OrderPojo p, List<OrderItemXmlForm> orderItemXmlForms,
+            String clientName, String customerName, String channelName) {
+        OrderXmlForm orderXmlForm =
+                new OrderXmlForm(convert(p), clientName, customerName, channelName);
         orderXmlForm.setItems(orderItemXmlForms);
         Double totalCost = 0D;
         for (OrderItemXmlForm oi : orderItemXmlForms) {

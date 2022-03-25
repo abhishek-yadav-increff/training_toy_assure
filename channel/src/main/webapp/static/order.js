@@ -127,34 +127,7 @@ function uploadRows() {
     });
 
 }
-// function addOrder() {
 
-//     var $form = $("#order-form");
-//     // console.log("before toJson");
-//     var json = toJson($form);
-//     // console.log("after toJson");
-//     // return false;
-//     var url = getOrderUrl();
-//     console.log(json);
-//     // return false;
-
-//     $.ajax({
-//         url: url,
-//         type: 'POST',
-//         data: json,
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         success: function (response) {
-//             getOrderList();
-//             toast(true, "Successfully added order!!");
-//             resetOrderInput();
-//         },
-//         error: handleAjaxError
-//     });
-
-//     return false;
-// }
 function getOrderList() {
     var url = getOrderUrl();
     $.ajax({
@@ -178,14 +151,15 @@ function displayOrderList(data) {
         var e = data[i];
         var buttonHtml;
         if (e.status == "CREATED")
-            buttonHtml = ' <button type="button" class="btn btn-secondary btn-sm" onclick="downloadInvoice(' + e.id + ')" disabled>Download Invoice</button>'
+            buttonHtml = ` <button type="button" class="btn btn-secondary btn-sm" onclick="downloadInvoice('` + e.channelOrderId + `')" disabled>Download Invoice</button>`
         else if (e.status == "ALLOCATED")
-            buttonHtml = ' <button type="button" class="btn btn-secondary btn-sm" onclick="downloadInvoice(' + e.id + ')" disabled>Download Invoice</button>'
+            buttonHtml = ` <button type="button" class="btn btn-secondary btn-sm" onclick="downloadInvoice('` + e.channelOrderId + `')" disabled>Download Invoice</button>`
         else if (e.status == "FULFILLED")
-            buttonHtml = ' <button type="button" class="btn btn-secondary btn-sm" onclick="downloadInvoice(' + e.id + ')">Download Invoice</button>'
+            buttonHtml = ` <button type="button" class="btn btn-secondary btn-sm" onclick="downloadInvoice('` + e.channelOrderId + `')">Download Invoice</button>`
 
         var row = '<tr>'
-            + '<td><a href="http://localhost:9000/assure/ui/orderpreview/' + e.id + '">' + e.id + '</a></td>'
+            // + '<td><a href="http://localhost:9001/channel/ui/orderpreview/' + e.id + '">' + e.id + '</a></td>'
+            + '<td>' + index++ + '</a></td>'
             + '<td>' + e.clientId + '</td>'
             + '<td>' + e.customerId + '</td>'
             + '<td>' + e.channelId + '</td>'
@@ -193,7 +167,6 @@ function displayOrderList(data) {
             + '<td>' + e.status + '</td>'
             + '<td>' + buttonHtml + '</td>'
             + '</tr>';
-        index++;
         $tbody.append(row);
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.increff.assure.dao.ClientDao;
 import com.increff.assure.dto.helper.CommonsHelper;
-import com.increff.assure.enums.UserEnum;
+import com.increff.commons.enums.UserEnum;
 import com.increff.assure.pojo.ClientPojo;
 import com.increff.commons.model.ApiException;
 import org.apache.log4j.Logger;

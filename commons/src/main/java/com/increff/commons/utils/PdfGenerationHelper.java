@@ -26,9 +26,8 @@ import org.apache.fop.apps.MimeConstants;
  * PdfGenerationHelper
  */
 public class PdfGenerationHelper {
-
-    public static String generateXML(Long id, OrderXmlForm orderXmlForm) throws ApiException {
-        String fname = "./xml_data/order_" + id.toString() + ".xml";
+    public static String generateXML(String id, OrderXmlForm orderXmlForm) throws ApiException {
+        String fname = "./xml_data/order_" + id + ".xml";
         File file = new File(fname);
         try {
             JAXBContext context = JAXBContext.newInstance(OrderXmlForm.class);
@@ -39,6 +38,21 @@ public class PdfGenerationHelper {
             throw new ApiException(e.getMessage());
         }
         return file.getAbsolutePath();
+    }
+
+    public static String generateXML(Long id, OrderXmlForm orderXmlForm) throws ApiException {
+        return generateXML(id.toString(), orderXmlForm);
+        // String fname = "./xml_data/order_" + id.toString() + ".xml";
+        // File file = new File(fname);
+        // try {
+        // JAXBContext context = JAXBContext.newInstance(OrderXmlForm.class);
+        // Marshaller jaxbMarshaller = context.createMarshaller();
+        // jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        // jaxbMarshaller.marshal(orderXmlForm, file);
+        // } catch (Exception e) {
+        // throw new ApiException(e.getMessage());
+        // }
+        // return file.getAbsolutePath();
     }
 
     public static List<String> generatePaths(String fname, String xlsModelPath) {
@@ -52,7 +66,11 @@ public class PdfGenerationHelper {
     }
 
     public static byte[] getPdf(Long id, String pdfFolder) throws ApiException {
-        String filepath = pdfFolder + "order_" + id.toString() + ".pdf";
+        return getPdf(id.toString(), pdfFolder);
+    }
+
+    public static byte[] getPdf(String id, String pdfFolder) throws ApiException {
+        String filepath = pdfFolder + "order_" + id + ".pdf";
         try {
             byte[] inFileBytes = Files.readAllBytes(Paths.get(filepath));
             byte[] encoded = org.apache.commons.codec.binary.Base64.encodeBase64(inFileBytes);

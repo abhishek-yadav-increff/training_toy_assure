@@ -30,7 +30,7 @@ public class ChannelClient {
         }
     }
 
-    public byte[] downloadOrder(Long id) throws ApiException {
+    public byte[] downloadOrder(String id) throws ApiException {
         try {
             ResponseEntity<byte[]> response = restTemplate.getForEntity(
                     "http://localhost:9001/channel/api/order/download/" + id, byte[].class);

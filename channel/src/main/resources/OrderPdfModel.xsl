@@ -48,21 +48,17 @@
                             </fo:block>
                         </fo:inline-container>
                         <fo:inline-container vertical-align="bottom" inline-progression-dimension="39%">
-                            <fo:block font-size="12pt" font-family="Helvetica" font-weight="bold">
-                                Order ID:
-                                <xsl:value-of select="id" />
+                            <fo:block font-size="12pt" font-family="Helvetica">
+                                Client Name:
+                                <xsl:value-of select="clientName" />
                             </fo:block>
                             <fo:block font-size="12pt" font-family="Helvetica">
-                                Client ID:
-                                <xsl:value-of select="clientId" />
+                                Customer Name:
+                                <xsl:value-of select="customerName" />
                             </fo:block>
                             <fo:block font-size="12pt" font-family="Helvetica">
-                                Customer ID:
-                                <xsl:value-of select="customerId" />
-                            </fo:block>
-                            <fo:block font-size="12pt" font-family="Helvetica">
-                                Channel ID:
-                                <xsl:value-of select="channelId" />
+                                Channel Name:
+                                <xsl:value-of select="channelName" />
                             </fo:block>
                             <fo:block font-size="12pt" font-family="Helvetica">
                                 Channel Order ID:
@@ -78,13 +74,17 @@
                     <fo:block>&#160;</fo:block>
                     <fo:block font-size="10pt">
                         <fo:table table-layout="fixed" width="100%" border-collapse="separate" xsl:use-attribute-sets="myBorder">
-                            <fo:table-column column-width="8cm" />
+                            <fo:table-column column-width="4cm" />
                             <fo:table-column column-width="3cm" />
                             <fo:table-column column-width="3cm" />
                             <fo:table-column column-width="3cm" />
+                            <fo:table-column column-width="4cm" />
                             <fo:table-header>
                                 <fo:table-cell xsl:use-attribute-sets="tableBorder">
-                                    <fo:block margin-left="1mm" font-weight="bold">Global Sku ID</fo:block>
+                                    <fo:block margin-left="1mm" font-weight="bold">Channel Sku ID</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell xsl:use-attribute-sets="tableBorder">
+                                    <fo:block margin-left="1mm" font-weight="bold">Name</fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell xsl:use-attribute-sets="tableBorder">
                                     <fo:block margin-left="1mm" font-weight="bold">Quantity</fo:block>
@@ -130,10 +130,14 @@
         <fo:table-row>
             <fo:table-cell xsl:use-attribute-sets="tableBorder">
                 <fo:block margin-left="1mm">
-                    <xsl:value-of select="globalSkuId" />
+                    <xsl:value-of select="channelSkuId" />
                 </fo:block>
             </fo:table-cell>
-
+            <fo:table-cell xsl:use-attribute-sets="tableBorder">
+                <fo:block margin-left="1mm">
+                    <xsl:value-of select="name" />
+                </fo:block>
+            </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="tableBorder">
                 <fo:block margin-left="1mm">
                     <xsl:value-of select="fulfilledQuantity" />

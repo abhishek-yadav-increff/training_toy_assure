@@ -30,7 +30,6 @@ com/increff/assure/client/ChannelClient.class
 com/increff/assure/spring/DbConfig.class
 com/increff/assure/model/BinSkuData.class
 com/increff/assure/service/OrderService.class
-com/increff/assure/enums/UserEnum.class
 com/increff/assure/dao/BinSkuDao.class
 com/increff/assure/model/ProductForm.class
 com/increff/assure/dao/InventoryDao.class
@@ -66,7 +65,6 @@ com/increff/assure/controller/BinSkuController.class
 com/increff/assure/service/OrderItemService.class
 com/increff/assure/spring/WebInitializer.class
 com/increff/assure/dao/AbstractDao.class
-com/increff/assure/enums/InvoiceEnum.class
 com/increff/assure/pojo/BinPojo.class
 com/increff/assure/dto/ChannelListingDto.class
 com/increff/assure/service/ChannelListingService.class
@@ -81,6 +79,5 @@ com/increff/assure/dto/helper/ZonedDateTimeDtoHelper.class
 com/increff/assure/dto/OrderDto.class
 com/increff/assure/util/IOUtil.class
 com/increff/assure/service/BinService.class
-com/increff/assure/enums/OrderEnum.class
 com/increff/assure/pojo/ChannelPojo.class
 com/increff/assure/controller/BinController.class

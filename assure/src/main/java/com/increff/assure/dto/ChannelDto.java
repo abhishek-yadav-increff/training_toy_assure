@@ -46,4 +46,12 @@ public class ChannelDto {
             return null;
         return ChannelDtoHelper.convert(channelPojos);
     }
+
+    public List<ChannelData> getByQueryForChannel(String query) throws ApiException {
+        List<ChannelPojo> channelPojos =
+                channelService.getByQueryForChannel(CommonsHelper.normalize(query));
+        if (channelPojos == null)
+            return null;
+        return ChannelDtoHelper.convert(channelPojos);
+    }
 }

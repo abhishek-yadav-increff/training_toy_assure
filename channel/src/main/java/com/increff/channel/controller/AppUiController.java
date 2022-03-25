@@ -13,21 +13,10 @@ public class AppUiController extends AbstractUiController {
 		return mavObject;
 	}
 
-	@RequestMapping(value = "/ui/channel")
-	public ModelAndView channel() {
-		ModelAndView mavObject = mav("channel.html");
-		return mavObject;
-	}
-
 	@RequestMapping(value = "/ui/order")
 	public ModelAndView order() {
 		ModelAndView mavObject = mav("order.html");
 		return mavObject;
 	}
 
-	@RequestMapping(value = "/ui/listing")
-	public ModelAndView listing() {
-		ModelAndView mavObject = mav("channel_listing.html");
-		return mavObject;
-	}
 }

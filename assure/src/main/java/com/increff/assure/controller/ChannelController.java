@@ -41,6 +41,14 @@ public class ChannelController {
         return channelDto.getByQuery(query);
     }
 
+    @ApiOperation(value = "Search a Channel by ID and Name")
+    @RequestMapping(path = "/api/channel/search/channel", method = RequestMethod.GET)
+    public List<ChannelData> getForChannel(
+            @RequestParam(value = "term", required = false) String query,
+            @RequestParam(value = "type", required = true) String type) throws ApiException {
+        return channelDto.getByQueryForChannel(query);
+    }
+
     @ApiOperation(value = "Gets list of all Channels")
     @RequestMapping(path = "/api/channel", method = RequestMethod.GET)
     public List<ChannelData> getAll() throws ApiException {

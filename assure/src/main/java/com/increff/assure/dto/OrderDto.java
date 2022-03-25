@@ -7,12 +7,15 @@ import com.increff.assure.client.ChannelClient;
 import com.increff.assure.dto.helper.CommonsHelper;
 import com.increff.assure.dto.helper.OrderDtoHelper;
 import com.increff.assure.dto.helper.OrderItemDtoHelper;
-import com.increff.assure.enums.InvoiceEnum;
+import com.increff.commons.enums.InvoiceEnum;
+import com.increff.assure.pojo.ChannelListingPojo;
 import com.increff.assure.pojo.ChannelPojo;
 import com.increff.assure.pojo.OrderItemPojo;
 import com.increff.assure.pojo.OrderPojo;
 import com.increff.assure.pojo.ProductPojo;
+import com.increff.assure.service.ChannelListingService;
 import com.increff.assure.service.ChannelService;
+import com.increff.assure.service.ClientService;
 import com.increff.assure.service.OrderItemService;
 import com.increff.assure.service.OrderService;
 import com.increff.assure.service.ProductService;
@@ -33,17 +36,18 @@ import org.springframework.stereotype.Service;
 public class OrderDto {
 
     @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private OrderItemService orderItemService;
-
-    @Autowired
     private ChannelClient channelClient;
 
     @Autowired
+    private OrderService orderService;
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private OrderItemService orderItemService;
+    @Autowired
     private ChannelService channelService;
-
+    @Autowired
+    private ChannelListingService channelListingService;
     @Autowired
     private ProductService productService;
 
@@ -94,14 +98,15 @@ public class OrderDto {
         orderService.generateInvoice(id);
 
         OrderXmlForm orderXmlForm = getXmlForm(id);
+        System.out.println(orderXmlForm);
         if (getInvoiceType(id).equals(InvoiceEnum.SELF)) {
             String fname = PdfGenerationHelper.generateXML(id, orderXmlForm);
             List<String> xsl_dir_pdf_paths = PdfGenerationHelper.generatePaths(fname, xlsModelPath);
             PdfGenerationHelper.generatePdf(fname, xsl_dir_pdf_paths);
         } else {
-            System.out.print("before calling client");
+            // System.out.print("before calling client");
             channelClient.generateInvoiceOrder(orderXmlForm);
-            System.out.print("after calling client");
+            // System.out.print("after calling client");
 
         }
     }
@@ -113,33 +118,65 @@ public class OrderDto {
         return invoiceEnum;
     }
 
-    public OrderXmlForm getXmlForm(Long id) throws ApiException {
+    private OrderXmlForm getXmlForm(Long id) throws ApiException {
         OrderPojo p = orderService.get(id);
         List<OrderItemPojo> orderItemPojos = orderItemService.getByOrderId(id);
-        List<OrderItemXmlForm> orderItemXmlForms = convertItems(orderItemPojos);
-        return OrderDtoHelper.convert(p, orderItemXmlForms);
+        List<OrderItemXmlForm> orderItemXmlForms =
+                convertItems(orderItemPojos, p.getClientId(), p.getChannelId());
+        String clientName = clientService.get(p.getClientId()).getName();
+        String customerName = clientService.get(p.getCustomerId()).getName();
+        String channelName = channelService.get(p.getChannelId()).getName();
+        return OrderDtoHelper.convert(p, orderItemXmlForms, clientName, customerName, channelName);
     }
 
-    private List<OrderItemXmlForm> convertItems(List<OrderItemPojo> orderItemPojos)
-            throws ApiException {
+    private List<OrderItemXmlForm> convertItems(List<OrderItemPojo> orderItemPojos, Long clientId,
+            Long channelId) throws ApiException {
         List<OrderItemXmlForm> orderItemXmlForms = new ArrayList<OrderItemXmlForm>();
         for (OrderItemPojo p : orderItemPojos) {
-            orderItemXmlForms.add(OrderItemDtoHelper.convertToForm(p));
+            System.out.println("oixp: " + orderItemXmlForms);
+            ProductPojo productPojo = productService.get(p.getGlobalSkuId());
+            System.out.println("PP: " + productPojo);
+            ChannelListingPojo clp =
+                    new ChannelListingPojo(clientId, channelId, p.getGlobalSkuId());
+            System.out.println("CLP: " + clp);
+            ChannelListingPojo channelListingPojo =
+                    channelListingService.getByClientIdChanneIdGlobalSkuId(clp);
+            System.out.println("CLP2: " + channelListingPojo);
+            orderItemXmlForms.add(OrderItemDtoHelper.convertToForm(p, productPojo.getName(),
+                    productPojo.getClientSkuId(), channelListingPojo.getChannelSkuId()));
         }
         return orderItemXmlForms;
     }
 
     public byte[] getPdf(Long id) throws ApiException {
         orderService.getPdf(id);
+        OrderPojo orderPojo = orderService.get(id);
         if (getInvoiceType(id).equals(InvoiceEnum.SELF))
             return PdfGenerationHelper.getPdf(id, pdfFolder);
         else
-            return channelClient.downloadOrder(id);
+            return channelClient.downloadOrder(orderPojo.getChannelOrderId());
     }
 
     public List<OrderData> getAllForChannel() throws ApiException {
         List<OrderPojo> orderPojos = orderService.getAllForChannel();
         return OrderDtoHelper.convert(orderPojos);
+    }
+
+    public void addForChannel(OrderForm orderForm) throws ApiException {
+        OrderPojo orderPojo = OrderDtoHelper.convert(orderForm);
+        orderService.add(orderPojo);
+
+        OrderPojo orderPojo2 = orderService.getByChannelOrderId(orderPojo.getChannelOrderId());
+        if (orderPojo2 == null)
+            throw new ApiException("Error creating order!!");
+        for (OrderItemForm orderItemForm : orderForm.getOrderItemForms()) {
+            ChannelListingPojo chp = new ChannelListingPojo(orderPojo2.getClientId(),
+                    orderPojo2.getChannelId(), orderItemForm.getChannelSkuId());
+            ChannelListingPojo chp2 = channelListingService.getByClientIdChanneIdChannelSkuId(chp);
+            OrderItemPojo orderItemPojo = OrderItemDtoHelper.convert(orderItemForm,
+                    chp2.getGlobalSkuId(), orderPojo2.getId());
+            orderService.addOrderItem(orderItemPojo);
+        }
     }
 
     // public void update(Long id, OrderForm f) throws ApiException {

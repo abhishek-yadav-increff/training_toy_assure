@@ -77,7 +77,7 @@
                             <fo:table-column column-width="4cm" />
                             <fo:table-column column-width="3cm" />
                             <fo:table-column column-width="3cm" />
-                            <fo:table-column column-width="3cm" />
+                            <fo:table-column column-width="4cm" />
                             <fo:table-column column-width="4cm" />
                             <fo:table-header>
                                 <fo:table-cell xsl:use-attribute-sets="tableBorder">

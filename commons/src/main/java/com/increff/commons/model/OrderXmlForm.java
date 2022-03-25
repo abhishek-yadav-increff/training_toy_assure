@@ -4,27 +4,26 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * OrderXmlForm
  */
 @XmlRootElement
 public class OrderXmlForm {
-
-    private Long id;
-    private Long clientId;
-    private Long customerId;
-    private Long channelId;
+    private Long Id;
+    private String clientName;
+    private String customerName;
+    private String channelName;
     private String channelOrderId;
     private String total;
     private String date;
     private List<OrderItemXmlForm> items;
 
-    public OrderXmlForm(OrderData p) {
-        this.id = p.getId();
-        this.clientId = p.getClientId();
-        this.customerId = p.getCustomerId();
-        this.channelId = p.getChannelId();
+    public OrderXmlForm(OrderData p, String clientName, String customerName, String channelName) {
+        this.clientName = clientName;
+        this.customerName = customerName;
+        this.channelName = channelName;
         this.channelOrderId = p.getChannelOrderId();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         this.date = simpleDateFormat.format(new java.util.Date());
@@ -32,40 +31,38 @@ public class OrderXmlForm {
 
     public OrderXmlForm() {}
 
-    @XmlElement
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @XmlElement
-    public Long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    @Override
+    public String toString() {
+        return "OrderXmlForm [channelName=" + channelName + ", channelOrderId=" + channelOrderId
+                + ", clientName=" + clientName + ", customerName=" + customerName + ", date=" + date
+                + ", items=" + items + ", total=" + total + "]";
     }
 
     @XmlElement
-    public Long getCustomerId() {
-        return customerId;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     @XmlElement
-    public Long getChannelId() {
-        return channelId;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setChannelId(Long channelId) {
-        this.channelId = channelId;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    @XmlElement
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 
     @XmlElement
@@ -87,6 +84,15 @@ public class OrderXmlForm {
     }
 
     @XmlElement
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @XmlElement
     public List<OrderItemXmlForm> getItems() {
         return items;
     }
@@ -95,20 +101,14 @@ public class OrderXmlForm {
         this.items = items;
     }
 
-    @XmlElement
-    public String getdate() {
-        return date;
+    @XmlTransient
+    public Long getId() {
+        return Id;
     }
 
-    public void setdate(String date) {
-        this.date = date;
+    public void setId(Long id) {
+        Id = id;
     }
 
-    @Override
-    public String toString() {
-        return "OrderXmlForm [channelId=" + channelId + ", channelOrderId=" + channelOrderId
-                + ", clientId=" + clientId + ", customerId=" + customerId + ", date=" + date
-                + ", id=" + id + ", items=" + items + ", total=" + total + "]";
-    }
 
 }

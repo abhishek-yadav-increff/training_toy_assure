@@ -12,7 +12,6 @@ import com.increff.assure.service.ProductService;
 import com.increff.commons.model.ApiException;
 import com.increff.commons.model.OrderItemData;
 import com.increff.commons.model.OrderItemForm;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

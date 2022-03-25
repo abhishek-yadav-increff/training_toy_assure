@@ -2,7 +2,6 @@ package com.increff.assure.controller;
 
 import java.util.List;
 import com.increff.assure.dto.OrderDto;
-import com.increff.assure.service.OrderService;
 import com.increff.commons.model.ApiException;
 import com.increff.commons.model.OrderData;
 import com.increff.commons.model.OrderForm;
@@ -28,6 +27,12 @@ public class OrderController {
     @RequestMapping(path = "/api/order", method = RequestMethod.POST)
     public void add(@RequestBody OrderForm form) throws ApiException {
         orderDto.add(form);
+    }
+
+    @ApiOperation(value = "Adds a Order")
+    @RequestMapping(path = "/api/order/channel", method = RequestMethod.POST)
+    public void addForChannel(@RequestBody OrderForm form) throws ApiException {
+        orderDto.addForChannel(form);
     }
 
 
@@ -65,7 +70,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "Gets list of all Orders")
-    @RequestMapping(path = "/api/order/all", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/order/channel", method = RequestMethod.GET)
     public List<OrderData> getAllForChannel() throws ApiException {
         return orderDto.getAllForChannel();
     }

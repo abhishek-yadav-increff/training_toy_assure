@@ -11,6 +11,7 @@ import lombok.Setter;
 public class OrderItemForm {
 
     private String clientSkuId;
+    private String channelSkuId;
     private Long orderedQuantity;
     private Double sellingPricePerUnit;
 

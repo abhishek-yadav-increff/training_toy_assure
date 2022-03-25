@@ -77,7 +77,7 @@ public class OrderItemService {
     public Boolean allocate(Long id) throws ApiException {
         Boolean isAllocated = true;
         List<OrderItemPojo> orderItemPojos = getByOrderId(id);
-        System.out.println("Will allocate following: " + orderItemPojos);
+        // System.out.println("Will allocate following: " + orderItemPojos);
         if (orderItemPojos.size() == 0)
             throw new ApiException("Can not allocate empty order!!");
         for (OrderItemPojo p : orderItemPojos) {
@@ -96,38 +96,38 @@ public class OrderItemService {
 
             // remove from binskus
             // remove from inventory called from binskuservice
-            System.out.println("Before binsku, inventory quantity reduced: " + b);
+            // System.out.println("Before binsku, inventory quantity reduced: " + b);
             b.setQuantity(b.getQuantity() - reduceQuantity);
             binSkuService.update(b.getId(), b);
-            System.out.println("After binsku quantity reduced: " + b);
+            // System.out.println("After binsku quantity reduced: " + b);
 
 
             // remove from order item
-            System.out.println("Before orderitempojo quantity reduced: " + p);
+            // System.out.println("Before orderitempojo quantity reduced: " + p);
             p.setOrderedQuantity(p.getOrderedQuantity() - reduceQuantity);
             dao.update(p);
-            System.out.println("After orderitempojo quantity reduced: " + p);
+            // System.out.println("After orderitempojo quantity reduced: " + p);
 
             // allocate in inventory
             InventoryPojo inventoryPojo = inventoryService.getByGlobalSkuId(p.getGlobalSkuId());
-            System.out.println("Before inventory quantity allocation: " + inventoryPojo);
+            // System.out.println("Before inventory quantity allocation: " + inventoryPojo);
             inventoryPojo
                     .setAllocatedQuantity(inventoryPojo.getAllocatedQuantity() + reduceQuantity);
             inventoryService.update(inventoryPojo.getId(), inventoryPojo);
-            System.out.println("After inventory quantity allocation: " + inventoryPojo);
+            // System.out.println("After inventory quantity allocation: " + inventoryPojo);
 
             // allocate in order item p
-            System.out.println("Before orderitempojo quantity allocation: " + p);
+            // System.out.println("Before orderitempojo quantity allocation: " + p);
             p.setAllocatedQuantity(p.getAllocatedQuantity() + reduceQuantity);
             dao.update(p);
-            System.out.println("After orderitempojo quantity allocation: " + p);
+            // System.out.println("After orderitempojo quantity allocation: " + p);
         }
     }
 
     @Transactional(rollbackFor = ApiException.class)
     public void generateInvoice(Long id) throws ApiException {
         List<OrderItemPojo> orderItemPojos = getByOrderId(id);
-        System.out.println("Will generate following: " + orderItemPojos);
+        // System.out.println("Will generate following: " + orderItemPojos);
         if (orderItemPojos.size() == 0)
             throw new ApiException("Can not generate empty order!!");
         for (OrderItemPojo p : orderItemPojos) {
@@ -141,28 +141,28 @@ public class OrderItemService {
 
         InventoryPojo inventoryPojo = inventoryService.getByGlobalSkuId(p.getGlobalSkuId());
         // reduce allocation from inventory
-        System.out.println("Before inventory quantity fulfillment reduce: " + inventoryPojo);
+        // System.out.println("Before inventory quantity fulfillment reduce: " + inventoryPojo);
         inventoryPojo.setAllocatedQuantity(inventoryPojo.getAllocatedQuantity() - reduceQuantity);
         inventoryService.update(inventoryPojo.getId(), inventoryPojo);
-        System.out.println("After inventory quantity fulfillment reduce: " + inventoryPojo);
+        // System.out.println("After inventory quantity fulfillment reduce: " + inventoryPojo);
 
         // reduce allocation in order line item
-        System.out.println("Before orderitempojo quantity fulfillment reduce: " + p);
+        // System.out.println("Before orderitempojo quantity fulfillment reduce: " + p);
         p.setAllocatedQuantity(p.getAllocatedQuantity() - reduceQuantity);
         dao.update(p);
-        System.out.println("After orderitempojo quantity fulfillment reduce: " + p);
+        // System.out.println("After orderitempojo quantity fulfillment reduce: " + p);
 
         // increase fulfillment in inventory
-        System.out.println("Before inventory quantity fulfillment: " + inventoryPojo);
+        // System.out.println("Before inventory quantity fulfillment: " + inventoryPojo);
         inventoryPojo.setFulfilledQuantity(inventoryPojo.getFulfilledQuantity() + reduceQuantity);
         inventoryService.update(inventoryPojo.getId(), inventoryPojo);
-        System.out.println("After inventory quantity fulfillment: " + inventoryPojo);
+        // System.out.println("After inventory quantity fulfillment: " + inventoryPojo);
 
         // increase fulfillment in order line item
-        System.out.println("Before orderitempojo quantity fulfillment: " + p);
+        // System.out.println("Before orderitempojo quantity fulfillment: " + p);
         p.setFulfilledQuantity(p.getFulfilledQuantity() + reduceQuantity);
         dao.update(p);
-        System.out.println("After orderitempojo quantity fulfillment: " + p);
+        // System.out.println("After orderitempojo quantity fulfillment: " + p);
 
     }
 }

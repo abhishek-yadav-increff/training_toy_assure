@@ -3,15 +3,13 @@ package com.increff.assure.service;
 import java.util.ArrayList;
 import java.util.List;
 import com.increff.assure.dao.OrderDao;
-import com.increff.assure.enums.InvoiceEnum;
-import com.increff.assure.enums.OrderEnum;
+import com.increff.commons.enums.InvoiceEnum;
+import com.increff.commons.enums.OrderEnum;
 import com.increff.assure.pojo.ChannelPojo;
 import com.increff.assure.pojo.OrderItemPojo;
 import com.increff.assure.pojo.OrderPojo;
 import com.increff.commons.model.ApiException;
-import com.increff.commons.model.OrderItemData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,10 +84,10 @@ public class OrderService {
     public void allocate(Long id) throws ApiException {
         if (get(id).getStatus() != OrderEnum.CREATED)
             throw new ApiException("Order only with status created can be allocated!!");
-        System.out.println("Before allocating: " + id);
+        // System.out.println("Before allocating: " + id);
         Boolean isAllocated = orderItemService.allocate(id);
-        System.out.println("After allocating: " + id);
-        System.out.println("Complete allocation: " + isAllocated);
+        // System.out.println("After allocating: " + id);
+        // System.out.println("Complete allocation: " + isAllocated);
         if (isAllocated)
             update(id, OrderEnum.ALLOCATED);
     }

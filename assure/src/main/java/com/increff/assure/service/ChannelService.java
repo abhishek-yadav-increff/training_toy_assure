@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.increff.assure.dao.ChannelDao;
 import com.increff.assure.dto.helper.CommonsHelper;
+import com.increff.commons.enums.InvoiceEnum;
 import com.increff.assure.pojo.ChannelPojo;
 import com.increff.commons.model.ApiException;
 import org.apache.log4j.Logger;
@@ -92,5 +93,13 @@ public class ChannelService {
             return channelPojos;
         }
 
+    }
+
+    public List<ChannelPojo> getByQueryForChannel(String normalize) throws ApiException {
+        List<ChannelPojo> channelPojos = getByQuery(normalize);
+        List<ChannelPojo> channelPojos2 =
+                channelPojos.stream().filter(c -> c.getInvoiceType().equals(InvoiceEnum.CHANNEL))
+                        .collect(Collectors.toList());
+        return channelPojos2;
     }
 }

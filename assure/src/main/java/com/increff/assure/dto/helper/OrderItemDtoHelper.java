@@ -36,9 +36,12 @@ public class OrderItemDtoHelper {
         return orderItemData;
     }
 
-    public static OrderItemXmlForm convertToForm(OrderItemPojo orderItemPojo) {
+    public static OrderItemXmlForm convertToForm(OrderItemPojo orderItemPojo, String name,
+            String clientSkuId, String channelSkuId) {
         OrderItemXmlForm orderItemXmlForm = new OrderItemXmlForm();
-        orderItemXmlForm.setGlobalSkuId(orderItemPojo.getGlobalSkuId());
+        orderItemXmlForm.setName(name);
+        orderItemXmlForm.setChannelSkuId(channelSkuId);
+        orderItemXmlForm.setClientSkuId(clientSkuId);;
         orderItemXmlForm.setFulfilledQuantity(orderItemPojo.getFulfilledQuantity());
         orderItemXmlForm.setSellingPricePerUnit(
                 CommonsHelper.doubleToString(orderItemPojo.getSellingPricePerUnit()));

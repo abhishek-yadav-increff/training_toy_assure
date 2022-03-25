@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <orderXmlForm>
-    <channelId>10002</channelId>
-    <channelOrderId>asdsad22</channelOrderId>
-    <clientId>10001</clientId>
-    <customerId>10002</customerId>
-    <id>10004</id>
+    <channelName>ab</channelName>
+    <channelOrderId>dev</channelOrderId>
+    <clientName>ab</clientName>
+    <customerName>cd</customerName>
+    <date>26/03/2022 01:00</date>
     <items>
+        <channelSkuId>channelskuid1</channelSkuId>
+        <clientSkuId>client1</clientSkuId>
         <fulfilledQuantity>1</fulfilledQuantity>
-        <globalSkuId>10001</globalSkuId>
+        <name>name1</name>
         <sellingPricePerUnit>1.00</sellingPricePerUnit>
         <totalSellingPrice>1.00</totalSellingPrice>
     </items>
     <items>
+        <channelSkuId>channelskuid2</channelSkuId>
+        <clientSkuId>client2</clientSkuId>
         <fulfilledQuantity>2</fulfilledQuantity>
-        <globalSkuId>10002</globalSkuId>
+        <name>name2</name>
         <sellingPricePerUnit>2.00</sellingPricePerUnit>
         <totalSellingPrice>4.00</totalSellingPrice>
     </items>
     <total>5.00</total>
-    <date>24/03/2022 09:44</date>
 </orderXmlForm>

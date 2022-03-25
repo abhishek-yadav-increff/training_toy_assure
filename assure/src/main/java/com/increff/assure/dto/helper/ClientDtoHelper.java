@@ -2,7 +2,7 @@ package com.increff.assure.dto.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.increff.assure.enums.UserEnum;
+import com.increff.commons.enums.UserEnum;
 import com.increff.assure.model.ClientData;
 import com.increff.assure.model.ClientForm;
 import com.increff.assure.pojo.ClientPojo;

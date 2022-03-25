@@ -1,4 +1,4 @@
-package com.increff.assure.enums;
+package com.increff.commons.enums;
 
 import java.util.HashMap;
 import java.util.Map;
