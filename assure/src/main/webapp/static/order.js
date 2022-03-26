@@ -17,7 +17,9 @@ function uploadOrder(event) {
     processData();
     return false;
 }
-
+function downloadErrors() {
+    writeFileData(errorData, "order_error.tsv");
+}
 // FILE HANDLING CODE
 function processData() {
     var file = $('#orderFile')[0].files[0];
@@ -121,8 +123,8 @@ function uploadRows() {
             // uploadRows();
         },
         error: function (response) {
+            errorData = handleAjaxError(response);
             document.getElementById("download-error-order").disabled = false;
-            handleAjaxError(response);
         }
     });
 
@@ -269,12 +271,16 @@ function init() {
 
     $('#order-form').submit(uploadOrder);
     $('#refresh-order-data').click(refreshOrderList);
+    $('#download-error-order').click(downloadErrors);
 
     document.getElementById('orderFile').addEventListener('input', function (evt) {
         var file = $('#orderFile')[0].files[0];
-        if (file.name != null) {
+        if (file.name != null)
             document.getElementById("add-order").disabled = false;
-        }
+        else
+            document.getElementById("add-order").disabled = true;
+
+
     });
 }
 $(document).ready(init);

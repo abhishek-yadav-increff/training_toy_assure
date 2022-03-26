@@ -12,10 +12,13 @@ function resetOnSuccess() {
     errorData = [];
     //Reset various counts
     //Update counts	
-    updateUploadDialog();
+    // updateUploadDialog();
+    document.getElementById("download-error-bin").disabled = true;
     document.getElementById("add-bin-sku").disabled = true;
 }
-
+function downloadErrors() {
+    writeFileData(errorData, "binsku_error.tsv");
+}
 // DISPLAY CODE
 function displayBinSkuList(data) {
     var $tbody = $('#bin-sku-table').find('tbody');
@@ -67,6 +70,7 @@ function getBinSkuList() {
     });
 }
 function addBinSku() {
+    document.getElementById("download-error-bin").disabled = true;
     var clientId = document.getElementById("inputClientId").value;
     processData(clientId);
     return false;
@@ -169,7 +173,12 @@ function uploadRows(clientId) {
             resetOnSuccess();
             toast(true, "BinSku were succesfully added!!");
         },
-        error: handleAjaxError
+        error: function (response) {
+            errorData = handleAjaxError(response);
+            console.log(errorData);
+            document.getElementById("download-error-bin").disabled = false;
+
+        }
     });
 
 }
@@ -202,17 +211,20 @@ function init() {
     $('#bin-add-form').submit(addBins);
     $('#refresh-bin-sku-data').click(resetOnSuccess);
     $('#bin-sku-form').submit(addBinSku);
+    $('#download-error-bin').click(downloadErrors);
 
     // $('#process-data').click(processData);
     // $('#download-errors').click(downloadErrors);
     // $('#productFile').on('change', updateFileName);
 
 
-    document.getElementById('binSkuFile').addEventListener('input', function (evt) {
+    document.getElementById('binSkuFile').addEventListener('change', function (evt) {
         var file = $('#binSkuFile')[0].files[0];
-        if (file.name != null) {
+        if (file.name != null)
             document.getElementById("add-bin-sku").disabled = false;
-        }
+        else
+            document.getElementById("add-bin-sku").disabled = true;
+
     });
 }
 

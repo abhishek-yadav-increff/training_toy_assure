@@ -20,7 +20,9 @@ import com.increff.assure.service.OrderItemService;
 import com.increff.assure.service.OrderService;
 import com.increff.assure.service.ProductService;
 import com.increff.commons.model.ApiException;
+import com.increff.commons.model.ErrorData;
 import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderDataChannel;
 import com.increff.commons.model.OrderForm;
 import com.increff.commons.model.OrderItemForm;
 import com.increff.commons.model.OrderItemXmlForm;
@@ -62,22 +64,54 @@ public class OrderDto {
 
         OrderPojo orderPojo = OrderDtoHelper.convert(orderForm);
         orderService.add(orderPojo);
-
         OrderPojo orderPojo2 = orderService.getByChannelOrderId(orderPojo.getChannelOrderId());
-        if (orderPojo2 == null)
-            throw new ApiException("Error creating order!!");
+
+        validateOrderItems(orderForm.getOrderItemForms(), orderPojo2);
         for (OrderItemForm orderItemForm : orderForm.getOrderItemForms()) {
             ProductPojo productPojo =
                     productService.getClientIdClientSkuId(orderPojo2.getClientId(),
                             CommonsHelper.normalize(orderItemForm.getClientSkuId()));
-            Long globalSkuId = null;
-            if (productPojo != null)
-                globalSkuId = productPojo.getGlobalSkuId();
+            Long globalSkuId = productPojo.getGlobalSkuId();
             OrderItemPojo orderItemPojo =
                     OrderItemDtoHelper.convert(orderItemForm, globalSkuId, orderPojo2.getId());
             orderService.addOrderItem(orderItemPojo);
         }
     }
+
+    private void validateOrderItems(List<OrderItemForm> orderItemForms, OrderPojo p)
+            throws ApiException {
+        List<ErrorData> errorDatas = new ArrayList<>();
+        Long row = 1L;
+        for (OrderItemForm oif : orderItemForms) {
+            try {
+                validateOrderItem(oif, p);
+            } catch (Exception e) {
+                errorDatas.add(new ErrorData("error", e.getMessage(), row));
+            }
+            row += 1;
+        }
+        if (!errorDatas.isEmpty())
+            throw new ApiException("Failed validating Order Items!!", errorDatas);
+    }
+
+    private void validateOrderItem(OrderItemForm oif, OrderPojo p) throws ApiException {
+        if (oif.getOrderedQuantity() == null)
+            throw new ApiException("Ordered Quantity cant not be empty!!");
+        if (oif.getOrderedQuantity() <= 0)
+            throw new ApiException("Ordered Quantity must be postive!!");
+        if (oif.getSellingPricePerUnit() == null)
+            throw new ApiException("Selling Price Per Unit cant not be empty!!");
+        if (oif.getSellingPricePerUnit() <= 0)
+            throw new ApiException("Selling Price Per Unit must be postive!!");
+        if (oif.getClientSkuId() == null)
+            throw new ApiException("Client Sku ID Per Unit cant not be empty!!");
+        ProductPojo productPojo = productService.getClientIdClientSkuId(p.getClientId(),
+                CommonsHelper.normalize(oif.getClientSkuId()));
+        if (productPojo == null)
+            throw new ApiException(
+                    "Product with Client ID, Client SKU ID combination doesn't exist!!");
+    }
+
 
     public OrderData get(Long id) throws ApiException {
         OrderPojo orderPojo = orderService.get(id);
@@ -157,9 +191,16 @@ public class OrderDto {
             return channelClient.downloadOrder(orderPojo.getChannelOrderId());
     }
 
-    public List<OrderData> getAllForChannel() throws ApiException {
+    public List<OrderDataChannel> getAllForChannel() throws ApiException {
         List<OrderPojo> orderPojos = orderService.getAllForChannel();
-        return OrderDtoHelper.convert(orderPojos);
+        List<OrderDataChannel> odc = new ArrayList<>();
+        for (OrderPojo p : orderPojos) {
+            String channelName = channelService.get(p.getChannelId()).getName();
+            String clientName = clientService.get(p.getClientId()).getName();
+            String customerName = clientService.get(p.getCustomerId()).getName();
+            odc.add(OrderDtoHelper.convertForChannel(p, clientName, customerName, channelName));
+        }
+        return odc;
     }
 
     public void addForChannel(OrderForm orderForm) throws ApiException {

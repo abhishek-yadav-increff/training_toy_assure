@@ -24,21 +24,7 @@ public class OrderItemService {
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(OrderItemPojo p) throws ApiException {
-        validateAdd(p);
         dao.insert(p);
-    }
-
-    private void validateAdd(OrderItemPojo p) throws ApiException {
-        if (p.getOrderId() == null)
-            throw new ApiException("Order ID not found!!");
-        if (p.getGlobalSkuId() == null)
-            throw new ApiException("Product not found!!");
-        if (p.getOrderedQuantity() == null)
-            throw new ApiException("Ordered Quantity can not be empty!!");
-        else if (p.getOrderedQuantity() <= 0)
-            throw new ApiException("Ordered Quantity must be postive!!");
-        if (p.getSellingPricePerUnit() == null)
-            throw new ApiException("Selling Price Per Unit can not be empty!!");
     }
 
     @Transactional(readOnly = true)

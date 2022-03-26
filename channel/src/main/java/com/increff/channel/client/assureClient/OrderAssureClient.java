@@ -3,6 +3,7 @@ package com.increff.channel.client.assureClient;
 import java.util.Arrays;
 import java.util.List;
 import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderDataChannel;
 import com.increff.commons.model.OrderForm;
 import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,11 @@ public class OrderAssureClient {
         return response.getBody();
     }
 
-    public List<OrderData> getOrders() throws ApiException {
-        ResponseEntity<OrderData[]> response = restTemplate
-                .getForEntity("http://localhost:9000/assure/api/order/channel", OrderData[].class);
-        List<OrderData> orderDatas = Arrays.asList(response.getBody());
+    public List<OrderDataChannel> getOrders() throws ApiException {
+        ResponseEntity<OrderDataChannel[]> response = restTemplate.getForEntity(
+                "http://localhost:9000/assure/api/order/channel", OrderDataChannel[].class);
+        List<OrderDataChannel> orderDatas = Arrays.asList(response.getBody());
+        System.out.print(orderDatas);
         return orderDatas;
     }
 

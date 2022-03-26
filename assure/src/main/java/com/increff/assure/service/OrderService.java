@@ -43,6 +43,7 @@ public class OrderService {
             throw new ApiException("Channel ID can not be empty!!");
         if (getByChannelOrderId(p.getChannelOrderId()) != null)
             throw new ApiException("Channel Order ID already exists!!");
+
     }
 
     @Transactional(readOnly = true)

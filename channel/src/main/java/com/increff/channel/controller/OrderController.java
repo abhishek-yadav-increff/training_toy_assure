@@ -3,6 +3,7 @@ package com.increff.channel.controller;
 import java.util.List;
 import com.increff.channel.dto.OrderDto;
 import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderDataChannel;
 import com.increff.commons.model.OrderForm;
 import com.increff.commons.model.OrderXmlForm;
 import com.increff.commons.model.ApiException;
@@ -46,7 +47,7 @@ public class OrderController {
 
     @ApiOperation(value = "Gets list of all Orders")
     @RequestMapping(path = "/api/order", method = RequestMethod.GET)
-    public List<OrderData> getAll() throws ApiException {
+    public List<OrderDataChannel> getAll() throws ApiException {
         return orderDto.getAll();
     }
 

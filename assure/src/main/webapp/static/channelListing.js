@@ -1,5 +1,6 @@
 // Utility
 function refreshChannelListingList() {
+    document.getElementById("download-error-listing").disabled = true;
     getChannelListingList();
     toast(true, "Refreshed!");
     resetInputChannelListing();
@@ -13,10 +14,15 @@ function resetInputChannelListing() {
 }
 function addChannelListing(event) {
     //Set the values to update
+    document.getElementById("download-error-listing").disabled = true;
+
     var clientId = document.getElementById("inputClientId").value;
     var channelId = document.getElementById("inputChannelId").value;
     processData(clientId, channelId);
     return false;
+}
+function downloadErrors() {
+    writeFileData(errorData, "channel_listing_error.tsv");
 }
 //VALIDATION
 
@@ -120,8 +126,8 @@ function uploadRows(clientId, channelId) {
             // uploadRows();
         },
         error: function (response) {
-            var response = JSON.parse(response.responseText);
-            console.log(response);
+            errorData = handleAjaxError(response);
+            document.getElementById("download-error-listing").disabled = false;
             toast(false, 'No data was added!');
         }
     });
@@ -138,10 +144,6 @@ function readFileDataChannelListing(file, callback, clientId, channelId) {
         }
     }
     Papa.parse(file, config);
-}
-
-function downloadErrors() {
-    writeFileData(errorData, "channel_listing_error.tsv");
 }
 
 
@@ -162,13 +164,14 @@ function displayChannelListingList(data) {
     $tbody.empty();
     data.sort(function (a, b) { return a.id - b.id; });
     data.reverse();
+    var index = 1;
     for (var i in data) {
         var e = data[i];
 
         var buttonHtml = ' <button type="button" class="btn btn-secondary btn-sm" onclick="displayEditChannelListing(' + e.id + ')">Edit</button>'
 
         var row = '<tr>'
-            + '<td>' + e.id + '</td>'
+            + '<td>' + index++ + '</td>'
             + '<td>' + e.channelId + '</td>'
             + '<td>' + e.channelSkuId + '</td>'
             + '<td>' + e.clientId + '</td>'
@@ -269,12 +272,15 @@ function init() {
     $('#channel-listing-form').submit(addChannelListing);
     $('#channel-listing-edit-form').submit(updateChannelListing);
     $('#refresh-channel-listing-data').click(refreshChannelListingList);
+    $('#download-error-listing').click(downloadErrors);
 
-    document.getElementById('channelListingFile').addEventListener('input', function (evt) {
+
+    document.getElementById('channelListingFile').addEventListener('change', function (evt) {
         var file = $('#channelListingFile')[0].files[0];
-        if (file.name != null) {
+        if (file.name != null)
             document.getElementById("add-channel-listing").disabled = false;
-        }
+        else
+            document.getElementById("add-channel-listing").disabled = true;
     });
 }
 

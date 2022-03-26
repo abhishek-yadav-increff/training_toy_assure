@@ -1,10 +1,12 @@
 package com.increff.assure.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.increff.assure.dao.BinSkuDao;
 import com.increff.assure.pojo.BinSkuPojo;
 import com.increff.assure.pojo.InventoryPojo;
 import com.increff.commons.model.ApiException;
+import com.increff.commons.model.ErrorData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,10 +27,8 @@ public class BinSkuService {
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(List<BinSkuPojo> ps) throws ApiException {
-        System.out.println(ps);
-        Long rowCount = 1L;
+        validateAdd(ps);
         for (BinSkuPojo p : ps) {
-            validateAdd(p, rowCount);
             BinSkuPojo binSkuPojo = getByGlobalSkuIdBinId(p.getGlobalSkuId(), p.getBinId());
             if (binSkuPojo != null) {
                 InventoryPojo inventoryPojo = inventoryService.getByGlobalSkuId(p.getGlobalSkuId());
@@ -37,7 +37,6 @@ public class BinSkuService {
                 inventoryService.update(inventoryPojo.getId(), inventoryPojo);
                 binSkuPojo.setQuantity(p.getQuantity());
                 dao.update(p);
-                System.out.println("Updating " + binSkuPojo + inventoryPojo);
             } else {
                 InventoryPojo inventoryPojo =
                         new InventoryPojo(p.getGlobalSkuId(), p.getQuantity());
@@ -47,15 +46,30 @@ public class BinSkuService {
         }
     }
 
+    private void validateAdd(List<BinSkuPojo> ps) throws ApiException {
+        List<ErrorData> errorDatas = new ArrayList<>();
+        Long rowCount = 1L;
+        for (BinSkuPojo p : ps) {
+            try {
+                validateAdd(p, rowCount);
+            } catch (ApiException e) {
+                ErrorData err = new ErrorData("Error", e.getMessage(), rowCount);
+                errorDatas.add(err);
+            }
+        }
+        if (!errorDatas.isEmpty())
+            throw new ApiException("Couldn't create/update Bin Skus", errorDatas);
+    }
+
     private void validateAdd(BinSkuPojo p, Long rowCount) throws ApiException {
         if (p.getGlobalSkuId() == null)
-            throw new ApiException("Row: " + rowCount + ", Product doesn't exist!!");
+            throw new ApiException("Product doesn't exist!!");
         productService.get(p.getGlobalSkuId());
         binService.get(p.getBinId());
         if (p.getQuantity() == null)
-            throw new ApiException("Row: " + rowCount + ",Quantity can not be empty!!");
+            throw new ApiException("Quantity can not be empty!!");
         if (p.getQuantity() < 0)
-            throw new ApiException("Row: " + rowCount + ",Quantity can not be negative!!");
+            throw new ApiException("Quantity can not be negative!!");
     }
 
     @Transactional(readOnly = true)

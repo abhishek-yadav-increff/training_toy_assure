@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.increff.assure.pojo.OrderPojo;
+import com.increff.commons.model.ApiException;
+import com.increff.commons.model.ErrorData;
 import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderDataChannel;
 import com.increff.commons.model.OrderForm;
+import com.increff.commons.model.OrderItemForm;
 import com.increff.commons.model.OrderItemXmlForm;
 import com.increff.commons.model.OrderXmlForm;
 
@@ -43,6 +47,13 @@ public class OrderDtoHelper {
         if (orderForm.getChannelOrderId() != null && !orderForm.getChannelOrderId().isEmpty())
             orderPojo.setChannelOrderId(CommonsHelper.normalize(orderForm.getChannelOrderId()));
         return orderPojo;
+    }
+
+    public static OrderDataChannel convertForChannel(OrderPojo orderPojo, String clientName,
+            String customerName, String channelName) {
+        OrderDataChannel orderDataChannel =
+                new OrderDataChannel(convert(orderPojo), clientName, customerName, channelName);
+        return orderDataChannel;
     }
 
     public static OrderXmlForm convert(OrderPojo p, List<OrderItemXmlForm> orderItemXmlForms,

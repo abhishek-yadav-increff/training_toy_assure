@@ -4,6 +4,7 @@ import java.util.List;
 import com.increff.assure.dto.OrderDto;
 import com.increff.commons.model.ApiException;
 import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderDataChannel;
 import com.increff.commons.model.OrderForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,7 +72,7 @@ public class OrderController {
 
     @ApiOperation(value = "Gets list of all Orders")
     @RequestMapping(path = "/api/order/channel", method = RequestMethod.GET)
-    public List<OrderData> getAllForChannel() throws ApiException {
+    public List<OrderDataChannel> getAllForChannel() throws ApiException {
         return orderDto.getAllForChannel();
     }
 

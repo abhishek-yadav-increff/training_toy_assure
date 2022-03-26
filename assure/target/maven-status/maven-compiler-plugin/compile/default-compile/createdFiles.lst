@@ -28,8 +28,10 @@ com/increff/assure/dao/ChannelDao.class
 com/increff/assure/dto/helper/ProductDtoHelper.class
 com/increff/assure/client/ChannelClient.class
 com/increff/assure/spring/DbConfig.class
+com/increff/assure/model/ChannelListingForm.class
 com/increff/assure/model/BinSkuData.class
 com/increff/assure/service/OrderService.class
+com/increff/assure/model/ChannelListingData.class
 com/increff/assure/dao/BinSkuDao.class
 com/increff/assure/model/ProductForm.class
 com/increff/assure/dao/InventoryDao.class

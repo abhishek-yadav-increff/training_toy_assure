@@ -5,6 +5,10 @@ function refreshOrderList() {
     document.getElementById("download-error-order").disabled = true;
 
 }
+function downloadErrors() {
+    writeFileData(errorData, "order_error.tsv");
+}
+
 function resetOrderInput() {
     document.getElementById("order-form").reset();
     $("#inputClientId").empty().trigger('change');
@@ -47,38 +51,6 @@ function readFileDataCallback(results) {
     uploadRows();
 }
 // API CODE
-function allocate(orderId) {
-    var url = getOrderUrl() + "/allocate/" + orderId;
-    $.ajax({
-        url: url,
-        type: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (response) {
-            getOrderList();
-            resetOrderInput();
-            toast(true, "Order was succesfully allocated!!");
-        },
-        error: handleAjaxError
-    });
-}
-function generateInvoice(orderId) {
-    var url = getOrderUrl() + "/generateinvoice/" + orderId;
-    $.ajax({
-        url: url,
-        type: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (response) {
-            getOrderList();
-            resetOrderInput();
-            toast(true, "Order was succesfully allocated!!");
-        },
-        error: handleAjaxError
-    });
-}
 
 function uploadRows() {
     //Update progress
@@ -121,8 +93,8 @@ function uploadRows() {
             // uploadRows();
         },
         error: function (response) {
+            errorData = handleAjaxError(response);
             document.getElementById("download-error-order").disabled = false;
-            handleAjaxError(response);
         }
     });
 
@@ -160,9 +132,9 @@ function displayOrderList(data) {
         var row = '<tr>'
             // + '<td><a href="http://localhost:9001/channel/ui/orderpreview/' + e.id + '">' + e.id + '</a></td>'
             + '<td>' + index++ + '</a></td>'
-            + '<td>' + e.clientId + '</td>'
-            + '<td>' + e.customerId + '</td>'
-            + '<td>' + e.channelId + '</td>'
+            + '<td>' + e.clientName + '</td>'
+            + '<td>' + e.customerName + '</td>'
+            + '<td>' + e.channelName + '</td>'
             + '<td>' + e.channelOrderId + '</td>'
             + '<td>' + e.status + '</td>'
             + '<td>' + buttonHtml + '</td>'
@@ -241,12 +213,16 @@ function init() {
 
     $('#order-form').submit(uploadOrder);
     $('#refresh-order-data').click(refreshOrderList);
+    $('#download-error-order').click(downloadErrors);
 
     document.getElementById('orderFile').addEventListener('input', function (evt) {
         var file = $('#orderFile')[0].files[0];
-        if (file.name != null) {
+        if (file.name != null)
             document.getElementById("add-order").disabled = false;
-        }
+        else
+            document.getElementById("add-order").disabled = true;
+
+
     });
 }
 $(document).ready(init);

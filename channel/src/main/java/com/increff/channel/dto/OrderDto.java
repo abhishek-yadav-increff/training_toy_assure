@@ -3,6 +3,7 @@ package com.increff.channel.dto;
 import java.util.List;
 import com.increff.channel.client.assureClient.OrderAssureClient;
 import com.increff.commons.model.OrderData;
+import com.increff.commons.model.OrderDataChannel;
 import com.increff.commons.model.OrderForm;
 import com.increff.commons.model.OrderXmlForm;
 import com.increff.commons.utils.PdfGenerationHelper;
@@ -38,7 +39,7 @@ public class OrderDto {
         return orderAssureClient.getOrder(id);
     }
 
-    public List<OrderData> getAll() throws ApiException {
+    public List<OrderDataChannel> getAll() throws ApiException {
         return orderAssureClient.getOrders();
     }
 
