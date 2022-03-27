@@ -1,1 +1,0 @@
-insert into assure.assure_channel values( 10001, "abhishek", 0);

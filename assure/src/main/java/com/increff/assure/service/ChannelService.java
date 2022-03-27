@@ -21,9 +21,16 @@ public class ChannelService {
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(ChannelPojo p) throws ApiException {
-        if (dao.selectByName(p.getName()) == null)
-            dao.insert(p);
-        else
+        validateAdd(p);
+        dao.insert(p);
+    }
+
+    private void validateAdd(ChannelPojo p) throws ApiException {
+        if (p.getName() == null || p.getName().isEmpty())
+            throw new ApiException("Name can not be empty!!");
+        if (p.getInvoiceType() == null)
+            throw new ApiException("Invalid/empty Invoice Type!!");
+        if (dao.selectByName(p.getName()) != null)
             throw new ApiException("Given name already exists!!");
     }
 

@@ -41,6 +41,8 @@ function displayBinSkuList(data) {
     }
 }
 function displayBin(data) {
+    if (data.smIndex == 10000 || data.smIndex == "10000")
+        document.getElementById("currentBins").innerHTML = "No Available Bins";
     if (data.smIndex == data.bgIndex)
         document.getElementById("currentBins").innerHTML = "Available Bins: [" + data.smIndex + "]";
     else
@@ -103,9 +105,6 @@ function addBins() {
     return false;
 }
 
-function getBinList() {
-
-}
 // FILE HANDLING CODE
 
 function processData(clientId) {

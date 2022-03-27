@@ -3,6 +3,7 @@ package com.increff.assure.dto;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import com.increff.assure.dto.helper.BinDtoHelper;
 import com.increff.assure.model.BinForm;
 import com.increff.assure.model.BinIndexRange;
@@ -32,18 +33,22 @@ public class BinDto {
     }
 
     public BinIndexRange getRange() throws ApiException {
-        List<BinPojo> binPojos = new ArrayList<>();
+        List<BinPojo> binPojos = new ArrayList<BinPojo>();
         binPojos = binService.getAll();
-        Long minIndex = 0L;
-        Long maxIndex = 0L;
+        Long minIndex = 10000L;
+        Long maxIndex = 10000L;
 
         if (binPojos != null) {
-            minIndex = binPojos.stream().min(Comparator.comparingLong(BinPojo::getBinId)).get()
-                    .getBinId();
-            maxIndex = binPojos.stream().max(Comparator.comparingLong(BinPojo::getBinId)).get()
-                    .getBinId();
+            try {
+                minIndex = binPojos.stream().min(Comparator.comparingLong(BinPojo::getBinId)).get()
+                        .getBinId();
+                maxIndex = binPojos.stream().max(Comparator.comparingLong(BinPojo::getBinId)).get()
+                        .getBinId();
+            } catch (NoSuchElementException ex) {
+            }
         }
-        return new BinIndexRange(minIndex, maxIndex);
+        BinIndexRange bir = new BinIndexRange(minIndex, maxIndex);
+        return bir;
     }
 
     // public BinData get(Long id) throws ApiException {

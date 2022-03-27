@@ -16,4 +16,9 @@ public class BinIndexRange {
         this.smIndex = smIndex;
         this.bgIndex = bgIndex;
     }
+
+    @Override
+    public String toString() {
+        return "BinIndexRange [bgIndex=" + bgIndex + ", smIndex=" + smIndex + "]";
+    }
 }

@@ -22,13 +22,17 @@ public class ClientService {
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(ClientPojo p) throws ApiException {
-        if (p.getName() == null) {
+        if (p.getName() == null)
             throw new ApiException("Name can not be empty!!");
-        }
-        if (p.getUserType() == null) {
+        if (p.getUserType() == null)
             throw new ApiException("User Type was illegal!!");
-        }
+        if (getByNameAndType(p) != null)
+            throw new ApiException("User already exists!!");
         dao.insert(p);
+    }
+
+    private Object getByNameAndType(ClientPojo p) {
+        return dao.getByNameAndType(p.getName(), p.getUserType());
     }
 
     @Transactional(readOnly = true)

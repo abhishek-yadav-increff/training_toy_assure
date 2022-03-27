@@ -2,8 +2,8 @@ package com.increff.assure.controller;
 
 import java.util.List;
 import com.increff.assure.dto.ClientDto;
-import com.increff.assure.model.ClientData;
-import com.increff.assure.model.ClientForm;
+import com.increff.commons.model.ClientData;
+import com.increff.commons.model.ClientForm;
 import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -3,8 +3,8 @@ package com.increff.assure.dto.helper;
 import java.util.ArrayList;
 import java.util.List;
 import com.increff.commons.enums.UserEnum;
-import com.increff.assure.model.ClientData;
-import com.increff.assure.model.ClientForm;
+import com.increff.commons.model.ClientData;
+import com.increff.commons.model.ClientForm;
 import com.increff.assure.pojo.ClientPojo;
 
 /**

@@ -13,5 +13,4 @@ public class BinSkuForm {
     private String clientSkuId;
     private Long clientId;
     private Long quantity;
-
 }

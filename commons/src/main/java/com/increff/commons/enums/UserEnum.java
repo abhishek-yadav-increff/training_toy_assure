@@ -17,4 +17,6 @@ public enum UserEnum {
     public static UserEnum fromString(String value) {
         return mapping.get(value);
     }
+
+
 };
