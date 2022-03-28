@@ -1,6 +1,5 @@
 package com.increff.assure.dto.helper;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import com.increff.commons.model.OrderDataChannel;
 import com.increff.commons.model.OrderForm;
 import com.increff.commons.model.OrderItemXmlForm;
 import com.increff.commons.model.OrderXmlForm;
-
 
 /**
  * OrderDtoHelper
@@ -42,21 +40,20 @@ public class OrderDtoHelper {
         orderPojo.setCustomerId(orderForm.getCustomerId());
         orderPojo.setChannelId(orderForm.getChannelId());
         if (orderForm.getChannelOrderId() != null && !orderForm.getChannelOrderId().isEmpty())
-            orderPojo.setChannelOrderId(CommonsHelper.normalize(orderForm.getChannelOrderId()));
+            orderPojo.setChannelOrderId(orderForm.getChannelOrderId().trim());
         return orderPojo;
     }
 
     public static OrderDataChannel convertForChannel(OrderPojo orderPojo, String clientName,
             String customerName, String channelName) {
-        OrderDataChannel orderDataChannel =
-                new OrderDataChannel(convert(orderPojo), clientName, customerName, channelName);
+        OrderDataChannel orderDataChannel = new OrderDataChannel(convert(orderPojo), clientName, customerName,
+                channelName);
         return orderDataChannel;
     }
 
     public static OrderXmlForm convert(OrderPojo p, List<OrderItemXmlForm> orderItemXmlForms,
             String clientName, String customerName, String channelName) {
-        OrderXmlForm orderXmlForm =
-                new OrderXmlForm(convert(p), clientName, customerName, channelName);
+        OrderXmlForm orderXmlForm = new OrderXmlForm(convert(p), clientName, customerName, channelName);
         orderXmlForm.setItems(orderItemXmlForms);
         Double totalCost = 0D;
         for (OrderItemXmlForm oi : orderItemXmlForms) {
@@ -65,6 +62,5 @@ public class OrderDtoHelper {
         orderXmlForm.setTotal(CommonsHelper.doubleToString(totalCost));
         return orderXmlForm;
     }
-
 
 }

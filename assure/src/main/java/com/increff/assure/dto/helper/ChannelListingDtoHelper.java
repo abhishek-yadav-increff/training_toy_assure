@@ -23,9 +23,9 @@ public class ChannelListingDtoHelper {
     public static ChannelListingPojo convert(ChannelListingForm channelListingForm,
             Long globalSkuId) {
         ChannelListingPojo channelListingPojo = new ChannelListingPojo();
-        String channelSkuId = channelListingForm.getChannelSkuId();
+        String channelSkuId = channelListingForm.getChannelSkuId().trim();
         if (channelSkuId != null && !channelSkuId.isEmpty())
-            channelListingPojo.setChannelSkuId(CommonsHelper.normalize(channelSkuId));
+            channelListingPojo.setChannelSkuId(channelSkuId);
         channelListingPojo.setChannelId(channelListingForm.getChannelId());
         channelListingPojo.setClientId(channelListingForm.getClientId());
         channelListingPojo.setGlobalSkuId(globalSkuId);

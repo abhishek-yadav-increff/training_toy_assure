@@ -8,5 +8,5 @@ import lombok.Setter;
 public class ChannelListingData extends ChannelListingForm {
 
     private Long id;
-    private long globalSkuId;
+    private Long globalSkuId;
 }

@@ -96,7 +96,6 @@ public class ProductDtoTest extends AbstractUnitTest {
         productDto.add(productForm);
     }
 
-
     @Test(expected = ApiException.class)
     public void addNullBrandId() throws ApiException {
         ClientForm clientForm = ClientUtil.getClientForm("name", "client");
@@ -170,6 +169,71 @@ public class ProductDtoTest extends AbstractUnitTest {
         productForm = ProductUtils.getProductForm("clientSkuId", clientData.getId(), "name2",
                 "brandId2", 11.999, "description2");
         productDto.add(productForm);
+    }
+
+    @Test()
+    public void getSuccess() throws ApiException {
+        ClientForm clientForm = ClientUtil.getClientForm("name", "client");
+        clientDto.add(clientForm);
+        List<ClientData> clientDatas = clientDto.getAll();
+        ClientData clientData = clientDatas.get(0);
+
+        ProductForm productForm = ProductUtils.getProductForm("clientSkuId", clientData.getId(),
+                "naMe   ", "brandId", 10.999, "   Description");
+        productDto.add(productForm);
+        List<ProductData> productDatas = productDto.getAll();
+        assertEquals(productDatas.size(), 1);
+        ProductData productData = productDatas.get(0);
+
+        assertEquals(productData.getClientSkuId(), "clientSkuId");
+        assertEquals(productData.getClientId(), clientData.getId());
+        assertEquals(productData.getName(), "name");
+        assertEquals(productData.getBrandId(), "brandId");
+        double precision = 0.001d;
+        assertEquals(productData.getMrp(), 11.00, precision);
+        assertEquals(productData.getDescription(), "description");
+    }
+
+    @Test()
+    public void getAllSuccess() throws ApiException {
+        ClientForm clientForm = ClientUtil.getClientForm("name", "client");
+        clientDto.add(clientForm);
+        List<ClientData> clientDatas = clientDto.getAll();
+        ClientData clientData = clientDatas.get(0);
+
+        ProductForm productForm = ProductUtils.getProductForm("clientSkuId", clientData.getId(),
+                "naMe   ", "brandId", 10.999, "   Description");
+        productDto.add(productForm);
+        productForm = ProductUtils.getProductForm("clientSkuId2", clientData.getId(),
+                "name2", "brandId2", 11.999, "description2");
+        productDto.add(productForm);
+        List<ProductData> productDatas = productDto.getAll();
+        assertEquals(productDatas.size(), 2);
+    }
+
+    @Test()
+    public void updateSuccess() throws ApiException {
+        ClientForm clientForm = ClientUtil.getClientForm("name", "client");
+        clientDto.add(clientForm);
+        List<ClientData> clientDatas = clientDto.getAll();
+        ClientData clientData = clientDatas.get(0);
+
+        ProductForm productForm = ProductUtils.getProductForm("clientSkuId", clientData.getId(),
+                "naMe   ", "brandId", 10.999, "   Description");
+        productDto.add(productForm);
+        productForm = ProductUtils.getProductForm("clientSkuId", clientData.getId(),
+                "name2", "brandId2", 11.999, "description2");
+        List<ProductData> productDatas = productDto.getAll();
+        assertEquals(productDatas.size(), 1);
+
+        ProductData productData = productDatas.get(0);
+        productDto.update(productData.getGlobalSkuId(), productForm);
+        productData = productDto.get(productData.getGlobalSkuId());
+        assertEquals(productData.getName(), "name2");
+        assertEquals(productData.getBrandId(), "brandId2");
+        double precision = 0.001d;
+        assertEquals(productData.getMrp(), 12.00, precision);
+        assertEquals(productData.getDescription(), "description2");
     }
 
 }
