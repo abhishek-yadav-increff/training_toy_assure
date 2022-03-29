@@ -21,11 +21,11 @@ public class ChannelAssureClient {
         ResponseEntity<ChannelData[]> response;
         if (query == null || query.isEmpty())
             response = restTemplate.getForEntity(
-                    "http://localhost:9000/assure/api/channel/search/channel/?type=query",
+                    "http://localhost:9000/assure/api/channel/search/external/?type=query",
                     ChannelData[].class);
         else
             response = restTemplate
-                    .getForEntity("http://localhost:9000/assure/api/channel/search/channel/?term="
+                    .getForEntity("http://localhost:9000/assure/api/channel/search/external/?term="
                             + query + "&type=query", ChannelData[].class);
         List<ChannelData> channelDatas = Arrays.asList(response.getBody());
         return channelDatas;

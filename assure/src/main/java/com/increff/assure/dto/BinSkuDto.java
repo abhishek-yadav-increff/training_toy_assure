@@ -1,17 +1,11 @@
 package com.increff.assure.dto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.increff.assure.dto.helper.BinSkuDtoHelper;
+import com.increff.assure.dto.helper.CommonsHelper;
 import com.increff.assure.model.BinSkuData;
 import com.increff.assure.model.BinSkuForm;
 import com.increff.assure.pojo.BinSkuPojo;
@@ -44,8 +38,8 @@ public class BinSkuDto {
         List<BinSkuPojo> binSkuPojos = new ArrayList<BinSkuPojo>();
         validateForms(binSkuForms);
         for (BinSkuForm binSkuForm : binSkuForms) {
-            ProductPojo productPojo = productService
-                    .getClientIdClientSkuId(binSkuForm.getClientId(), binSkuForm.getClientSkuId().trim());
+            ProductPojo productPojo = productService.getClientIdClientSkuId(
+                    binSkuForm.getClientId(), binSkuForm.getClientSkuId().trim());
             Long globalSkuId = null;
             if (productPojo != null)
                 globalSkuId = productPojo.getGlobalSkuId();
@@ -57,50 +51,20 @@ public class BinSkuDto {
 
     }
 
-    private static <T> List<T> distinctList(List<T> list, Function<? super T, ?>... keyExtractors) {
 
-        return list
-                .stream()
-                .filter(distinctByKeys(keyExtractors))
-                .collect(Collectors.toList());
-    }
-
-    private static <T> Predicate<T> distinctByKeys(Function<? super T, ?>... keyExtractors) {
-
-        final Map<List<?>, Boolean> seen = new ConcurrentHashMap<>();
-
-        return t -> {
-
-            final List<?> keys = Arrays.stream(keyExtractors)
-                    .map(ke -> ke.apply(t))
-                    .collect(Collectors.toList());
-
-            return seen.putIfAbsent(keys, Boolean.TRUE) == null;
-
-        };
-
-    }
-
-    private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
-        Set<Object> seen = ConcurrentHashMap.newKeySet();
-        return t -> seen.add(keyExtractor.apply(t));
-    }
 
     private void validateForms(List<BinSkuForm> binSkuForms) throws ApiException {
-        // List<BinSkuForm> binSkuForms3 = binSkuForms.stream()
-        // .filter(distinctByKeys(BinSkuForm::getBinId,
-        // BinSkuForm::getClientSkudId))
-        // .collect(Collectors.toList());
         for (BinSkuForm bsk : binSkuForms)
             validateForm(bsk);
-        List<BinSkuForm> binSkuForms2 = binSkuForms.stream().filter(distinctByKey(BinSkuForm::getClientId))
-                .collect(Collectors.toList());
+        List<BinSkuForm> binSkuForms2 =
+                binSkuForms.stream().filter(CommonsHelper.distinctByKey(BinSkuForm::getClientId))
+                        .collect(Collectors.toList());
         if (binSkuForms2.size() != 1)
             throw new ApiException("Multiple Client ID not allowed!!");
-        final List<BinSkuForm> binSkuForms3 = distinctList(binSkuForms, BinSkuForm::getBinId,
-                BinSkuForm::getClientSkuId);
+        final List<BinSkuForm> binSkuForms3 = CommonsHelper.distinctList(binSkuForms,
+                BinSkuForm::getBinId, BinSkuForm::getClientSkuId);
         if (binSkuForms3.size() != binSkuForms.size())
-            throw new ApiException("Client ID, Client Sku Id combination must be unique!!");
+            throw new ApiException("Client Sku Id must be unique!!");
 
     }
 

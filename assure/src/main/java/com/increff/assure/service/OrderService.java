@@ -25,6 +25,9 @@ public class OrderService {
     @Autowired
     private ChannelService channelService;
 
+    @Autowired
+    private ClientService clientService;
+
     @Transactional(rollbackFor = ApiException.class)
     public void add(OrderPojo p) throws ApiException {
 
@@ -43,6 +46,9 @@ public class OrderService {
             throw new ApiException("Channel ID can not be empty!!");
         if (getByChannelOrderId(p.getChannelOrderId()) != null)
             throw new ApiException("Channel Order ID already exists!!");
+        clientService.get(p.getClientId());
+        clientService.get(p.getCustomerId());
+        channelService.get(p.getChannelId());
 
     }
 

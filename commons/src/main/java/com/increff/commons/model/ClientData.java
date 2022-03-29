@@ -9,4 +9,9 @@ public class ClientData extends ClientForm {
 
     private Long id;
 
+    @Override
+    public String toString() {
+        return "ClientData [id=" + id + ", name=" + getName() + ", userEnum=" + getUserEnum() + "]";
+    }
+
 }

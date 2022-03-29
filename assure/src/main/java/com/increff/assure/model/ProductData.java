@@ -9,4 +9,12 @@ public class ProductData extends ProductForm {
 
     private Long globalSkuId;
 
+    @Override
+    public String toString() {
+        return "ProductData [globalSkuId=" + globalSkuId + ", brandId=" + getBrandId()
+                + ", clientId=" + getClientId() + ", clientSkuId=" + getClientSkuId()
+                + ", description=" + getDescription() + ", mrp=" + getMrp() + ", name=" + getName()
+                + "]";
+    }
+
 }

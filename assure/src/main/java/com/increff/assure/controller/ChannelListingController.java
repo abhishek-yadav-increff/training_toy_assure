@@ -6,7 +6,6 @@ import com.increff.assure.model.ChannelListingData;
 import com.increff.assure.model.ChannelListingForm;
 import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,11 +27,11 @@ public class ChannelListingController {
         channelListingDto.add(forms);
     }
 
-    @ApiOperation(value = "Gets a ChannelListing by ID")
-    @RequestMapping(path = "/api/channellisting/{id}", method = RequestMethod.GET)
-    public ChannelListingData get(@PathVariable Long id) throws ApiException {
-        return channelListingDto.get(id);
-    }
+    // @ApiOperation(value = "Gets a ChannelListing by ID")
+    // @RequestMapping(path = "/api/channellisting/{id}", method = RequestMethod.GET)
+    // public ChannelListingData get(@PathVariable Long id) throws ApiException {
+    // return channelListingDto.get(id);
+    // }
 
     @ApiOperation(value = "Gets list of all ChannelListings")
     @RequestMapping(path = "/api/channellisting", method = RequestMethod.GET)

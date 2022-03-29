@@ -6,7 +6,6 @@ import com.increff.commons.model.ApiException;
 import com.increff.commons.model.ChannelData;
 import com.increff.commons.model.ChannelForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,11 +27,11 @@ public class ChannelController {
         channelDto.add(form);
     }
 
-    @ApiOperation(value = "Gets a Channel by ID")
-    @RequestMapping(path = "/api/channel/{id}", method = RequestMethod.GET)
-    public ChannelData get(@PathVariable Long id) throws ApiException {
-        return channelDto.get(id);
-    }
+    // @ApiOperation(value = "Gets a Channel by ID")
+    // @RequestMapping(path = "/api/channel/{id}", method = RequestMethod.GET)
+    // public ChannelData get(@PathVariable Long id) throws ApiException {
+    // return channelDto.get(id);
+    // }
 
     @ApiOperation(value = "Search a Channel by ID and Name")
     @RequestMapping(path = "/api/channel/search/", method = RequestMethod.GET)
@@ -42,7 +41,7 @@ public class ChannelController {
     }
 
     @ApiOperation(value = "Search a Channel by ID and Name")
-    @RequestMapping(path = "/api/channel/search/channel", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/channel/search/external", method = RequestMethod.GET)
     public List<ChannelData> getForChannel(
             @RequestParam(value = "term", required = false) String query,
             @RequestParam(value = "type", required = true) String type) throws ApiException {

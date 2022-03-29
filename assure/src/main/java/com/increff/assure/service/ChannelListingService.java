@@ -18,7 +18,6 @@ public class ChannelListingService {
 
     @Transactional(rollbackFor = ApiException.class)
     public void add(List<ChannelListingPojo> p) throws ApiException {
-        System.out.print("in add()" + p.toString());
         validateAdd(p);
         for (ChannelListingPojo chLiPojo : p) {
             dao.insert(chLiPojo);

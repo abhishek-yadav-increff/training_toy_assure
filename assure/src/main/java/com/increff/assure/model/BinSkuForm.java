@@ -13,4 +13,10 @@ public class BinSkuForm {
     private String clientSkuId;
     private Long clientId;
     private Long quantity;
+
+    @Override
+    public String toString() {
+        return "BinSkuForm [binId=" + binId + ", clientId=" + clientId + ", clientSkuId="
+                + clientSkuId + ", quantity=" + quantity + "]";
+    }
 }

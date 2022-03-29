@@ -6,7 +6,6 @@ import com.increff.assure.model.BinSkuData;
 import com.increff.assure.model.BinSkuForm;
 import com.increff.commons.model.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,11 +27,11 @@ public class BinSkuController {
         binDto.add(forms);
     }
 
-    @ApiOperation(value = "Gets a BinSku by BinSku ID")
-    @RequestMapping(path = "/api/binSku/{id}", method = RequestMethod.GET)
-    public BinSkuData get(@PathVariable Long id) throws ApiException {
-        return binDto.get(id);
-    }
+    // @ApiOperation(value = "Gets a BinSku by BinSku ID")
+    // @RequestMapping(path = "/api/binSku/{id}", method = RequestMethod.GET)
+    // public BinSkuData get(@PathVariable Long id) throws ApiException {
+    // return binDto.get(id);
+    // }
 
     @ApiOperation(value = "Gets list of all BinSkus")
     @RequestMapping(path = "/api/binSku", method = RequestMethod.GET)
@@ -40,10 +39,10 @@ public class BinSkuController {
         return binDto.getAll();
     }
 
-    @ApiOperation(value = "Gets a BinSku by globalSkuId")
-    @RequestMapping(path = "/api/binSku/globalskuid/{id}", method = RequestMethod.GET)
-    public List<BinSkuData> getByGlobalSkuId(@PathVariable Long id) throws ApiException {
-        return binDto.getByGlobalSkuId(id);
-    }
+    // @ApiOperation(value = "Gets a BinSku by globalSkuId")
+    // @RequestMapping(path = "/api/binSku/globalskuid/{id}", method = RequestMethod.GET)
+    // public List<BinSkuData> getByGlobalSkuId(@PathVariable Long id) throws ApiException {
+    // return binDto.getByGlobalSkuId(id);
+    // }
 
 }

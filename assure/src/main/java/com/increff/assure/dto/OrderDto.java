@@ -2,6 +2,7 @@ package com.increff.assure.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import com.increff.assure.client.ChannelClient;
 import com.increff.assure.dto.helper.CommonsHelper;
@@ -39,7 +40,6 @@ public class OrderDto {
 
     @Autowired
     private ChannelClient channelClient;
-
     @Autowired
     private OrderService orderService;
     @Autowired
@@ -61,16 +61,14 @@ public class OrderDto {
     @Transactional(rollbackOn = ApiException.class)
     public void add(OrderForm orderForm) throws ApiException {
 
-
         OrderPojo orderPojo = OrderDtoHelper.convert(orderForm);
         orderService.add(orderPojo);
         OrderPojo orderPojo2 = orderService.getByChannelOrderId(orderPojo.getChannelOrderId());
 
         validateOrderItems(orderForm.getOrderItemForms(), orderPojo2);
         for (OrderItemForm orderItemForm : orderForm.getOrderItemForms()) {
-            ProductPojo productPojo =
-                    productService.getClientIdClientSkuId(orderPojo2.getClientId(),
-                            CommonsHelper.normalize(orderItemForm.getClientSkuId()));
+            ProductPojo productPojo = productService.getClientIdClientSkuId(
+                    orderPojo2.getClientId(), orderItemForm.getClientSkuId());
             Long globalSkuId = productPojo.getGlobalSkuId();
             OrderItemPojo orderItemPojo =
                     OrderItemDtoHelper.convert(orderItemForm, globalSkuId, orderPojo2.getId());
@@ -80,6 +78,8 @@ public class OrderDto {
 
     private void validateOrderItems(List<OrderItemForm> orderItemForms, OrderPojo p)
             throws ApiException {
+        if (orderItemForms == null)
+            throw new ApiException("Order Items can not be empty!!");
         List<ErrorData> errorDatas = new ArrayList<>();
         Long row = 1L;
         for (OrderItemForm oif : orderItemForms) {
@@ -90,8 +90,15 @@ public class OrderDto {
             }
             row += 1;
         }
-        if (!errorDatas.isEmpty())
+        if (!errorDatas.isEmpty()) {
+            System.out.print(errorDatas);
             throw new ApiException("Failed validating Order Items!!", errorDatas);
+        }
+        List<OrderItemForm> orderItemForms2 = orderItemForms.stream()
+                .filter(CommonsHelper.distinctByKey(OrderItemForm::getClientSkuId))
+                .collect(Collectors.toList());
+        if (orderItemForms2.size() != orderItemForms.size())
+            throw new ApiException("Duplicate Order Items found!!");
     }
 
     private void validateOrderItem(OrderItemForm oif, OrderPojo p) throws ApiException {
@@ -105,8 +112,8 @@ public class OrderDto {
             throw new ApiException("Selling Price Per Unit must be postive!!");
         if (oif.getClientSkuId() == null)
             throw new ApiException("Client Sku ID Per Unit cant not be empty!!");
-        ProductPojo productPojo = productService.getClientIdClientSkuId(p.getClientId(),
-                CommonsHelper.normalize(oif.getClientSkuId()));
+        ProductPojo productPojo =
+                productService.getClientIdClientSkuId(p.getClientId(), oif.getClientSkuId());
         if (productPojo == null)
             throw new ApiException(
                     "Product with Client ID, Client SKU ID combination doesn't exist!!");

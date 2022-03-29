@@ -8,4 +8,10 @@ import lombok.Setter;
 public class ChannelData extends ChannelForm {
 
     private Long id;
+
+    @Override
+    public String toString() {
+        return "ChannelData [id=" + id + ", invoiceType=" + getInvoiceType() + ", name=" + getName()
+                + "]";
+    }
 }

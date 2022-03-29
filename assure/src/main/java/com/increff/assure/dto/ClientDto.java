@@ -7,7 +7,6 @@ import com.increff.commons.model.ClientData;
 import com.increff.commons.model.ClientForm;
 import com.increff.assure.pojo.ClientPojo;
 import com.increff.assure.service.ClientService;
-import com.increff.commons.enums.UserEnum;
 import com.increff.commons.model.ApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

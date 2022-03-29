@@ -30,7 +30,7 @@ public class OrderController {
         orderDto.add(form);
     }
 
-    @ApiOperation(value = "Adds a Order")
+    @ApiOperation(value = "Adds an Order from external app")
     @RequestMapping(path = "/api/order/channel", method = RequestMethod.POST)
     public void addForChannel(@RequestBody OrderForm form) throws ApiException {
         orderDto.addForChannel(form);
@@ -44,7 +44,7 @@ public class OrderController {
     // orderDto.add(forms);
     // }
 
-    @ApiOperation(value = "Gets a Order by ID")
+    @ApiOperation(value = "Gets an Order by ID")
     @RequestMapping(path = "/api/order/{id}", method = RequestMethod.GET)
     public OrderData get(@PathVariable Long id) throws ApiException {
         return orderDto.get(id);
@@ -52,13 +52,13 @@ public class OrderController {
 
 
 
-    @ApiOperation(value = "Allocate an Order by ID")
+    @ApiOperation(value = "Allocates an Order by ID")
     @RequestMapping(path = "/api/order/allocate/{id}", method = RequestMethod.PUT)
     public void allocate(@PathVariable Long id) throws ApiException {
         orderDto.allocate(id);
     }
 
-    @ApiOperation(value = "Generate Invoice of an Order by ID")
+    @ApiOperation(value = "Generates Invoice of an Order by ID")
     @RequestMapping(path = "/api/order/generateinvoice/{id}", method = RequestMethod.PUT)
     public void generateInvoice(@PathVariable Long id) throws ApiException {
         orderDto.generateInvoice(id);
@@ -70,7 +70,7 @@ public class OrderController {
         return orderDto.getAll();
     }
 
-    @ApiOperation(value = "Gets list of all Orders")
+    @ApiOperation(value = "Gets list of all Orders for external app")
     @RequestMapping(path = "/api/order/channel", method = RequestMethod.GET)
     public List<OrderDataChannel> getAllForChannel() throws ApiException {
         return orderDto.getAllForChannel();

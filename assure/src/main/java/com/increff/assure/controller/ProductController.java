@@ -34,12 +34,12 @@ public class ProductController {
         return productDto.get(id);
     }
 
-    @ApiOperation(value = "Gets a Product by Client ID and Client SKU ID")
-    @RequestMapping(path = "/api/product/{clientId}/{clientSkuId}", method = RequestMethod.GET)
-    public ProductData getClientIdClientSkuId(@PathVariable Long clientId,
-            @PathVariable String clientSkuId) throws ApiException {
-        return productDto.getClientIdClientSkuId(clientId, clientSkuId);
-    }
+    // @ApiOperation(value = "Gets a Product by Client ID and Client SKU ID")
+    // @RequestMapping(path = "/api/product/{clientId}/{clientSkuId}", method = RequestMethod.GET)
+    // public ProductData getClientIdClientSkuId(@PathVariable Long clientId,
+    // @PathVariable String clientSkuId) throws ApiException {
+    // return productDto.getClientIdClientSkuId(clientId, clientSkuId);
+    // }
 
 
     @ApiOperation(value = "Gets list of all Products")

@@ -56,6 +56,7 @@ public class BinSkuService {
                 ErrorData err = new ErrorData("Error", e.getMessage(), rowCount);
                 errorDatas.add(err);
             }
+            rowCount += 1;
         }
         if (!errorDatas.isEmpty())
             throw new ApiException("Couldn't create/update Bin Skus", errorDatas);

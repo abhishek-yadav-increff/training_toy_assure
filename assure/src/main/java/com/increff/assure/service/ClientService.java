@@ -53,7 +53,7 @@ public class ClientService {
     public ClientPojo getCheck(Long id) throws ApiException {
         ClientPojo p = dao.select(id);
         if (p == null) {
-            throw new ApiException("Client with given ID does not exist, id: " + id);
+            throw new ApiException("User with given ID does not exist, id: " + id);
         }
         return p;
     }

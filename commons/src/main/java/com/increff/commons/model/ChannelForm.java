@@ -14,4 +14,10 @@ public class ChannelForm {
     public ChannelForm() {}
 
 
+    @Override
+    public String toString() {
+        return "ChannelForm [invoiceType=" + invoiceType + ", name=" + name + "]";
+    }
+
+
 }

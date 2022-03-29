@@ -37,7 +37,7 @@ function addClient() {
 }
 
 function getClientList() {
-    var url = getClientUrl();
+    var url = getClientUrl() + "/all";
     $.ajax({
         url: url,
         type: 'GET',
